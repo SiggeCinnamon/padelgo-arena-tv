@@ -1,18 +1,16 @@
-import React, { BrowserRoute as Router, Switch, Route } from "React";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Court from "./components/Court.js";
+import Home from "./components/Home.js";
 
 function App() {
-  const Home = () => {
-    <h1>Home</h1>;
-  };
-
   return (
     <Router>
       <div className="App">
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/courts/:courtId" component={Court} />
+          <Route path="/courts/:courtExtId" component={Court} />
         </Switch>
       </div>
     </Router>
