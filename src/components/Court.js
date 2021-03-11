@@ -1,61 +1,109 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import StreamPlayer from './StreamPlayer.js';
+import Videojs from 'video.js'
+import axios from 'axios';
 
 function Court({ match }) {
-    const axios = require('axios');
+    const debugLevel = true;
     const [court, setCourt] = useState([]);
-    const [src, setSrc] = useState("");
+    const [popular, setPopular] = useState([]);
+    const [playerProp, setPlayerProp] = useState("");
 
+    const playerRef = useRef(null);
 
     useEffect(() => {
         fetchCourt();
     }, []);
-
-    useEffect(() => {
-        initStreamSrc();
-    }, [court]);
+    
+    function debugMessage(scope, msg) {
+        if (debugLevel) {
+            console.log(scope, msg);
+        }
+    }
 
     const fetchCourt = async () => {
         try {
             const clubResponse = await axios.get(`https://staging-courts.padelgo.tv/v2/courts/${match.params.courtExtId}`);
             const courtsResponse = await axios.get(`https://staging-courts.padelgo.tv/Courts/${await clubResponse.data.clubId}`);
-
+            
             setCourt(courtsResponse.data);
-
-            console.log("fetchCourt.courtsResponse.data:", courtsResponse.data);
+            debugMessage("fetchCourt.courtsResponse.data:", await courtsResponse.data);
         } catch (e) {
             console.error("fetchCourt ERROR :", e);
         }
     }
 
-    const initStreamSrc = async () => {
+    const fetchPopular = async (clubId, topN) => {
         try {
-            console.log("initStreamSrc.court:", court);
-            console.log("initStreamSrc.court[0]:", court[0]);
             const body = {
-                "clubId": court[0].clubId,
+                "clubId": clubId,
                 "stream": true,
                 "liveStream": true,
                 "highlight": true,
                 "video": true,
                 "page": 1,
-                "take": 1,
+                "take": topN,
                 "sortOrder": 0
             }
 
             const response = await axios.post(`https://staging-streams.padelgo.tv/Media/popular`, body);
-            setSrc(response.data[0].url);
-
-            return response.data[0].url;
+            debugMessage("fetchPopular.response.data:", response.data);
+            setPopular(response.data);
         } catch (e) {
-            console.error("initStreamSrc ERROR :", e);
+            console.error("fetchPopular ERROR :", e);
         }
     }
 
+    const onPopularClick = (url, thumbnailURL) => {
+        debugMessage("onpopularClick.playerRef:", playerRef);
+
+        if (playerRef.current) {
+            const splayer = Videojs(playerRef.current);
+            splayer.src(playerProp.src);
+            splayer.poster(playerProp.poster);
+            splayer.load();
+        }
+
+        setPlayerProp(Object.assign({}, {src: url, poster: thumbnailURL}));
+    }
+
     return (
-        <div>
+        <div className="container">
             <h1>Court</h1>
-            <StreamPlayer props={src} />
+            <div className="courts-container">
+                <ul>
+                    {court.map((c, i) => ( 
+                        <li key={i} onClick={() => fetchPopular(c.clubId, 10)} 
+                            style={{cursor: "pointer"}}>
+                                courtId: {c.courtId}, 
+                                Description: {c.description}, 
+                                cameraId: {c.cameraId}, 
+                                clubId: {c.clubId}, 
+                                courtExtId: {c.courtExtId}</li>
+                ))}
+                </ul>
+            </div>
+            <hr style={{height: "5px", borderWidth: "0", backgroundColor: "black"}}/>
+            <h1>Popular</h1>
+            <div className="popular-container">
+                <ul>
+                    {popular.map((p, i) => (
+                        <li key={i} onClick={() => onPopularClick(p.url, p.thumbnailURL)} 
+                            style={{cursor: "pointer"}}>
+                                Channel: {p.channel}, 
+                                Description: {p.description}, 
+                                Club name: {p.clubName}, 
+                                Media type: {p.mediaType}, 
+                                Likes/Dislikes ratio: {p.likes - p.dislikes}</li>
+                    ))}
+                </ul>
+            </div>
+            <hr style={{height: "5px", borderWidth: "0", backgroundColor: "black"}}/>
+            
+            <div className="player-container">
+                <h1>Player</h1>
+                {playerProp && <StreamPlayer ref={playerRef} props={playerProp} />}
+            </div>
         </div>
     )
 }

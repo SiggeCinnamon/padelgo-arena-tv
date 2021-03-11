@@ -1,29 +1,33 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, forwardRef } from 'react'
 import Videojs from 'video.js'
+import 'video.js/dist/video-js.css';
 
-function StreamPlayer(props) {
-    const src = props.props;
-    const pRef = useRef();
+export default forwardRef(function StreamPlayer(props, ref) {
+    const src = props.props.src;
+    const poster = props.props.poster;
+
+    const options = {
+        autoplay: false,
+        muted: true,
+        controls: true,
+        width: 600,
+        heigh: 400,
+    };
 
     useEffect(() => {
-        console.log("StreamPlayer.src:", src);
-        const player = Videojs(pRef.current, { autoplay: true, muted: true }, () => {
+        const player = Videojs(ref.current, options, () => {
             player.src({ type: 'video/mp4', src: src });
+            player.poster(poster);
         });
-
-        console.log("player.currentSrc:", player.currentSrc());
-        console.log("player.currentType:", player.currentType());
 
         return (() => {
             player.dispose();
         })
-    })
+    }, [])
 
     return (
-        <div>
-            <video ref={pRef} className="video-js vjs-16-9" playsInline />
+        <div data-vjs-player>
+            <video ref={ref} className="video-js vjs-16-9" playsInline />
         </div>
     )
-}
-
-export default StreamPlayer
+});
