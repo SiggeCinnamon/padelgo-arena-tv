@@ -14,7 +14,7 @@ import axios from "axios";
 async function getMediaAPIPOSTResponse(route, payload) {
   try {
     const config = {
-      baseURL: "https://staging-courts.padelgo.tv/",
+      baseURL: "https://staging-streams.padelgo.tv/",
       method: "POST",
     };
 
