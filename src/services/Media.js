@@ -1,5 +1,16 @@
 import axios from "axios";
 
+/* {
+  "clubId": 0,
+  "stream": true,
+  "liveStream": true,
+  "highlight": true,
+  "video": true,
+  "page": 0,
+  "take": 0,
+  "sortOrder": 0
+} */
+
 async function getMediaAPIPOSTResponse(route, payload) {
   try {
     const config = {
