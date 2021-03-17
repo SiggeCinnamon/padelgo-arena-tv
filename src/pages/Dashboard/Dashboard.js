@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { debugMsg, setDebugLevel } from "simplistic-log";
 import Routes from "../../routes.json";
-import { getCourtsWithClubId } from "../../services/Courts.js";
+import { getCourtsWithClubId } from "../../services/Court.js";
 import "./Dashboard.css";
 
 function Home({ match }) {
@@ -20,13 +20,20 @@ function Home({ match }) {
     setCourts(await getCourtsWithClubId(match.params.clubId));
   };
 
-  const toLink = () => {
+  const toLink = (route) => {
     const x = courts.find((e) => e.courtExtId === court);
     debugMsg(x, 3);
 
     return {
-      pathname: Routes.COURT,
+      pathname: route,
       props: x,
+    };
+  };
+
+  const toArenaTv = () => {
+    return {
+      pathname: Routes.ARENA_TV,
+      props: match.params.clubId,
     };
   };
 
@@ -34,7 +41,7 @@ function Home({ match }) {
     <>
       <div className='vertical-center'>
         <div className='btn-div'>
-          <Link className='btn btn-primary' to={`${Routes.COURTS}/${court}`}>
+          <Link className='btn btn-primary' to={toArenaTv}>
             Arena TV
           </Link>
         </div>
@@ -62,7 +69,7 @@ function Home({ match }) {
             className={
               court === "-1" ? "btn btn-primary disabled" : "btn btn-primary"
             }
-            to={toLink}>
+            to={toLink(Routes.COURT)}>
             Go to court
           </Link>
         </div>
