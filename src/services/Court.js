@@ -5,7 +5,7 @@ async function getCourtsAPIGETResponse(route) {
     // setDebugLevel(1);
 
     const config = {
-      baseURL: "https://staging-courts.padelgo.tv/Courts",
+      baseURL: "https://staging-courts.padelgo.tv/",
       method: "GET",
     };
 
@@ -32,5 +32,5 @@ async function getCourtsAPIGETResponse(route) {
 }
 
 export async function getCourtsWithClubId(clubId) {
-  return await getCourtsAPIGETResponse(`${clubId}`);
+  return await getCourtsAPIGETResponse(`Courts/${clubId}`);
 }

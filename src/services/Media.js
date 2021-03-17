@@ -3,7 +3,7 @@ import axios from "axios";
 async function getMediaAPIPOSTResponse(route, payload) {
   try {
     const config = {
-      baseURL: "https://staging-courts.padelgo.tv/Media",
+      baseURL: "https://staging-courts.padelgo.tv/",
       method: "POST",
     };
 
@@ -38,13 +38,13 @@ async function getMediaAPIPOSTResponse(route, payload) {
 }
 
 export async function getTrendingMedia(filter) {
-  return await getMediaAPIPOSTResponse(`/trending`, filter);
+  return await getMediaAPIPOSTResponse(`Media/trending`, filter);
 }
 
 export async function getPopularMedia(filter) {
-  return await getMediaAPIPOSTResponse(`/popular`, filter);
+  return await getMediaAPIPOSTResponse(`Media/popular`, filter);
 }
 
 export async function getLatestMedia(filter) {
-  return await getMediaAPIPOSTResponse(`/popular`, filter);
+  return await getMediaAPIPOSTResponse(`Media/popular`, filter);
 }

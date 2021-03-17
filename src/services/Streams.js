@@ -3,7 +3,7 @@ import axios from "axios";
 async function getStreamsAPIGETResponse(route) {
   try {
     const config = {
-      baseURL: "https://staging-streams.padelgo.tv/Streams/",
+      baseURL: "https://staging-streams.padelgo.tv/",
       method: "GET",
     };
 
@@ -30,13 +30,15 @@ async function getStreamsAPIGETResponse(route) {
 }
 
 export async function getStreamsWithCourtId(courtId) {
-  return await getStreamsAPIGETResponse(`court/${courtId}`);
+  return await getStreamsAPIGETResponse(`Streams/court/${courtId}`);
 }
 
 export async function getStreamURLWithLiveStreamId(liveStreamId) {
-  return await getStreamsAPIGETResponse(`url/anonymously/${liveStreamId}`);
+  return await getStreamsAPIGETResponse(
+    `Streams/url/anonymously/${liveStreamId}`
+  );
 }
 
 export async function getStreamThumbnailWithLiveStreamId(liveStreamId) {
-  return await getStreamsAPIGETResponse(`${liveStreamId}/thumbnail`);
+  return await getStreamsAPIGETResponse(`Streams/${liveStreamId}/thumbnail`);
 }
