@@ -1,25 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
-import StreamPlayer from "./StreamPlayer.js";
+import { debugMsg, setDebugLevel } from "simplistic-log";
+import StreamPlayer from "../../components/StreamPlayer/StreamPlayer.js";
 import Videojs from "video.js";
 import axios from "axios";
 
 function Court({ match }) {
-    const debugLevel = true;
+    setDebugLevel(1);
+
     const [court, setCourt] = useState([]);
     const [popular, setPopular] = useState([]);
     const [playerProp, setPlayerProp] = useState("");
+    const [streams, setStreams] = useState("");
 
     const playerRef = useRef(null);
 
     useEffect(() => {
         fetchCourt();
     }, []);
-
-    function debugMessage(scope, msg) {
-        if (debugLevel) {
-            console.log(scope, msg);
-        }
-    }
 
     const fetchCourt = async () => {
         try {
@@ -32,10 +29,7 @@ function Court({ match }) {
             );
 
             setCourt(courtsResponse.data);
-            debugMessage(
-                "fetchCourt.courtsResponse.data:",
-                await courtsResponse.data
-            );
+            debugMsg(await courtsResponse.data, 1);
         } catch (e) {
             console.error("fetchCourt ERROR :", e);
         }
@@ -58,15 +52,30 @@ function Court({ match }) {
                 `https://staging-streams.padelgo.tv/Media/popular`,
                 body
             );
-            debugMessage("fetchPopular.response.data:", response.data);
+            debugMsg(response.data, 1);
             setPopular(response.data);
+
+            let dto = { data: [], key: streams.key === 0 ? 1 : 0 };
+
+            response.data.forEach((e) => {
+                dto.data.push({
+                    sources: [{
+                        src: e.url,
+                        type: 'video/mp4'
+                    }],
+                    poster: e.thumbnailURL
+                });
+            });
+
+            debugMsg(dto, 1);
+            setStreams(dto);
         } catch (e) {
             console.error("fetchPopular ERROR :", e);
         }
     };
 
     const onPopularClick = (url, thumbnailURL) => {
-        debugMessage("onPopularClick.playerRef:", playerRef);
+        debugMsg(playerRef, 1);
 
         if (playerRef.current) {
             const splayer = Videojs(playerRef.current);
@@ -118,7 +127,7 @@ function Court({ match }) {
 
             <div className='player-container'>
                 <h1>Player</h1>
-                {playerProp && <div className="player" style={{ width: "35vw", marginLeft: "10px" }}><StreamPlayer ref={playerRef} props={playerProp} key={playerProp.src} /></div>}
+                {streams && <div className="player" style={{ width: "35vw", marginLeft: "10px" }}><StreamPlayer ref={playerRef} props={streams} key={streams.key} /></div>}
             </div>
         </div>
     );
