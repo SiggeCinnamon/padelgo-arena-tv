@@ -2,20 +2,31 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Routes from "./routes.json";
-import Court from "./components/Court.js";
-import Home from "./components/Home.js";
+import Court from "./pages/Court/Court.js";
+import Dashboard from "./pages/Dashboard/Dashboard.js";
 
 function App() {
+
+  const Home = () => {
+    return (
+      <h1>Home</h1>
+    )
+  }
+
   return (
     <Router>
       <div className="App">
-        <Switch>
-          <Route path={Routes.HOME} exact component={Home} />
-          <Route path={Routes.COURTS} component={Court} />
-        </Switch>
+        <main className="container">
+          <Switch>
+            <Route path={Routes.HOME} exact component={Home} />
+            <Route path={Routes.COURT} component={Court} />
+            <Route path={Routes.DASHBOARD} component={Dashboard} />
+          </Switch>
+        </main>
       </div>
     </Router>
   );
+
 }
 
 export default App;
