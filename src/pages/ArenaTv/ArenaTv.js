@@ -8,6 +8,7 @@ function ArenaTv(props) {
   const playerRef = useRef(null);
 
   useEffect(() => {
+    // Might want to change the parameters here later on (?)
     fetchPopularMedia(1, 5);
   }, []);
 
@@ -40,6 +41,7 @@ function ArenaTv(props) {
   };
 
   const onPlaylistAtEnd = async () => {
+    // Might want to change the parameters here later on (?)
     const data = pipeline(await fetchPopularMedia(1, 5));
     setSources(sources.concat(data));
   };
