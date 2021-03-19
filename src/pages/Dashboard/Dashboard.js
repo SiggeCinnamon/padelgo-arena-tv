@@ -33,7 +33,7 @@ function Home({ match }) {
   const toArenaTv = () => {
     return {
       pathname: Routes.ARENA_TV,
-      props: match.params.clubId,
+      props: { clubId: match.params.clubId },
     };
   };
 
