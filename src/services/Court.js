@@ -5,7 +5,7 @@ async function getCourtsAPIGETResponse(route) {
     // setDebugLevel(1);
 
     const config = {
-      baseURL: "https://staging-courts.padelgo.tv/",
+      baseURL: process.env.REACT_APP_COURTS_API_BASE_URL,
       method: "GET",
     };
 

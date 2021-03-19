@@ -3,7 +3,7 @@ import axios from "axios";
 async function getStreamsAPIGETResponse(route) {
   try {
     const config = {
-      baseURL: "https://staging-streams.padelgo.tv/",
+      baseURL: process.env.REACT_APP_STREAMS_API_BASE_URL,
       method: "GET",
     };
 
