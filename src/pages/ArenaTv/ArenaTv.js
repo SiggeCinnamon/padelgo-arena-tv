@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { getPopularMedia } from "../../services/Media.js";
 import VideoPlayer from "../../components/StreamPlayer/VideoPlayer.js";
+import "./ArenaTv.css";
 
 function ArenaTv(props) {
   const [popular, setPopular] = useState([]);
   const [sources, setSources] = useState([]);
-  const playerRef = useRef(null);
 
   useEffect(() => {
     // Might want to change the parameters here later on (?)
@@ -63,18 +63,18 @@ function ArenaTv(props) {
   };
 
   return (
-    <div className='container'>
-      <h1>Arena tv</h1>
-      <div className='player'>
-        {sources && (
-          <VideoPlayer
-            ref={playerRef}
-            src={sources}
-            controls={true}
-            autoplay={false}
-            onPlaylistAtEnd={onPlaylistAtEnd}
-          />
-        )}
+    <div className='wrapper'>
+      <div className='main-wrapper container-fluid'>
+        <div id='container-video' className='container-fluid'>
+          {sources && (
+            <VideoPlayer
+              src={sources}
+              controls={true}
+              autoplay={false}
+              onPlaylistAtEnd={onPlaylistAtEnd}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
