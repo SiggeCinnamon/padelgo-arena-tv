@@ -9,16 +9,12 @@ import ArenaTv from "./pages/ArenaTv/ArenaTv.js";
 function App() {
   return (
     <Router>
-      <div className='App'>
-        <main className='container'>
-          <Switch>
-            <Route path={Routes.HOME} exact component={Home} />
-            <Route path={Routes.COURT} component={Court} />
-            <Route path={Routes.DASHBOARD} component={Dashboard} />
-            <Route path={Routes.ARENA_TV} component={ArenaTv} />
-          </Switch>
-        </main>
-      </div>
+      <Switch>
+        <Route path={Routes.HOME} exact component={Home} />
+        <Route path={Routes.COURT} component={Court} />
+        <Route path={Routes.DASHBOARD} component={Dashboard} />
+        <Route path={Routes.ARENA_TV} component={ArenaTv} />
+      </Switch>
     </Router>
   );
 }
