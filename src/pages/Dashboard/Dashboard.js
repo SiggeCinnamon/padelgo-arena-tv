@@ -5,7 +5,7 @@ import Routes from "../../routes.json";
 import { getCourtsWithClubId } from "../../services/Court.js";
 import "./Dashboard.css";
 
-function Home({ match }) {
+function Dashboard({ match }) {
   setDebugLevel(3);
   debugMsg(match, 2);
 
@@ -78,4 +78,4 @@ function Home({ match }) {
   );
 }
 
-export default Home;
+export default Dashboard;
