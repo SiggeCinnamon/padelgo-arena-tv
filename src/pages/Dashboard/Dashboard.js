@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { debugMsg, setDebugLevel } from "simplistic-log";
 import Routes from "../../routes.json";
 import { getCourtsWithClubId } from "../../services/Court.js";
 import "./Dashboard.css";
 
 function Dashboard({ match }) {
-  setDebugLevel(3);
-  debugMsg(match, 2);
-
   const [court, setCourt] = useState("-1");
   const [courts, setCourts] = useState([]);
 
@@ -18,16 +14,6 @@ function Dashboard({ match }) {
 
   const fetchCourts = async () => {
     setCourts(await getCourtsWithClubId(match.params.clubId));
-  };
-
-  const toLink = (route) => {
-    const x = courts.find((e) => e.courtExtId === court);
-    debugMsg(x, 3);
-
-    return {
-      pathname: route,
-      props: x,
-    };
   };
 
   const toArenaTv = () => {
@@ -58,18 +44,19 @@ function Dashboard({ match }) {
                 Courts
               </option>
               <option disabled='disabled'>--------</option>
-              {courts.map((c, i) => (
-                <option value={c.courtExtId} key={c.courtId}>
-                  Court #{c.courtId}
-                </option>
-              ))}
+              {courts &&
+                courts.map((c, i) => (
+                  <option value={c.courtId} key={c.courtId}>
+                    Court #{c.courtId}
+                  </option>
+                ))}
             </select>
           </div>
           <Link
             className={
               court === "-1" ? "btn btn-primary disabled" : "btn btn-primary"
             }
-            to={toLink(Routes.COURT)}>
+            to={`${Routes.COURT.replace(":courtId", court)}`}>
             Go to court
           </Link>
         </div>

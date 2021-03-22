@@ -1,6 +1,6 @@
 {
     "HOME": "/",
-    "COURT": "/court",
+    "COURT": "/court/:courtId",
     "DASHBOARD": "/dashboard/:clubId",
     "ARENA_TV": "/arenatv"
 }
