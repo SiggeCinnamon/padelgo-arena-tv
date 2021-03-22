@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState, forwardRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-playlist/dist/videojs-playlist.js";
 
-// eslint-disable-next-line import/prefer-default-export
 const usePlayer = ({ src, controls, autoplay }) => {
   const options = {
     fill: true,
@@ -29,7 +28,7 @@ const usePlayer = ({ src, controls, autoplay }) => {
     setPlayer(vjsPlayer);
 
     return () => {
-      if (player !== null) {
+      if (player && player !== null) {
         player.dispose();
       }
     };
@@ -45,34 +44,41 @@ const usePlayer = ({ src, controls, autoplay }) => {
   return { videoRef: videoRef, player: player };
 };
 
-export default forwardRef(function VideoPlayer({ src, controls, autoplay, onPlaylistAtEnd }, ref) {
+export default function VideoPlayer(
+  { src, controls, autoplay, onPlaylistAtEnd },
+  ref
+) {
   const comp = usePlayer({ src, controls, autoplay });
   ref = comp.videoRef;
   let player = comp.player;
 
   const onEndingHandler = (e) => {
-    if (player && player.playlist.currentIndex() === player.playlist.lastIndex()) {
+    if (
+      player &&
+      player.playlist.currentIndex() === player.playlist.lastIndex()
+    ) {
       onPlaylistAtEnd();
     }
   };
 
   useEffect(() => {
     if (player !== null) {
-      player.on('ended', onEndingHandler);
+      player.on("ended", onEndingHandler);
     }
 
     return () => {
-      if (player !== null) {
+      if (player && player !== null) {
         player.dispose();
       }
     };
   }, [player]);
 
   return (
-    <>
-      <div data-vjs-player>
-        <video ref={ref} className='video-js' />
-      </div>
-    </>
+    <video
+      ref={ref}
+      className='video-js vjs-fluid vjs-big-play-centered'
+      width='100%'
+      height='100%'
+    />
   );
-});
+}

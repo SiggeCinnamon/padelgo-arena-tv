@@ -4,11 +4,11 @@ import Routes from "../../routes.json";
 
 function Home() {
   const [value, setValue] = useState("");
+
   return (
     <>
       <div className='container'>
         <h1>Home</h1>
-
         <div className='input-group mb-3'>
           <Link
             className='btn btn-outline-secondary'
