@@ -28,3 +28,7 @@ async function getScoresAPIGETRespone(route) {
         console.error(error);
     }
 }
+
+export async function getScoresWithLiveStreamId(liveStreamId){
+    return await getScoresAPIGETRespone(`/Scores/${liveStreamId}`)
+}

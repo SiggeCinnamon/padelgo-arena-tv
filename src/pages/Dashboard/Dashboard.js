@@ -44,11 +44,11 @@ function Home({ match }) {
                             <option value="-1" style={{ fontWeight: "bold" }}>Courts</option>
                             <option disabled="disabled">--------</option>
                             {courts.map((c, i) => (
-                                <option value={c.courtExtId} key={c.courtId}>Court #{c.courtId}</option>
+                                <option value={c.courtId} key={c.courtId}>Court #{c.courtId}</option>
                             ))}
                         </select>
                     </div>
-                    <Link className={court === "-1" ? "btn btn-primary disabled" : "btn btn-primary"} to={toLink}>Go to court</Link>
+                    <Link className={court === "-1" ? "btn btn-primary disabled" : "btn btn-primary"} to={`${Routes.COURT.replace(":courtId", court)}`}>Go to court</Link>
                 </div>
             </div>
         </>

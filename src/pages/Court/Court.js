@@ -1,41 +1,42 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { debugMsg, setDebugLevel } from 'simplistic-log';
-import { getStreamsWithCourtId, getStreamURLWithLiveStreamId } from '../../services/Streams.js';
-import StreamPlayer from '../../components/StreamPlayer/StreamPlayer.js';
-import './Court.css';
+import React, { useState, useEffect} from 'react';
+
+import { getStreamsWithCourtId } from '../../services/Streams.js';
+import { getScoresWithLiveStreamId } from '../../services/Scores.js';
+import Scoreboard from '../../components/ScoreBoard/scoreboard.js';
 
 function Court(props) {
-    setDebugLevel(1);
-    debugMsg(props.location.props, 1);
 
-    /* Stream:
-    shouldPlayAds: boolean
-    streamType: String
-    url: String */
-    const [stream, setStream] = useState({});
-    const [poster, setPoster] = useState('');
-
-    const playerRef = useRef(null);
+    const [score, setScore] = useState('');
+    const [court, setCourt] = useState('')
 
     useEffect(() => {
-        fetchStream();
+        const interval = setInterval(() => {
+            console.log('5sek')
+            fetchScore();
+        }, 50000);
+        return () => clearInterval(interval);
     }, []);
 
-    const fetchStream = async () => {
-        setStream(await getStreamURLWithLiveStreamId(2345));
-        setPoster('https://static.padelgo.tv/other/padelgo-missing-thumbnail.png');
+    useEffect(() => {
+        fetchScore()
+    }, [])
+
+    const fetchScore = async () => {
+        const FetchGetStreamsWithCourtId = await getStreamsWithCourtId(props.match.params.courtId)
+        setCourt(getStreamsWithCourtId(props.match.params.courtId))
+        console.log(props.match.params.courtId, 'CourtState')
+        setScore(await getScoresWithLiveStreamId(FetchGetStreamsWithCourtId[0]?.liveStreamId || ""));
+
     };
 
     return (
         <>
-            <div className="container">
-                <div className="row">
-                    <h1>Court</h1>
-                    {stream && <div className="player-container" style={{ width: "50vw" }}><StreamPlayer ref={playerRef} src={stream.url} type={stream.streamType} poster={poster} key={stream.streamId} /></div>}
-                </div>
-            </div>
+        <Scoreboard score={score}/>
         </>
     )
 }
 
 export default Court
+
+//Fetch https://staging-streams.padelgo.tv/Streams/court/{courtId} to get "liveStreamId"
+//Fetch https://staging-scores.padelgo.tv//Scores/{liveStreamId} to get score
