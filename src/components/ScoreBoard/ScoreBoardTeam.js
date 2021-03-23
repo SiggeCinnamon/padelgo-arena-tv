@@ -2,8 +2,9 @@ import styles from './scoreboard.module.css';
 
 export default function scoreboardTeam({ team }) {
     return (
+
         <div className={styles.teamContainer}>
-            <div className='players-color p-1' style={{ backgroundColor: team.color }}></div>
+            <div className='players-color d-flex p-2' style={{ backgroundColor: team.color }}></div>
             <div className={styles.playersName} style={{ backgroundColor: team.backgroundColor }}>
                 <span className={styles.teamName}>{team.name}</span>
             </div>
@@ -21,6 +22,7 @@ export default function scoreboardTeam({ team }) {
                 </div>
             </div>
         </div>
+
     );
 };
 
