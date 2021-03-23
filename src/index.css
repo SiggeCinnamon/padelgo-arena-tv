@@ -1,23 +1,25 @@
 :root {
-  --primary-colour: rgb(156, 39, 176);
-  --primary-hover-colour: rgb(119, 29, 134);
+  --primary-colour         : rgb(156, 39, 176);
+  --primary-hover-colour   : rgb(119, 29, 134);
   --primary-disabled-colour: rgb(170, 112, 179);
-  --secondary-colour: rgb(255, 255, 255);
+  --secondary-colour       : rgb(255, 255, 255);
 }
 
 * {
-  margin: 0;
-  padding: 0;
+  margin    : 0;
+  padding   : 0;
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
+html,
+body {
+  height  : 100%;
+  margin  : 0;
+  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing : antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
