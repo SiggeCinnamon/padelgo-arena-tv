@@ -64,11 +64,9 @@ export default function VideoPlayer(
     if (!video && x >= 1920) {
       document.getElementsByClassName("vjs-tech")[0].style.transform =
         "translateY(-4%)";
-      console.log("if called, x:", x, "video:", video);
     } else {
       document.getElementsByClassName("vjs-tech")[0].style.transform =
         "translateY(0%)";
-      console.log("else, x:", x, "video:", video);
     }
   };
 
