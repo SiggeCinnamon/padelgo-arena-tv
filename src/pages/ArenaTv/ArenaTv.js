@@ -64,17 +64,15 @@ function ArenaTv(props) {
 
   return (
     <div className='wrapper'>
-      <div className='main-wrapper container-fluid'>
-        <div id='container-video' className='container-fluid'>
-          {sources && (
-            <VideoPlayer
-              src={sources}
-              controls={true}
-              autoplay={false}
-              onPlaylistAtEnd={onPlaylistAtEnd}
-            />
-          )}
-        </div>
+      <div className='container-video'>
+        {sources && (
+          <VideoPlayer
+            src={sources}
+            controls={true}
+            autoplay={true}
+            onPlaylistAtEnd={onPlaylistAtEnd}
+          />
+        )}
       </div>
     </div>
   );
