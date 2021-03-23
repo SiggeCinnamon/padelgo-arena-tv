@@ -5,8 +5,14 @@ import { getScoresWithLiveStreamId } from '../../services/Scores.js';
 import Scoreboard from '../../components/ScoreBoard/scoreboard.js';
 import "./Court.css";
 function Court(props) {
+  const [score, setScore] = useState("");
 
-    const [score, setScore] = useState('');
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchScore();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
