@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getPopularMedia } from "../../services/Media.js";
-import VideoPlayer from "../../components/StreamPlayer/VideoPlayer.js";
+import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.js";
 import "./ArenaTv.css";
 
 function ArenaTv(props) {

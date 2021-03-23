@@ -8,9 +8,8 @@ function Court(props) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("5sek");
       fetchScore();
-    }, 50000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
