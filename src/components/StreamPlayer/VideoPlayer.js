@@ -52,6 +52,26 @@ export default function VideoPlayer(
   ref = comp.videoRef;
   let player = comp.player;
 
+  const onFullscreenChangeHandler = (e) => {
+    const video = document.fullscreenElement;
+
+    const win = window,
+      doc = document,
+      docElem = doc.documentElement,
+      body = doc.getElementsByTagName("body")[0],
+      x = win.innerWidth || docElem.clientWidth || body.clientWidth;
+
+    if (!video && x >= 1920) {
+      document.getElementsByClassName("vjs-tech")[0].style.transform =
+        "translateY(-4%)";
+      console.log("if called, x:", x, "video:", video);
+    } else {
+      document.getElementsByClassName("vjs-tech")[0].style.transform =
+        "translateY(0%)";
+      console.log("else, x:", x, "video:", video);
+    }
+  };
+
   const onEndingHandler = (e) => {
     if (
       player &&
@@ -63,6 +83,7 @@ export default function VideoPlayer(
 
   useEffect(() => {
     if (player !== null) {
+      player.on("fullscreenchange", onFullscreenChangeHandler);
       player.on("ended", onEndingHandler);
     }
 
@@ -76,6 +97,7 @@ export default function VideoPlayer(
   return (
     <video
       ref={ref}
+      id='video'
       className='video-js vjs-fluid vjs-big-play-centered'
       width='100%'
       height='100%'
