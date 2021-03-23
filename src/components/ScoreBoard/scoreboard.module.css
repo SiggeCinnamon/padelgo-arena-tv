@@ -1,7 +1,7 @@
 .wrapperScoreboard {
     width           : 100%;
     height          : 100%;
-    position        : absolute;
+    position        : fixed;
     background-color: #9C99B0;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .playersName {
-    min-width    : 80% !important;
+    min-width    : 60% ;
     overflow     : hidden;
     white-space  : nowrap;
     text-overflow: ellipsis;
