@@ -8,7 +8,7 @@ async function getCourtsAPIGETResponse(route) {
       baseURL: process.env.REACT_APP_COURTS_API_BASE_URL,
       method: "GET",
     };
-    
+
     try {
       const result = await axios.create(config).get(route);
       return result.data;
@@ -32,5 +32,5 @@ async function getCourtsAPIGETResponse(route) {
 }
 
 export async function getCourtsWithClubId(clubId) {
-  return await getCourtsAPIGETResponse(`Courts/${clubId}`);
+  return await getCourtsAPIGETResponse(`/Courts/${clubId}`);
 }
