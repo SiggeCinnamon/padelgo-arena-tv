@@ -30,15 +30,15 @@ async function getStreamsAPIGETResponse(route) {
 }
 
 export async function getStreamsWithCourtId(courtId) {
-  return await getStreamsAPIGETResponse(`Streams/court/${courtId}`);
+  return await getStreamsAPIGETResponse(`/Streams/court/${courtId}`);
 }
 
 export async function getStreamURLWithLiveStreamId(liveStreamId) {
   return await getStreamsAPIGETResponse(
-    `Streams/url/anonymously/${liveStreamId}`
+    `/Streams/url/anonymously/${liveStreamId}`
   );
 }
 
 export async function getStreamThumbnailWithLiveStreamId(liveStreamId) {
-  return await getStreamsAPIGETResponse(`Streams/${liveStreamId}/thumbnail`);
+  return await getStreamsAPIGETResponse(`/Streams/${liveStreamId}/thumbnail`);
 }
