@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getPopularMedia } from "../../services/Media.js";
+import { getChannelsInfoWithChannelName } from "../../services/Channels.js";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.js";
 import "./ArenaTv.css";
 
@@ -8,7 +9,6 @@ function ArenaTv(props) {
   const [sources, setSources] = useState([]);
 
   useEffect(() => {
-    // Might want to change the parameters here later on (?)
     fetchPopularMedia(1, 5);
   }, []);
 
@@ -33,19 +33,27 @@ function ArenaTv(props) {
         poster:
           process.env.NODE_ENV === "development"
             ? "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Big_Buck_Bunny_thumbnail_vlc.png/800px-Big_Buck_Bunny_thumbnail_vlc.png"
-            : p.poster,
+            : p.thumbnailURL,
+        channel: p.channel,
+        description: p.description,
+        avatar: fetchChannelData(p.channel).profileImageURL || "",
       });
     });
 
     return pipeline;
   };
 
+  const fetchChannelData = async (channel) => {
+    const data = await getChannelsInfoWithChannelName(channel);
+    return await data;
+  };
+
   const onPlaylistAtEnd = async () => {
-    // Might want to change the parameters here later on (?)
     const data = pipeline(await fetchPopularMedia(1, 5));
     setSources(sources.concat(data));
   };
 
+  // TODO Use the proper endpoint (Waiting for it)
   const fetchPopularMedia = async (page = 1, take = 0, sortOrder = 0) => {
     const data = await getPopularMedia({
       clubId: Number(props.location.props.clubId),
