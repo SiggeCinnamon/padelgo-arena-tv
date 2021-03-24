@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import videojs from "video.js";
+import VideoOverlay from "../../components/VideoOverlay/VideoOverlay.js";
 import "video.js/dist/video-js.css";
 import "videojs-playlist/dist/videojs-playlist.js";
 
+// TODO Add EventListener for Escape, to return to Dashboard / Previous page
 const usePlayer = ({ src, controls, autoplay }) => {
   const options = {
     fill: true,
@@ -28,8 +30,8 @@ const usePlayer = ({ src, controls, autoplay }) => {
     setPlayer(vjsPlayer);
 
     return () => {
-      if (player && player !== null) {
-        player.dispose();
+      if (vjsPlayer !== null) {
+        vjsPlayer.dispose();
       }
     };
   }, []);
@@ -49,8 +51,11 @@ export default function VideoPlayer(
   ref
 ) {
   const comp = usePlayer({ src, controls, autoplay });
+  const player = comp.player;
   ref = comp.videoRef;
-  let player = comp.player;
+  const sourcesRef = useRef();
+
+  const [videoData, setVideoData] = useState({});
 
   const onFullscreenChangeHandler = (e) => {
     const video = document.fullscreenElement;
@@ -70,6 +75,18 @@ export default function VideoPlayer(
     }
   };
 
+  const onPlaylistItemHandler = (e) => {
+    if (player && player.playlist.currentIndex() !== -1) {
+      const currentItem = sourcesRef.current[player.playlist.currentIndex()];
+
+      setVideoData({
+        channel: currentItem.channel,
+        description: currentItem.description,
+        avatar: currentItem.avatar,
+      });
+    }
+  };
+
   const onEndingHandler = (e) => {
     if (
       player &&
@@ -80,25 +97,35 @@ export default function VideoPlayer(
   };
 
   useEffect(() => {
+    sourcesRef.current = src;
+  }, [src]);
+
+  useEffect(() => {
     if (player !== null) {
+      player.on("playlistitem", onPlaylistItemHandler);
       player.on("fullscreenchange", onFullscreenChangeHandler);
       player.on("ended", onEndingHandler);
     }
 
     return () => {
-      if (player && player !== null) {
-        player.dispose();
+      if (player !== null) {
+        player.off("playlistitem");
+        player.off("fullscreenchange");
+        player.off("ended");
       }
     };
   }, [player]);
 
   return (
-    <video
-      ref={ref}
-      id='video'
-      className='video-js vjs-fluid vjs-big-play-centered'
-      width='100%'
-      height='100%'
-    />
+    <div>
+      <video
+        ref={ref}
+        id='video'
+        className='video-js vjs-fluid vjs-big-play-centered'
+        width='100%'
+        height='100%'
+      />
+      <VideoOverlay data={videoData} />
+    </div>
   );
 }
