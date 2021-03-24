@@ -11,13 +11,14 @@
 }
 
 .__video_overlay_logo>p {
-    margin-top : 6px;
-    margin-left: 10px;
-    font-family: 'Roboto Slab', serif;
-    font-style : normal;
-    font-weight: bold;
-    font-size  : 18px;
-    color      : #FFF;
+    margin-top     : 5px;
+    margin-left    : 10px;
+    font-family    : 'Roboto Slab', serif;
+    font-style     : normal;
+    font-weight    : bold;
+    font-size      : 18px;
+    color          : #FFF;
+    text-decoration: none;
 }
 
 .__video_overlay_channel {

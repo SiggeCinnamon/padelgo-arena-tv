@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./VideoOverlay.module.css";
 
-const VideoOverlay = (props) => {
+const VideoOverlay = ({ data }) => {
   return (
     <>
       <div className={styles.__video_overlay_logo}>
@@ -11,7 +11,7 @@ const VideoOverlay = (props) => {
         <div className={styles.__video_overlay_channel_content}>
           <img
             src={
-              props.data.avatar ||
+              data.avatar ||
               "https://static.padelgo.tv/profilepictures/600x600/tranapadel.jpeg" // TODO Change the default avatar to a proper placeholer avatar
             }
             className='img-raised rounded-circle img-fluid'
@@ -19,9 +19,9 @@ const VideoOverlay = (props) => {
           />
           <div className={styles.__video_overlay_channel_content_headers}>
             <h6>
-              {props.data.channel} - {props.data.description}
+              {data.channel} - {data.description}
             </h6>
-            <h6>padelgo.tv/channel/{props.data.channel}</h6>
+            <h6>padelgo.tv/channel/{data.channel}</h6>
           </div>
         </div>
       </div>
