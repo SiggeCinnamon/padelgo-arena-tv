@@ -49,13 +49,9 @@ async function getMediaAPIPOSTResponse(route, payload) {
 }
 
 export async function getTrendingMedia(filter) {
-  return await getMediaAPIPOSTResponse(`Media/trending`, filter);
+  return await getMediaAPIPOSTResponse(`/Media/trending`, filter);
 }
 
 export async function getPopularMedia(filter) {
-  return await getMediaAPIPOSTResponse(`Media/popular`, filter);
-}
-
-export async function getLatestMedia(filter) {
-  return await getMediaAPIPOSTResponse(`Media/popular`, filter);
+  return await getMediaAPIPOSTResponse(`/Media/popular`, filter);
 }
