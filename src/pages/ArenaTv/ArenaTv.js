@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getPopularMedia } from "../../services/Media.js";
 import { getChannelsInfoWithChannelName } from "../../services/Channels.js";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.js";
-import "./ArenaTv.css";
+import styles from "./ArenaTv.module.scss";
 
 function ArenaTv(props) {
   const [popular, setPopular] = useState([]);
@@ -72,8 +72,8 @@ function ArenaTv(props) {
   };
 
   return (
-    <div className='wrapper'>
-      <div className='container-video'>
+    <div className={styles.__arenatv_wrapper}>
+      <div className={styles.__arenatv_container_video}>
         {sources && (
           <VideoPlayer
             src={sources}

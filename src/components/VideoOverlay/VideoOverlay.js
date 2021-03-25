@@ -1,40 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import styles from "./VideoOverlay.module.css";
+import styles from "./VideoOverlay.module.scss";
 
 const VideoOverlay = ({ data, currentProgress, history }) => {
   const [icon, setIcon] = useState("");
-  const [colour, setColour] = useState("");
+  const [color, setcolor] = useState("");
   const [text, setText] = useState("");
 
   useEffect(() => {
     switch (String(data.mediaType).toLowerCase()) {
       case "stream": {
         setIcon("movie_filter");
-        setColour("#eb6531");
+        setcolor("#eb6531");
         setText("STREAM");
         break;
       }
       case "highlight": {
         setIcon("live_tv");
-        setColour("#ebab0c");
+        setcolor("#ebab0c");
         setText("HIGHLIGHT");
         break;
       }
       case "live": {
         setIcon("stop_circle");
-        setColour("#28b869");
+        setcolor("#28b869");
         setText("LIVE");
         break;
       }
       default: {
         setIcon("");
-        setColour("#9c27b0");
+        setcolor("#9c27b0");
         setText("");
         break;
       }
     }
-  }, [icon, colour, data]);
+  }, [icon, color, data]);
 
   return (
     <>
@@ -50,7 +50,7 @@ const VideoOverlay = ({ data, currentProgress, history }) => {
         <div className={styles.__video_overlay_channel_type}>
           <div
             className={styles.__video_overlay_channel_type_pill}
-            style={{ background: colour }}>
+            style={{ background: color }}>
             <i className='material-icons media-card--highlight'>{icon}</i>
             <p>{text}</p>
           </div>

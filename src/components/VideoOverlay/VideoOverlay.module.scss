@@ -1,0 +1,125 @@
+@use '../../utilities/variables'as vars;
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100&display=swap%27");
+
+.__video_overlay_logo {
+    position        : absolute;
+    top             : 0;
+    left            : 0;
+    height          : 40px;
+    width           : 100%;
+    user-select     : none;
+    background-color: vars.$primary-color;
+}
+
+.__video_overlay_logo {
+    p {
+        margin-top : 5px;
+        margin-left: 10px;
+        font-family: "Roboto Slab", serif;
+        font-style : normal;
+        font-weight: bold;
+        font-size  : 18px;
+        color      : #fff;
+        user-select: none;
+        cursor     : pointer;
+    }
+}
+
+.__video_overlay_logo_p:hover {
+    color: rgb(230, 230, 230);
+}
+
+.__video_overlay_channel_type {
+    position: absolute;
+    top     : 80px;
+    left    : 50px;
+    width   : 180px;
+}
+
+.__video_overlay_channel_type_pill {
+    display        : flex;
+    padding-top    : 18px;
+    padding-right  : 5px;
+    padding-bottom : 0px;
+    padding-right  : 5px;
+    border-radius  : 25px;
+    justify-content: center;
+    text-align     : center;
+    user-select    : none;
+}
+
+.__video_overlay_channel_type_pill {
+    i {
+        padding-right: 5px;
+        color        : white;
+    }
+}
+
+.__video_overlay_channel_type_pill {
+    p {
+        font-size  : 18px;
+        font-style : none;
+        font-family: "Roboto", serif;
+        font-weight: bold;
+        color      : #fff;
+    }
+}
+
+.__video_overlay_channel {
+    position: absolute;
+    bottom  : 0;
+    left    : 0;
+    height  : 150px;
+    width   : 100%;
+    background: linear-gradient(180deg,
+            rgba(196, 196, 196, 0) 0%,
+            rgba(0, 0, 0, 0.92) 100%);
+}
+
+.__video_overlay_channel_content {
+    display       : flex;
+    flex-direction: row;
+}
+
+.__video_overlay_channel_content {
+    img {
+        margin-top : 25px;
+        margin-left: 25px;
+        max-width  : 100px;
+    }
+}
+
+.__video_overlay_channel_content_headers {
+    margin-top : 35px;
+    margin-left: 30px;
+}
+
+.__video_overlay_channel_content_headers {
+    h6 {
+        font-family: "Roboto Slab", serif;
+        font-size  : 36px;
+        font-style : normal;
+        font-weight: bold;
+        line-height: 30px;
+        text-align : left;
+        text-shadow: 0 0 1px rgba(0, 0, 0, 1), 0 0 1px rgba(0, 0, 0, 1),
+            0 0 1px rgba(0, 0, 0, 1), 0 0 1px rgba(0, 0, 0, 1);
+        color: white;
+    }
+}
+
+.__video_overlay_progress_container {
+    position: absolute;
+    bottom  : 0;
+    left    : 0;
+    width   : 100%;
+}
+
+.__video_overlay_progress {
+    height: 5px;
+}
+
+.__video_overlay_progress_bar {
+    width           : 0%;
+    background-color: vars.$primary-color;
+}
