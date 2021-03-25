@@ -34,6 +34,7 @@ function ArenaTv(props) {
           process.env.NODE_ENV === "development"
             ? "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Big_Buck_Bunny_thumbnail_vlc.png/800px-Big_Buck_Bunny_thumbnail_vlc.png"
             : p.thumbnailURL,
+        mediaType: p.mediaType,
         channel: p.channel,
         description: p.description,
         avatar: fetchChannelData(p.channel).profileImageURL || "",
