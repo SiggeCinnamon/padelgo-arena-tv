@@ -6,8 +6,8 @@
     left       : 0;
     height     : 40px;
     width      : 100%;
-    background : var(--primary-colour);
     user-select: none;
+    background : var(--primary-colour);
 }
 
 .__video_overlay_logo>p {
@@ -26,6 +26,38 @@
     color: rgb(230, 230, 230);
 }
 
+.__video_overlay_channel_type {
+    position: absolute;
+    top     : 80px;
+    left    : 50px;
+    width   : 180px;
+}
+
+.__video_overlay_channel_type_pill {
+    display        : flex;
+    padding-top    : 18px;
+    padding-right  : 5px;
+    padding-bottom : 0px;
+    padding-right  : 5px;
+    border-radius  : 25px;
+    justify-content: center;
+    text-align     : center;
+    user-select    : none;
+}
+
+.__video_overlay_channel_type_pill>i {
+    padding-right: 5px;
+    color        : white;
+}
+
+.__video_overlay_channel_type_pill>p {
+    font-size  : 18px;
+    font-style : none;
+    font-family: 'Roboto', serif;
+    font-weight: bold;
+    color      : #FFF;
+}
+
 .__video_overlay_channel {
     position  : absolute;
     bottom    : 0;
@@ -34,6 +66,7 @@
     width     : 100%;
     background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, rgba(0, 0, 0, 0.92) 100%);
 }
+
 
 .__video_overlay_channel_content {
     display       : flex;
@@ -60,4 +93,20 @@
     text-align : left;
     text-shadow: 0 0 1px rgba(0, 0, 0, 1), 0 0 1px rgba(0, 0, 0, 1), 0 0 1px rgba(0, 0, 0, 1), 0 0 1px rgba(0, 0, 0, 1);
     color      : white;
+}
+
+.__video_overlay_progress_container {
+    position: absolute;
+    bottom  : 0;
+    left    : 0;
+    width   : 100%;
+}
+
+.__video_overlay_progress {
+    height: 5px;
+}
+
+.__video_overlay_progress_bar {
+    width           : 0%;
+    background-color: var(--primary-colour);
 }
