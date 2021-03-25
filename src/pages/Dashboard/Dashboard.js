@@ -2,16 +2,25 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Routes from "../../routes.json";
 import { getCourtsWithClubId } from "../../services/Court.js";
-
-import "./Dashboard.scss";
+import { getClubDataWithClubId } from "../../services/Clubs.js";
+import styles from "./Dashboard.module.scss";
 
 function Dashboard({ match }) {
   const [court, setCourt] = useState("-1");
   const [courts, setCourts] = useState([]);
+  const [club, setClub] = useState({});
 
   useEffect(() => {
     fetchCourts();
   }, []);
+
+  useEffect(() => {
+    fetchClubData();
+  }, [courts]);
+
+  const fetchClubData = async () => {
+    setClub(await getClubDataWithClubId(match.params.clubId));
+  };
 
   const fetchCourts = async () => {
     setCourts(await getCourtsWithClubId(match.params.clubId));
@@ -26,32 +35,33 @@ function Dashboard({ match }) {
 
   return (
     <>
-      <nav className='navbar'>
-        <span className='navbar'>padelgo.tv - stream for free</span>
+      <nav className={styles.__dashboard_navbar + " navbar"}>
+        <span>padelgo.tv - stream for free</span>
       </nav>
-      <div className='container flex-nowrap justify-content-center'>
-        <div className='row justify-content-md-center'>
-          <div className='col-md'>
+      <div className={styles.__dashboard_container + " container"}>
+        <div className='d-flex flex-wrap justify-content-center'>
+          <div className='col'>
             {/* ARENATV */}
-
-            <div className='card'>
-              <div className='card-top'>Showcase</div>
+            <div className={styles.__dashboard_card + " card"}>
+              <div className={styles.__dashboard_card_top + " card-top"}>
+                <p>Showcase</p>
+              </div>
               <div className='card-body'>
                 <div>
-                  <p className='card-text'>
+                  <p className={styles.__dashboard_card_text + " card-text"}>
                     Continuously display highlights and streams from your club
                     in fullscreen.
                     <br />
                     <br />
-                    Return here by clicking at padelgo.tv in the top right or
+                    Return here by clicking at padelgo.tv in the top left or
                     press ESC.
                   </p>
                 </div>
               </div>
-              <div className='div-btn'>
+              <div className={styles.__dashboard_div_btn}>
                 <Link
                   type='button'
-                  className='btn btn-secondary btn-rounded'
+                  className={styles.__dashboard_btn + " btn btn-rounded"}
                   to={toArenaTv}>
                   Start
                 </Link>
@@ -61,18 +71,20 @@ function Dashboard({ match }) {
           {/* ARENATV */}
 
           {/* SCORE */}
-          <div className='col-md'>
-            <div className='card'>
-              <div className='card-top'>Score</div>
+          <div className='col'>
+            <div className={styles.__dashboard_card + " card"}>
+              <div className={styles.__dashboard_card_top + " card-top"}>
+                <p>Score</p>
+              </div>
               <div className='card-body'>
-                <p className='card-text'>
+                <p className={styles.__dashboard_card_text + " card-text"}>
                   Display the current score from a live stream. Pick a court in
                   the list below.
                 </p>
               </div>
 
               {/* DROPDOWNMENU */}
-              <div className='dropdown'>
+              <div className={styles.__dashboard_dropdown}>
                 <div
                   className='btn-group'
                   role='group'
@@ -92,7 +104,7 @@ function Dashboard({ match }) {
                       {courts &&
                         courts.map((c, i) => (
                           <option value={c.courtId} key={c.courtId}>
-                            Court #{c.courtId} at {c.description}
+                            Court #{c.courtId} at {club.name}
                           </option>
                         ))}
                     </select>
@@ -101,12 +113,12 @@ function Dashboard({ match }) {
               </div>
               {/* DROPDOWNMENU */}
               {/* COURTBUTTON */}
-              <div className='div-btn'>
+              <div className={styles.__dashboard_div_btn}>
                 <Link
                   className={
                     court === "-1"
-                      ? "btn btn-primary disabled"
-                      : "btn btn-primary"
+                      ? styles.__dashboard_btn + " btn btn-rounded disabled"
+                      : styles.__dashboard_btn + " btn btn-rounded"
                   }
                   to={`${Routes.COURT.replace(":courtId", court)}`}>
                   Start
