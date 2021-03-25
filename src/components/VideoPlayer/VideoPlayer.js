@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { withRouter } from "react-router-dom";
 import videojs from "video.js";
 import VideoOverlay from "../../components/VideoOverlay/VideoOverlay.js";
 import "video.js/dist/video-js.css";
@@ -46,10 +47,10 @@ const usePlayer = ({ src, controls, autoplay }) => {
   return { videoRef: videoRef, player: player };
 };
 
-export default function VideoPlayer(
-  { src, controls, autoplay, onPlaylistAtEnd },
+const VideoPlayer = (
+  { src, controls, autoplay, onPlaylistAtEnd, history },
   ref
-) {
+) => {
   const comp = usePlayer({ src, controls, autoplay });
   const player = comp.player;
   ref = comp.videoRef;
@@ -96,12 +97,19 @@ export default function VideoPlayer(
     }
   };
 
+  const onEscapeHandler = (e) => {
+    if (e.keyCode === 27) {
+      history.goBack();
+    }
+  };
+
   useEffect(() => {
     sourcesRef.current = src;
   }, [src]);
 
   useEffect(() => {
     if (player !== null) {
+      document.addEventListener("keydown", onEscapeHandler, false);
       player.on("playlistitem", onPlaylistItemHandler);
       player.on("fullscreenchange", onFullscreenChangeHandler);
       player.on("ended", onEndingHandler);
@@ -128,4 +136,6 @@ export default function VideoPlayer(
       <VideoOverlay data={videoData} />
     </div>
   );
-}
+};
+
+export default withRouter(VideoPlayer);
