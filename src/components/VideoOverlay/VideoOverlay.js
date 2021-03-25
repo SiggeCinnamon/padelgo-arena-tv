@@ -1,20 +1,24 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import styles from "./VideoOverlay.module.css";
+import defaultAvatar from "../../assets/default_avatar.svg";
 
 // TODO Test the overlay throughougly by using different channels
-const VideoOverlay = ({ data }) => {
+const VideoOverlay = ({ data, history }) => {
   return (
     <>
       <div className={styles.__video_overlay_logo}>
-        <p>padelgo.tv - stream for free</p>
+        <p
+          className={styles.__video_overlay_logo_p}
+          onClick={() => history.goBack()}
+          alt='Go back'>
+          padelgo.tv - stream for free
+        </p>
       </div>
       <div className={styles.__video_overlay_channel}>
         <div className={styles.__video_overlay_channel_content}>
           <img
-            src={
-              data.avatar ||
-              "https://static.padelgo.tv/profilepictures/600x600/tranapadel.jpeg" // TODO Change the default avatar to a proper placeholer avatar
-            }
+            src={data.avatar || defaultAvatar}
             className='img-raised rounded-circle img-fluid'
             alt='player'
           />
@@ -30,4 +34,4 @@ const VideoOverlay = ({ data }) => {
   );
 };
 
-export default VideoOverlay;
+export default withRouter(VideoOverlay);
