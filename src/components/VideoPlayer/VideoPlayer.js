@@ -56,6 +56,7 @@ const VideoPlayer = (
   const sourcesRef = useRef();
 
   const [videoData, setVideoData] = useState({});
+  const [currentProgress, setCurrentProgress] = useState({});
 
   const onFullscreenChangeHandler = (e) => {
     const video = document.fullscreenElement;
@@ -83,6 +84,7 @@ const VideoPlayer = (
         channel: currentItem.channel,
         description: currentItem.description,
         avatar: currentItem.avatar,
+        mediaType: currentItem.mediaType,
       });
     }
   };
@@ -102,15 +104,21 @@ const VideoPlayer = (
     }
   };
 
+  const onProgressHandler = (e) => {
+    setCurrentProgress(
+      player.children_[7].progressControl.seekBar.progress_ * 100
+    );
+  };
+
   useEffect(() => {
     sourcesRef.current = src;
   }, [src]);
 
   useEffect(() => {
     if (player !== null) {
-      document.addEventListener("keydown", onEscapeHandler, false);
       player.on("playlistitem", onPlaylistItemHandler);
       player.on("fullscreenchange", onFullscreenChangeHandler);
+      player.on("timeupdate", onProgressHandler);
       player.on("ended", onEndingHandler);
     }
 
@@ -118,10 +126,19 @@ const VideoPlayer = (
       if (player !== null) {
         player.off("playlistitem");
         player.off("fullscreenchange");
+        player.on("timeupdate", onProgressHandler);
         player.off("ended");
       }
     };
   }, [player]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", onEscapeHandler);
+
+    return () => {
+      document.removeEventListener("keydown", onEscapeHandler);
+    };
+  }, []);
 
   return (
     <div>
@@ -132,7 +149,7 @@ const VideoPlayer = (
         width='100%'
         height='100%'
       />
-      <VideoOverlay data={videoData} />
+      <VideoOverlay data={videoData} currentProgress={currentProgress} />
     </div>
   );
 };
