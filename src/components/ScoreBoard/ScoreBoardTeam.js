@@ -5,7 +5,7 @@ export default function scoreboardTeam({ team }) {
     <div className={styles.teamContainer}>
       <div
         className='players-color d-flex p-2'
-        style={{ backgroundColor: team.color, marginRight: "3px" }}></div>
+        style={{ backgroundColor: team.color}}></div>
       <div
         className={styles.playersName}
         style={{ backgroundColor: team.backgroundColor }}>
