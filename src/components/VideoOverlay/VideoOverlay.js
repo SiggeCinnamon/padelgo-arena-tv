@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./VideoOverlay.module.css";
 
+// TODO Test the overlay throughougly by using different channels
 const VideoOverlay = ({ data }) => {
   return (
     <>
