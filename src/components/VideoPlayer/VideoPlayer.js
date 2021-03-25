@@ -5,7 +5,6 @@ import VideoOverlay from "../../components/VideoOverlay/VideoOverlay.js";
 import "video.js/dist/video-js.css";
 import "videojs-playlist/dist/videojs-playlist.js";
 
-// TODO Add EventListener for Escape, to return to Dashboard / Previous page
 const usePlayer = ({ src, controls, autoplay }) => {
   const options = {
     fill: true,

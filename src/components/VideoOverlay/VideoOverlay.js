@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import styles from "./VideoOverlay.module.css";
 import defaultAvatar from "../../assets/default_avatar.svg";
 
-// TODO Test the overlay throughougly by using different channels
 const VideoOverlay = ({ data, history }) => {
   return (
     <>
