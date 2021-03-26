@@ -8,7 +8,7 @@ export default function Testscorboard({ isManageScorePage, score }) {
   } else {
     return (
       <>
-        <div className={styles.wrapperScoreboard}>
+        <div className={styles.wrapperScoreboard} >
           <div
             className={
               !isManageScorePage

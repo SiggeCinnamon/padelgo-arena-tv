@@ -4,6 +4,7 @@ import styles from "./scoreboard.module.css";
 // TODO: Fix responsiveness at mobile resolutions (Iphone X)
 
 export default function Scoreboard({ isManageScorePage, score }) {
+
   if (!score || score.error) {
     return null;
   } else {
