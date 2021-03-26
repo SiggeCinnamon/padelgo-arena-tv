@@ -58,18 +58,10 @@ const VideoPlayer = (
   const [videoData, setVideoData] = useState({});
   const [currentProgress, setCurrentProgress] = useState({});
 
-  const onFullscreenChangeHandler = (e) => {
-    const video = document.fullscreenElement;
-
-    const win = window,
-      doc = document,
-      docElem = doc.documentElement,
-      body = doc.getElementsByTagName("body")[0],
-      x = win.innerWidth || docElem.clientWidth || body.clientWidth;
-
-    if (!video && x >= 1920) {
+  const setTranslateY = () => {
+    if (window.innerWidth <= 1920) {
       document.getElementsByClassName("vjs-tech")[0].style.transform =
-        "translateY(-4%)";
+        "translateY(0%)";
     } else {
       document.getElementsByClassName("vjs-tech")[0].style.transform =
         "translateY(0%)";
@@ -87,6 +79,10 @@ const VideoPlayer = (
         mediaType: currentItem.mediaType,
       });
     }
+  };
+
+  const onResizeHandler = (e) => {
+    setTranslateY();
   };
 
   const onEndingHandler = (e) => {
@@ -117,7 +113,6 @@ const VideoPlayer = (
   useEffect(() => {
     if (player !== null) {
       player.on("playlistitem", onPlaylistItemHandler);
-      player.on("fullscreenchange", onFullscreenChangeHandler);
       player.on("timeupdate", onProgressHandler);
       player.on("ended", onEndingHandler);
     }
@@ -125,18 +120,19 @@ const VideoPlayer = (
     return () => {
       if (player !== null) {
         player.off("playlistitem");
-        player.off("fullscreenchange");
-        player.on("timeupdate", onProgressHandler);
+        player.off("timeupdate", onProgressHandler);
         player.off("ended");
       }
     };
   }, [player]);
 
   useEffect(() => {
+    setTranslateY();
     document.addEventListener("keydown", onEscapeHandler);
-
+    window.addEventListener("resize", onResizeHandler);
     return () => {
       document.removeEventListener("keydown", onEscapeHandler);
+      window.removeEventListener("resize", onResizeHandler);
     };
   }, []);
 
@@ -145,7 +141,7 @@ const VideoPlayer = (
       <video
         ref={ref}
         id='video'
-        className='video-js vjs-fluid vjs-big-play-centered'
+        className='video-js vjs-big-play-centered vjs-fluid'
         width='100%'
         height='100%'
       />
