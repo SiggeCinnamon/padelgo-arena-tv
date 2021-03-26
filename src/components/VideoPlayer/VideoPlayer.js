@@ -58,16 +58,6 @@ const VideoPlayer = (
   const [videoData, setVideoData] = useState({});
   const [currentProgress, setCurrentProgress] = useState({});
 
-  const setTranslateY = () => {
-    if (window.innerWidth <= 1920) {
-      document.getElementsByClassName("vjs-tech")[0].style.transform =
-        "translateY(0%)";
-    } else {
-      document.getElementsByClassName("vjs-tech")[0].style.transform =
-        "translateY(0%)";
-    }
-  };
-
   const onPlaylistItemHandler = (e) => {
     if (player && player.playlist.currentIndex() !== -1) {
       const currentItem = sourcesRef.current[player.playlist.currentIndex()];
@@ -79,10 +69,6 @@ const VideoPlayer = (
         mediaType: currentItem.mediaType,
       });
     }
-  };
-
-  const onResizeHandler = (e) => {
-    setTranslateY();
   };
 
   const onEndingHandler = (e) => {
@@ -127,12 +113,9 @@ const VideoPlayer = (
   }, [player]);
 
   useEffect(() => {
-    setTranslateY();
     document.addEventListener("keydown", onEscapeHandler);
-    window.addEventListener("resize", onResizeHandler);
     return () => {
       document.removeEventListener("keydown", onEscapeHandler);
-      window.removeEventListener("resize", onResizeHandler);
     };
   }, []);
 
