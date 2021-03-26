@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+import { withRouter } from "react-router-dom";
 import videojs from "video.js";
+import VideoOverlay from "../../components/VideoOverlay/VideoOverlay.js";
 import "video.js/dist/video-js.css";
 import "videojs-playlist/dist/videojs-playlist.js";
 
@@ -28,8 +30,8 @@ const usePlayer = ({ src, controls, autoplay }) => {
     setPlayer(vjsPlayer);
 
     return () => {
-      if (player && player !== null) {
-        player.dispose();
+      if (vjsPlayer !== null) {
+        vjsPlayer.dispose();
       }
     };
   }, []);
@@ -44,13 +46,17 @@ const usePlayer = ({ src, controls, autoplay }) => {
   return { videoRef: videoRef, player: player };
 };
 
-export default function VideoPlayer(
-  { src, controls, autoplay, onPlaylistAtEnd },
+const VideoPlayer = (
+  { src, controls, autoplay, onPlaylistAtEnd, history },
   ref
-) {
+) => {
   const comp = usePlayer({ src, controls, autoplay });
+  const player = comp.player;
   ref = comp.videoRef;
-  let player = comp.player;
+  const sourcesRef = useRef();
+
+  const [videoData, setVideoData] = useState({});
+  const [currentProgress, setCurrentProgress] = useState({});
 
   const onFullscreenChangeHandler = (e) => {
     const video = document.fullscreenElement;
@@ -70,6 +76,19 @@ export default function VideoPlayer(
     }
   };
 
+  const onPlaylistItemHandler = (e) => {
+    if (player && player.playlist.currentIndex() !== -1) {
+      const currentItem = sourcesRef.current[player.playlist.currentIndex()];
+
+      setVideoData({
+        channel: currentItem.channel,
+        description: currentItem.description,
+        avatar: currentItem.avatar,
+        mediaType: currentItem.mediaType,
+      });
+    }
+  };
+
   const onEndingHandler = (e) => {
     if (
       player &&
@@ -79,26 +98,60 @@ export default function VideoPlayer(
     }
   };
 
+  const onEscapeHandler = (e) => {
+    if (e.keyCode === 27) {
+      history.goBack();
+    }
+  };
+
+  const onProgressHandler = (e) => {
+    setCurrentProgress(
+      player.children_[7].progressControl.seekBar.progress_ * 100
+    );
+  };
+
+  useEffect(() => {
+    sourcesRef.current = src;
+  }, [src]);
+
   useEffect(() => {
     if (player !== null) {
+      player.on("playlistitem", onPlaylistItemHandler);
       player.on("fullscreenchange", onFullscreenChangeHandler);
+      player.on("timeupdate", onProgressHandler);
       player.on("ended", onEndingHandler);
     }
 
     return () => {
-      if (player && player !== null) {
-        player.dispose();
+      if (player !== null) {
+        player.off("playlistitem");
+        player.off("fullscreenchange");
+        player.on("timeupdate", onProgressHandler);
+        player.off("ended");
       }
     };
   }, [player]);
 
+  useEffect(() => {
+    document.addEventListener("keydown", onEscapeHandler);
+
+    return () => {
+      document.removeEventListener("keydown", onEscapeHandler);
+    };
+  }, []);
+
   return (
-    <video
-      ref={ref}
-      id='video'
-      className='video-js vjs-fluid vjs-big-play-centered'
-      width='100%'
-      height='100%'
-    />
+    <div>
+      <video
+        ref={ref}
+        id='video'
+        className='video-js vjs-fluid vjs-big-play-centered'
+        width='100%'
+        height='100%'
+      />
+      <VideoOverlay data={videoData} currentProgress={currentProgress} />
+    </div>
   );
-}
+};
+
+export default withRouter(VideoPlayer);

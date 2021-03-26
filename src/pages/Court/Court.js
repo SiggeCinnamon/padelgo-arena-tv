@@ -7,33 +7,36 @@ import "./Court.css";
 function Court(props) {
     const [score, setScore] = useState("");
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            fetchScore();
-        }, 5000);
-        return () => clearInterval(interval);
-    }, []);
+function Court(props) {
+  const [score, setScore] = useState("");
 
-    useEffect(() => {
-        fetchScore();
-    }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchScore();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
-    const fetchScore = async () => {
-        const FetchGetStreamsWithCourtId = await getStreamsWithCourtId(
-            props.match.params.courtId
-        );
-        setScore(
-            await getScoresWithLiveStreamId(
-                FetchGetStreamsWithCourtId[0]?.liveStreamId || ""
-            )
-        );
-    };
+  useEffect(() => {
+    fetchScore();
+  }, []);
 
-    return (
-        <>
-            <Testscoreboard score={score} />
-        </>
+  const fetchScore = async () => {
+    const FetchGetStreamsWithCourtId = await getStreamsWithCourtId(
+      props.match.params.courtId
     );
+    setScore(
+      await getScoresWithLiveStreamId(
+        FetchGetStreamsWithCourtId[0]?.liveStreamId || ""
+      )
+    );
+  };
+
+  return (
+    <>
+      <Scoreboard score={score} />
+    </>
+  );
 }
 
 export default Court;
