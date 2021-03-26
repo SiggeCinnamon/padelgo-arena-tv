@@ -9,20 +9,17 @@
     width      : 100%;
     height     : 100%;
     position   : absolute;
-    box-sizing : border-box;
-
-    // align-items: center;
-
 }
 
 .scoreboardcontainer {
-    width : 80%;
-    margin: 0 auto;
-
+    width      : 1440px;
+    margin     : 0 auto;
+    margin-left: 0px;
 }
 
 
 .teamcontainer {
+    width         : 1100px;
     font-family   : 'Roboto Slab', serif;
     font-size     : 64px;
     font-style    : normal;
@@ -35,66 +32,61 @@
 
 
 .avatar {
-    border-radius   : 50%;
-    width           : 120px;
-    height          : auto;
-    border          : 6px solid #9C27B0;
-    position        : absolute;
-    background-color: brown;
+    border-radius: 50%;
+    width        : 120px;
+    height       : auto;
+    position     : absolute;
+    margin-right  : 25px;
+    margin-left  : 25px;
 }
 
 .avataroverlap {
     border-radius   : 50%;
     width           : 120px;
-    height          : auto;
-    border          : 7px solid #9C27B0;
+    height          : auto;  
     position        : relative;
-    background-color: brown;
-    margin-left: 50px;
+    margin-right: 25px;
 }
 
 .playername {
-    background-color: yellow;
-    width           : 40%;
-    margin-left     : 10px;
-    display         : flex;
-    align-items     : center;
-    justify-content : center
-}
+    display        : flex;
 
+    color          : white;
+
+}
 .scorecontainer {
     display        : flex;
-    align-items    : center;
-    justify-content: center;
-
 }
 
+
 .setcontainer {
-    margin-left    : 20px;
-    margin-right   : auto;
-    height         : 120px;
-    width          : 120px;
-    left           : 781px;
-    top            : 385px;
-    border-radius  : 0px;
-    display        : flex;
-    align-items    : center;
-    justify-content: center;
+
+    color: white;
 }
 
 .gamecontainer {
-    background     : rgba($color: #000000, $alpha: 0.5);
-    margin-left    : 20px;
-    margin-right   : auto;
+
     height         : 120px;
-    width          : 120px;
-    left           : 781px;
-    top            : 385px;
-    border-radius  : 0px;
+    width          : 140px;
+    margin-right   : 25px;
     display        : flex;
     align-items    : center;
     justify-content: center;
+
 }
+
+.currentscore {
+    height         : 120px;
+    width          : 140px;
+    margin-right   : 25px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    opacity        : 0.5;
+    margin-left    : 25px;
+
+}
+
 
 .stupidseparator {
     margin-bottom: 20px;
