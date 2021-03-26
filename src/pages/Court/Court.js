@@ -3,9 +3,9 @@ import { getStreamsWithCourtId } from "../../services/Streams.js";
 import { getScoresWithLiveStreamId } from "../../services/Scores.js";
 import Scoreboard from "../../components/ScoreBoard/scoreboard.js";
 import Testscoreboard from "../../components/ScoreBoard/Testscoreboard.js";
-import "./Court.css";
-function Court(props) {
-    const [score, setScore] = useState("");
+import styles from "./Court.module.scss";
+
+
 
 function Court(props) {
   const [score, setScore] = useState("");
@@ -34,7 +34,7 @@ function Court(props) {
 
   return (
     <>
-      <Scoreboard score={score} />
+      <Testscoreboard score={score} />
     </>
   );
 }

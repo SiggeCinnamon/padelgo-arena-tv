@@ -4,10 +4,12 @@
 
 
 .wrapperScoreboard {
-    width     : 100%;
-    height    : 100%;
-    position  : absolute;
-    box-sizing: border-box;
+    padding-top: 20%;
+    margin     : auto;
+    width      : 100%;
+    height     : 100%;
+    position   : absolute;
+    box-sizing : border-box;
 
     // align-items: center;
 
@@ -16,7 +18,7 @@
 .scoreboardcontainer {
     width : 80%;
     margin: 0 auto;
-    
+
 }
 
 
@@ -28,7 +30,7 @@
     line-height   : 84px;
     letter-spacing: 0em;
     text-align    : center;
-    margin-left   : 5px;
+    margin        : auto;
 }
 
 
@@ -48,6 +50,7 @@
     border          : 7px solid #9C27B0;
     position        : relative;
     background-color: brown;
+    margin-left: 50px;
 }
 
 .playername {
@@ -60,20 +63,39 @@
 }
 
 .scorecontainer {
-    height          : 120px;
-    width           : 120px;
-    left            : 781px;
-    top             : 385px;
-    border-radius   : 0px;
-    background-color: blue;
-    margin-left     : 10px;
-    margin-right    : auto;
-    display         : flex;
-    align-items     : center;
-    justify-content : center
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+
 }
 
+.setcontainer {
+    margin-left    : 20px;
+    margin-right   : auto;
+    height         : 120px;
+    width          : 120px;
+    left           : 781px;
+    top            : 385px;
+    border-radius  : 0px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
+
+.gamecontainer {
+    background     : rgba($color: #000000, $alpha: 0.5);
+    margin-left    : 20px;
+    margin-right   : auto;
+    height         : 120px;
+    width          : 120px;
+    left           : 781px;
+    top            : 385px;
+    border-radius  : 0px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
 
 .stupidseparator {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
