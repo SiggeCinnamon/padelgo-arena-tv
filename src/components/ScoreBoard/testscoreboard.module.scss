@@ -9,17 +9,11 @@
     width      : 100%;
     height     : 100%;
     position   : absolute;
+
 }
 
 .scoreboardcontainer {
-    width      : 1440px;
-    margin     : 0 auto;
-    margin-left: 0px;
-}
-
-
-.teamcontainer {
-    width         : 1100px;
+    width         : 1440px;
     font-family   : 'Roboto Slab', serif;
     font-size     : 64px;
     font-style    : normal;
@@ -30,32 +24,32 @@
     margin        : auto;
 }
 
-
 .avatar {
     border-radius: 50%;
     width        : 120px;
     height       : auto;
     position     : absolute;
-    margin-right  : 25px;
-    margin-left  : 25px;
 }
 
 .avataroverlap {
-    border-radius   : 50%;
-    width           : 120px;
-    height          : auto;  
-    position        : relative;
-    margin-right: 25px;
+    border-radius: 50%;
+    width        : 120px;
+    height       : auto;
+    position     : relative;
+    margin-left  : 75px;
+    margin-right : 25px;
 }
 
 .playername {
-    display        : flex;
-
-    color          : white;
-
+    width       : 500px;
+    color       : white;
+    margin-right: 25px;
+    ;
 }
+
 .scorecontainer {
-    display        : flex;
+    display: flex;
+    width  : 100%;
 }
 
 
@@ -67,7 +61,7 @@
 .gamecontainer {
 
     height         : 120px;
-    width          : 140px;
+    width          : 120px;
     margin-right   : 25px;
     display        : flex;
     align-items    : center;
@@ -77,7 +71,7 @@
 
 .currentscore {
     height         : 120px;
-    width          : 140px;
+    width          : 120px;
     margin-right   : 25px;
     display        : flex;
     align-items    : center;
