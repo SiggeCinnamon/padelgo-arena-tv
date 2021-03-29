@@ -52,8 +52,8 @@ const VideoPlayer = (
 ) => {
   const comp = usePlayer({ src, controls, autoplay });
   const player = comp.player;
-  ref = comp.videoRef;
   const sourcesRef = useRef();
+  ref = comp.videoRef;
 
   const [videoData, setVideoData] = useState({});
   const [currentProgress, setCurrentProgress] = useState({});

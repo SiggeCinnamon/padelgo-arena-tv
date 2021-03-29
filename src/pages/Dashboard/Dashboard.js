@@ -26,13 +26,6 @@ function Dashboard({ match }) {
     setCourts(await getCourtsWithClubId(match.params.clubId));
   };
 
-  const toArenaTv = () => {
-    return {
-      pathname: Routes.ARENA_TV,
-      props: { clubId: match.params.clubId },
-    };
-  };
-
   return (
     <>
       <nav className={styles.__dashboard_navbar + " navbar"}>
@@ -62,7 +55,10 @@ function Dashboard({ match }) {
                 <Link
                   type='button'
                   className={styles.__dashboard_btn + " btn btn-rounded"}
-                  to={toArenaTv}>
+                  to={`${Routes.ARENA_TV.replace(
+                    ":clubId",
+                    match.params.clubId
+                  )}`}>
                   Start
                 </Link>
               </div>

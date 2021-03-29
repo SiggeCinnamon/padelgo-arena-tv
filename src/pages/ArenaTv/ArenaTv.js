@@ -4,7 +4,7 @@ import { getChannelsInfoWithChannelName } from "../../services/Channels.js";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.js";
 import styles from "./ArenaTv.module.scss";
 
-function ArenaTv(props) {
+const ArenaTv = ({ match }) => {
   const [popular, setPopular] = useState([]);
   const [sources, setSources] = useState([]);
 
@@ -57,7 +57,7 @@ function ArenaTv(props) {
   // TODO Use the proper endpoint (Waiting for it)
   const fetchPopularMedia = async (page = 1, take = 0, sortOrder = 0) => {
     const data = await getPopularMedia({
-      clubId: Number(props.location.props.clubId),
+      clubId: Number(match.params.clubId),
       stream: true,
       liveStream: false,
       highlight: true,
@@ -85,6 +85,6 @@ function ArenaTv(props) {
       </div>
     </div>
   );
-}
+};
 
 export default ArenaTv;

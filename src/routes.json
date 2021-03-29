@@ -2,5 +2,5 @@
     "HOME": "/",
     "COURT": "/court/:courtId",
     "DASHBOARD": "/dashboard/:clubId",
-    "ARENA_TV": "/arenatv"
+    "ARENA_TV": "/arenatv/:clubId"
 }
