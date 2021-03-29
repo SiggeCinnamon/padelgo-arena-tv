@@ -1,32 +1,27 @@
 import ScoreboardTeam from "./ScoreBoardTeam";
-import styles from "./scoreboard.module.css";
 
-// TODO: Fix responsiveness at mobile resolutions (Iphone X)
+import styles from "./scoreboard.module.scss";
 
-export default function Scoreboard({ isManageScorePage, score }) {
-
+export default function scoreboard({ isManageScorePage, score }) {
   if (!score || score.error) {
     return null;
   } else {
     return (
       <>
-        <div className={styles.wrapperScoreboard}>
+        <div className={styles.wrapperScoreboard} >
           <div
-            id='scores-container'
             className={
               !isManageScorePage
                 ? styles.scoresContainer
                 : styles.scoresContainerManageScore
-            }>
-            {score.isLive && (
-              <div className={styles.liveBubble}>
-                <span>LIVE</span>
+            }
+          >
+            <div className={styles.scoreboardcontainer}>
+              <div className={styles.stupidseparator}>
+                <ScoreboardTeam team={score.team[0]} nameColor={0} />
               </div>
-            )}
-            <div className={styles.test1}>
-              <div className={styles.container}>
-                <ScoreboardTeam team={score.team[0]} />
-                <ScoreboardTeam team={score.team[1]} />
+              <div className={styles.stupidseparator}>
+                <ScoreboardTeam team={score.team[1]} nameColor={1}/>
               </div>
             </div>
           </div>

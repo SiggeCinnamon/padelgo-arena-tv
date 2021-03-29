@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getStreamsWithCourtId } from "../../services/Streams.js";
 import { getScoresWithLiveStreamId } from "../../services/Scores.js";
 import Scoreboard from "../../components/ScoreBoard/scoreboard.js";
-import Testscoreboard from "../../components/ScoreBoard/Testscoreboard.js";
 import styles from "./Court.module.scss";
-
-
 
 function Court(props) {
   const [score, setScore] = useState("");
@@ -34,7 +31,7 @@ function Court(props) {
 
   return (
     <>
-      <Testscoreboard score={score} />
+        <Scoreboard score={score} />
     </>
   );
 }
