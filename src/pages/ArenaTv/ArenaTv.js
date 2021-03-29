@@ -60,7 +60,7 @@ function ArenaTv(props) {
       clubId: Number(props.location.props.clubId),
       stream: true,
       liveStream: false,
-      highlight: false,
+      highlight: true,
       video: false,
       page: page,
       take: take,
@@ -77,7 +77,7 @@ function ArenaTv(props) {
         {sources && (
           <VideoPlayer
             src={sources}
-            controls={true}
+            controls={false}
             autoplay={true}
             onPlaylistAtEnd={onPlaylistAtEnd}
           />
