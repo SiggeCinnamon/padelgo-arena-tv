@@ -42,3 +42,6 @@ export async function getStreamURLWithLiveStreamId(liveStreamId) {
 export async function getStreamThumbnailWithLiveStreamId(liveStreamId) {
   return await getStreamsAPIGETResponse(`/Streams/${liveStreamId}/thumbnail`);
 }
+export async function getTeamsOnStream(liveStreamId) {
+  return await getStreamsAPIGETResponse(`/Teams/teams/${liveStreamId}`);
+}

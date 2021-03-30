@@ -4,7 +4,7 @@ async function getScoresAPIGETRespone(route) {
     try {
 
         const config = {
-            baseURL: 'https://staging-scores.padelgo.tv/',
+            baseURL: process.env.REACT_APP_SCORES_API_BASE_URL,
             method: 'GET',
         }
 
