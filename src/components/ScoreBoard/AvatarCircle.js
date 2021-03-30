@@ -1,9 +1,8 @@
 import styles from "./scoreboard.module.scss";
 import React, { useState, useEffect } from "react";
-export default function AvatarCircle({ channelName, width }) {
+import { getTeamsOnStream } from "../../services/Streams";
+export default function AvatarCircle({ channelName, width, backgroundColor }) {
   const [image, setImage] = useState();
-
-
 
   useEffect(() => {
     setImageByChannelAndWidth(channelName, width);
@@ -31,10 +30,14 @@ export default function AvatarCircle({ channelName, width }) {
 
   return (
     <div className="thumbnail img-circle">
-      {image && <img src={image}
-        onError={() => setImageByChannelAndWidth("default", width)}
-        alt={channelName}
-      />}
+      {image && (
+        <img
+          src={image}
+          className={styles.avatar} style={{border: "5px solid "+ backgroundColor}}
+          onError={() => setImageByChannelAndWidth("default", width)}
+          alt={channelName}
+        />
+      )}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import {
 } from "../../services/Streams.js";
 import { getScoresWithLiveStreamId } from "../../services/Scores.js";
 import Scoreboard from "../../components/ScoreBoard/scoreboard.js";
+
 import styles from "./Court.module.scss";
 
 //https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg
@@ -48,9 +49,14 @@ function Court(props) {
     );
   };
 
-  return <>
-  
-  { channels && score && <Scoreboard score={score} channels={channels} />}</>;
+  return (
+    <>
+      <nav className={styles.__court_navbar + " navbar"}>
+        <span>padelgo.tv - stream for free</span>
+      </nav>
+      {channels && score && <Scoreboard score={score} channels={channels} />}
+    </>
+  );
 }
 
 export default Court;
