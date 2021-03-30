@@ -3,32 +3,33 @@ import styles from "./scoreboard.module.scss";
 import AvatarCircle from "./AvatarCircle.js";
 
 export default function ScoreboardTeam({ team, nameColor, channelName }) {
+
+
   return (
     <>
       <div className="container justify-center">
         <div className={styles.scoreboardcontainer + "d-flex"}>
           <div className={styles.scorecontainer}>
-          
-              {channelName &&
-                channelName.map((c, index) => {
-                  return (
-                    <div className={styles.imgcontainer + "d-flex"}>
-                    <div className={styles.avatar}>
-                      <AvatarCircle
-                        key={index}
-                        channelName={c.channelName[0]}
-                        width={200}/>
-                    </div>             
-                     <div className={styles.avataroverlap}>
-                      <AvatarCircle
-                        key={index}
-                        channelName={c.channelName[1]}
-                        width={200}/>
-                        </div>
-                        </div>
-                  );
-                })}
-            </div>
+            {channelName && (
+              <div className={styles.imgcontainer + "d-flex"}>
+                <div className={styles.avatar1}>
+                  <AvatarCircle
+                    channelName={channelName[0].channelName}
+                    backgroundColor={team.backgroundColor}
+                    width={200}
+                  />
+                </div>
+                {channelName[1] && (
+                  <div className={styles.avataroverlap}>
+                    <AvatarCircle
+                      channelName={channelName[1].channelName}
+                      backgroundColor={team.backgroundColor}
+                      width={200}
+                    />
+                  </div>
+                )}{" "}
+              </div>
+            )}
             <div
               className={styles.playername + " d-flex"}
               style={{
@@ -66,7 +67,7 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
             </div>
           </div>
         </div>
-   
+      </div>
     </>
   );
 }

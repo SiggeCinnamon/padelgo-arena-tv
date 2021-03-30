@@ -2,13 +2,13 @@
 
 
 .wrapperScoreboard {
-    display        : flex;
-    align-items    : center;
-    justify-content: center;
-    margin         : auto;
-    width          : 100%;
-    height         : 100%;
-    position       : absolute;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    margin          : auto;
+    width           : 100%;
+    height          : 100%;
+    position        : absolute;
     background-image: url("https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg");
     background-color: blue;
 }
@@ -23,12 +23,13 @@
     margin     : auto;
 }
 
+
 .avatar {
     border-radius: 50%;
     width        : 120px;
     height       : auto;
     position     : absolute;
-    object-fit: cover;
+
 }
 
 .avataroverlap {
