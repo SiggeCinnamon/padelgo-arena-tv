@@ -1,3 +1,3 @@
-import scoreboard from './scoreboard';
+import scoreboard from "./ScoreBoard";
 
 export default scoreboard;

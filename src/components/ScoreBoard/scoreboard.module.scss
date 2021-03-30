@@ -13,7 +13,7 @@
     background-color: blue;
 }
 
-.scoreboardcontainer {
+.scoreboardContainer {
     width      : auto;
     font-family: 'Roboto Slab', serif;
     font-size  : 64px;
@@ -32,7 +32,7 @@
 
 }
 
-.avataroverlap {
+.avatarOverlap {
     border-radius: 50%;
     width        : 120px;
     height       : auto;
@@ -43,7 +43,7 @@
 
 }
 
-.playername {
+.playerName {
     width          : 400px;
     color          : white;
     margin-right   : 25px;
@@ -52,16 +52,16 @@
     align-items    : center;
 }
 
-.scorecontainer {
+.scoreContainer {
     display: flex;
     width  : 100%;
 }
 
-.setcontainer {
+.setContainer {
     color: white;
 }
 
-.gamecontainer {
+.gameContainer {
     height         : 120px;
     width          : 120px;
     margin-right   : 25px;
@@ -70,7 +70,7 @@
     justify-content: center;
 }
 
-.currentscore {
+.currentScore {
     height         : 120px;
     width          : 120px;
     margin-right   : 25px;
@@ -80,6 +80,8 @@
     margin-left    : 25px;
 }
 
-.stupidseparator {
+.stupidSeparator {
     margin-bottom: 20px;
 }
+
+.imgContainer {}

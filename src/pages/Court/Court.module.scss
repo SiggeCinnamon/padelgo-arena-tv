@@ -1,13 +1,12 @@
 @use '../../utilities/variables'as vars;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100&display=swap');
 
 .__court_navbar {
     width           : 100%;
     height          : 40px;
     user-select     : none;
     background-color: vars.$primary-color;
-}
 
-.__court_navbar {
     span {
         margin-left: 10px;
         font-family: 'Roboto Slab', serif;

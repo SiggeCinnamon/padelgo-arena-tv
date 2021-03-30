@@ -8,9 +8,7 @@
     height          : 40px;
     user-select     : none;
     background-color: vars.$primary-color;
-}
 
-.__dashboard_navbar {
     span {
         margin-left: 10px;
         font-family: 'Roboto Slab', serif;
@@ -81,11 +79,15 @@
     transform       : scale(1.2, 1.2);
     color           : #FFF;
     background-color: vars.$primary-color;
-}
 
-.__dashboard_btn:hover {
-    color           : #FFF;
-    background-color: vars.$primary-hover-color;
+    &:hover {
+        color           : #FFF;
+        background-color: vars.$primary-hover-color;
+    }
+
+    &:active {
+        background-color: vars.$primary-color;
+    }
 }
 
 .__dashboard_dropdown {

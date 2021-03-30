@@ -39,10 +39,7 @@ const VideoOverlay = ({ data, currentProgress, history }) => {
   return (
     <>
       <div className={styles.__video_overlay_logo}>
-        <p
-          className={styles.__video_overlay_logo_p}
-          onClick={() => history.goBack()}
-          alt='Go back'>
+        <p onClick={() => history.goBack()} alt='Go back'>
           padelgo.tv - stream for free
         </p>
       </div>

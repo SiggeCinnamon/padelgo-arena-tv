@@ -4,8 +4,7 @@ import {
   getTeamsOnStream,
 } from "../../services/Streams.js";
 import { getScoresWithLiveStreamId } from "../../services/Scores.js";
-import Scoreboard from "../../components/ScoreBoard/scoreboard.js";
-
+import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
 import styles from "./Court.module.scss";
 
 //https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg
@@ -18,7 +17,7 @@ function Court(props) {
   useEffect(() => {
     const interval = setInterval(() => {
       fetchScore();
-    }, 7000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -44,7 +43,7 @@ function Court(props) {
 
     setScore(
       await getScoresWithLiveStreamId(
-        fetchGetStreamsWithCourtId[0]?.liveStreamId || ""
+        fetchGetStreamsWithCourtId[0].liveStreamId
       )
     );
   };

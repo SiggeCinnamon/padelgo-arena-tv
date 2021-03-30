@@ -22,11 +22,11 @@
         color      : #FFF;
         user-select: none;
         cursor     : pointer;
-    }
-}
 
-.__video_overlay_logo_p:hover {
-    color: rgb(230, 230, 230);
+        &:hover {
+            color: rgb(230, 230, 230);
+        }
+    }
 }
 
 .__video_overlay_channel_type {
