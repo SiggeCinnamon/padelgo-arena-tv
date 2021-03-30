@@ -5,7 +5,7 @@ import {
   getTeamsOnStream,
 } from "../../services/Streams.js";
 import { getScoresWithLiveStreamId } from "../../services/Scores.js";
-import Scoreboard from "../../components/ScoreBoard/Scoreboard.js";
+import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
 import styles from "./Court.module.scss";
 
 function Court({ match, history }) {
