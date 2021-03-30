@@ -9,6 +9,8 @@
     width          : 100%;
     height         : 100%;
     position       : absolute;
+    background-image: url("https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg");
+    background-color: blue;
 }
 
 .scoreboardcontainer {
@@ -26,6 +28,7 @@
     width        : 120px;
     height       : auto;
     position     : absolute;
+    object-fit: cover;
 }
 
 .avataroverlap {
@@ -35,6 +38,7 @@
     position     : relative;
     margin-left  : 75px;
     margin-right : 25px;
+
 
 }
 
