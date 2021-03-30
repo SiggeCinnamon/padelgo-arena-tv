@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import {
   getStreamsWithCourtId,
   getTeamsOnStream,
@@ -7,10 +8,7 @@ import { getScoresWithLiveStreamId } from "../../services/Scores.js";
 import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
 import styles from "./Court.module.scss";
 
-//https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg
-//https://dev.padelgo.tv/create-stream/start?id=vLkEiuUsC46
-
-function Court(props) {
+function Court({ match, history }) {
   const [score, setScore] = useState("");
   const [channels, setChannels] = useState("");
 
@@ -24,11 +22,16 @@ function Court(props) {
   useEffect(() => {
     fetchScore();
     fetchChannels();
+    document.addEventListener("keydown", onEscapeHandler);
+
+    return () => {
+      document.removeEventListener("keydown", onEscapeHandler);
+    };
   }, []);
 
   const fetchChannels = async () => {
     const fetchGetTeamsWithLiveId = await getStreamsWithCourtId(
-      props.match.params.courtId
+      match.params.courtId
     );
 
     setChannels(
@@ -38,7 +41,7 @@ function Court(props) {
 
   const fetchScore = async () => {
     const fetchGetStreamsWithCourtId = await getStreamsWithCourtId(
-      props.match.params.courtId
+      match.params.courtId
     );
 
     setScore(
@@ -48,17 +51,25 @@ function Court(props) {
     );
   };
 
+  const onEscapeHandler = (e) => {
+    if (e.keyCode === 27) {
+      history.goBack();
+    }
+  };
+
   return (
     <>
       <nav className={styles.__court_navbar + " navbar"}>
-        <span>padelgo.tv - stream for free</span>
+        <p
+          onClick={() => {
+            history.goBack();
+          }}>
+          padelgo.tv - stream for free
+        </p>
       </nav>
       {channels && score && <Scoreboard score={score} channels={channels} />}
     </>
   );
 }
 
-export default Court;
-
-//Fetch https://staging-streams.padelgo.tv/Streams/court/{courtId} to get "liveStreamId"
-//Fetch https://staging-scores.padelgo.tv//Scores/{liveStreamId} to get score
+export default withRouter(Court);
