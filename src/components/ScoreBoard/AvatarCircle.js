@@ -22,23 +22,23 @@ export default function AvatarCircle({ channelName, width, borderColor }) {
         break;
       default:
         setImage(
-          `https://static.padelgo.tv/profilepictures/600x600/${channelName}.jpeg?cache=${new Date().getTime()}`
+          `https://static.padelgo.tv/profilepictures/600x600/default.jpeg?cache=1616674604690`
         );
         break;
     }
   };
 
   return (
-    <div className='thumbnail img-circle'>
+    <>
       {image && (
         <img
           src={image}
-          className={styles.avatar}
+        className={styles.avatar}
           style={{ border: "5px solid " + borderColor }}
           onError={() => setImageByChannelAndWidth("default", width)}
           alt={channelName}
         />
       )}
-    </div>
+    </>
   );
 }

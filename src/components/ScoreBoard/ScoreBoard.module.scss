@@ -22,25 +22,31 @@
     line-height: 84px;
     margin     : auto;
 }
+.scoreContainer {
+    display: flex;
+   
+}
 
+.imgcontainer{
+position: absolute;
 
+}
 .avatar {
     border-radius: 50%;
     width        : 120px;
     height       : auto;
-    position     : absolute;
-
+    position     : relative;
+    margin-left  : -75px;
+    margin-right : 25px;
+    
+}
+.avatarOverlap{
+    width: 100%;
+    
 }
 
-.avatarOverlap {
-    border-radius: 50%;
-    width        : 120px;
-    height       : auto;
-    position     : relative;
-    margin-left  : 75px;
-    margin-right : 25px;
-
-
+.ghost{
+    opacity: 0;
 }
 
 .playerName {
@@ -52,10 +58,7 @@
     align-items    : center;
 }
 
-.scoreContainer {
-    display: flex;
-    width  : 100%;
-}
+
 
 .setContainer {
     color: white;
@@ -84,4 +87,3 @@
     margin-bottom: 20px;
 }
 
-.imgContainer {}

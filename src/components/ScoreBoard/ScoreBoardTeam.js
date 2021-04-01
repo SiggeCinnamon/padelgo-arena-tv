@@ -4,22 +4,33 @@ import AvatarCircle from "./AvatarCircle.js";
 export default function ScoreboardTeam({ team, nameColor, channelName }) {
   return (
     <>
-      <div className='container justify-center'>
+      <div className="container justify-center">
         <div className={styles.scoreboardContainer + " d-flex"}>
           <div className={styles.scoreContainer}>
             {channelName && (
               <div className={styles.imgContainer + " d-flex"}>
                 <div>
-                  <AvatarCircle
-                    channelName={channelName[0].channelName}
-                    borderColor={team.backgroundColor}
-                    width={200}
-                  />
-                </div>
-                {channelName[1] && (
-                  <div className={styles.avatarOverlap}>
+                  {channelName.length === 1 && (
+                    <div className={styles.ghost}>
+                      <AvatarCircle
+                        channelName="test"
+                        borderColor={team.backgroundColor}
+                        width={10}
+                      />
+                    </div>
+                  )}
+                  {channelName[1] && (
                     <AvatarCircle
                       channelName={channelName[1].channelName}
+                      borderColor={team.backgroundColor}
+                      width={200}
+                    />
+                  )}
+                </div>
+                {channelName[0] && (
+                  <div className={styles.avatarOverlap}>
+                    <AvatarCircle
+                      channelName={channelName[0].channelName}
                       borderColor={team.backgroundColor}
                       width={200}
                     />
@@ -32,10 +43,10 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
               style={{
                 backgroundColor: nameColor === 0 ? "#3D3D3D" : "#FFF",
                 color: nameColor === 0 ? "#FFF" : "#3D3D3D",
-              }}>
+              }}
+            >
               <span>{team.name}</span>
             </div>
-
             <div className={styles.setContainer + " d-flex"}>
               {team.sets.map((set, index) => {
                 return (
@@ -44,7 +55,8 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
                     className={styles.gameContainer}
                     style={{
                       backgroundColor: getScoreTileBackgroundColor(set),
-                    }}>
+                    }}
+                  >
                     <span>{set.game}</span>
                   </div>
                 );
@@ -55,7 +67,8 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
                   backgroundColor: getCurrentPointTileBackground(
                     team.currentPoint
                   ),
-                }}>
+                }}
+              >
                 <span>{team.currentPoint.score}</span>
               </div>
             </div>
