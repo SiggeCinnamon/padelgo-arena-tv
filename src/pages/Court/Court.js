@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import {
   getStreamsWithCourtId,
@@ -11,19 +11,22 @@ import styles from "./Court.module.scss";
 function Court({ match, history }) {
   const [score, setScore] = useState("");
   const [channels, setChannels] = useState("");
+  const intervalRef = useRef();
 
   useEffect(() => {
     const interval = setInterval(() => {
       fetchScore();
     }, 5000);
-    return () => clearInterval(interval);
+
+    intervalRef.current = interval;
+    return () => clearInterval(intervalRef.current);
   }, []);
 
   useEffect(() => {
     fetchScore();
     fetchChannels();
-    document.addEventListener("keydown", onEscapeHandler);
 
+    document.addEventListener("keydown", onEscapeHandler);
     return () => {
       document.removeEventListener("keydown", onEscapeHandler);
     };
@@ -34,9 +37,17 @@ function Court({ match, history }) {
       match.params.courtId
     );
 
-    setChannels(
-      await getTeamsOnStream(fetchGetTeamsWithLiveId[0].liveStreamId)
-    );
+    if (
+      fetchGetTeamsWithLiveId[0] &&
+      fetchGetTeamsWithLiveId[0].hasOwnProperty("liveStreamId")
+    ) {
+      setChannels(
+        await getTeamsOnStream(fetchGetTeamsWithLiveId[0].liveStreamId)
+      );
+    } else {
+      setChannels(null);
+      clearInterval(intervalRef.current);
+    }
   };
 
   const fetchScore = async () => {
@@ -44,11 +55,19 @@ function Court({ match, history }) {
       match.params.courtId
     );
 
-    setScore(
-      await getScoresWithLiveStreamId(
-        fetchGetStreamsWithCourtId[0].liveStreamId
-      )
-    );
+    if (
+      fetchGetStreamsWithCourtId[0] &&
+      fetchGetStreamsWithCourtId[0].hasOwnProperty("liveStreamId")
+    ) {
+      setScore(
+        await getScoresWithLiveStreamId(
+          fetchGetStreamsWithCourtId[0].liveStreamId
+        )
+      );
+    } else {
+      setScore(null);
+      clearInterval(intervalRef.current);
+    }
   };
 
   const onEscapeHandler = (e) => {
@@ -68,6 +87,11 @@ function Court({ match, history }) {
         </p>
       </nav>
       {channels && score && <Scoreboard score={score} channels={channels} />}
+      {score === null && (
+        <div className={styles.__court_noGamePlaying_div + " container"}>
+          <p>No game currently playing</p>
+        </div>
+      )}
     </>
   );
 }
