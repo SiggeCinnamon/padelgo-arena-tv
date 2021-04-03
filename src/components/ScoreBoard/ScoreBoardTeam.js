@@ -1,7 +1,10 @@
 import styles from "./ScoreBoard.module.scss";
 import AvatarCircle from "./AvatarCircle.js";
+import BottomChannelName from "./BottomChannelName";
 
 export default function ScoreboardTeam({ team, nameColor, channelName }) {
+
+
   return (
     <>
       <div className="container justify-center">
