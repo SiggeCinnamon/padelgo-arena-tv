@@ -3,7 +3,6 @@ import BottomChannelName from "./BottomChannelName";
 import styles from "./ScoreBoard.module.scss";
 
 export default function scoreboard({ isManageScorePage, score, channels }) {
-  console.log(channels);
   if (!score || score.error) {
     return null;
   } else {
@@ -34,7 +33,9 @@ export default function scoreboard({ isManageScorePage, score, channels }) {
             </div>
           </div>
           <div className={styles.BottomChannelName}>
-            {channels && <BottomChannelName channelName={channels[0].players} />}
+            {channels && (
+              <BottomChannelName channelName={channels[0].players} />
+            )}
           </div>
         </div>
       </>

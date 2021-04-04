@@ -1,7 +1,5 @@
-@use '../../utilities/variables' as vars;
+@use '../../utilities/variables'as vars;
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@800;900&display=swap');
-
-
 
 .wrapperScoreboard {
     display         : flex;
@@ -12,10 +10,11 @@
     position        : absolute;
     background-image: url("https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg");
     background-color: blue;
-    padding-bottom: 50px;
+    padding-bottom  : 50px;
 
 }
-.BottomChannelName{
+
+.BottomChannelName {
     padding-bottom: 50px;
 }
 
@@ -28,15 +27,17 @@
     line-height: 84px;
     margin     : auto;
 }
+
 .scoreContainer {
     display: flex;
-   
-}
-
-.imgcontainer{
-position: absolute;
 
 }
+
+.imgcontainer {
+    position: absolute;
+
+}
+
 .avatar {
     border-radius: 50%;
     width        : 120px;
@@ -44,14 +45,15 @@ position: absolute;
     position     : relative;
     margin-left  : -75px;
     margin-right : 25px;
-    
-}
-.avatarOverlap{
-    width: 100%;
-    
+
 }
 
-.ghost{
+.avatarOverlap {
+    width: 100%;
+
+}
+
+.ghost {
     opacity: 0;
 }
 
@@ -63,8 +65,6 @@ position: absolute;
     justify-content: center;
     align-items    : center;
 }
-
-
 
 .setContainer {
     color: white;
@@ -93,42 +93,7 @@ position: absolute;
     margin-bottom: 20px;
 }
 
-
-
-.__video_overlay_logo {
-    position        : absolute;
-    top             : 0;
-    left            : 0;
-    height          : 40px;
-    width           : 100%;
-    user-select     : none;
-    background-color: vars.$primary-color;
-}
-
-.__video_overlay_logo {
-    p {
-        margin-top : 8px;
-        margin-left: 10px;
-        font-family: "Roboto Slab", serif;
-        font-style : normal;
-        font-weight: bold;
-        font-size  : 18px;
-        color      : #FFF;
-        user-select: none;
-        cursor     : pointer;
-
-        &:hover {
-            color: rgb(230, 230, 230);
-        }
-
-        &:active {
-            color: "#FFF";
-        }
-    }
-}
-
-
-.__video_overlay_channel {
+.__scoreboard_overlay_channel {
     position: absolute;
     bottom  : 25px;
     left    : 0;
@@ -139,13 +104,10 @@ position: absolute;
             rgba(0, 0, 0, 0.92) 100%);
 }
 
-.__video_overlay_channel_content {
+.__scoreboard_overlay_channel_content {
     display       : flex;
     flex-direction: row;
- 
-}
 
-.__video_overlay_channel_content {
     img {
         margin-top : 0px;
         margin-left: 25px;
@@ -153,12 +115,10 @@ position: absolute;
     }
 }
 
-.__video_overlay_channel_content_headers {
+.__scoreboard_overlay_channel_content_headers {
     margin-top : 35px;
     margin-left: 30px;
-}
 
-.__video_overlay_channel_content_headers {
     h6 {
         font-family: "Roboto Slab", serif;
         font-size  : 36px;
@@ -171,4 +131,3 @@ position: absolute;
         color: #FFF;
     }
 }
-

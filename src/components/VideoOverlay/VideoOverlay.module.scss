@@ -9,9 +9,7 @@
     width           : 100%;
     user-select     : none;
     background-color: vars.$primary-color;
-}
 
-.__video_overlay_logo {
     p {
         margin-top : 8px;
         margin-left: 10px;
@@ -50,16 +48,12 @@
     justify-content: center;
     text-align     : center;
     user-select    : none;
-}
 
-.__video_overlay_channel_type_pill {
     i {
         padding-right: 5px;
         color        : #FFF;
     }
-}
 
-.__video_overlay_channel_type_pill {
     p {
         font-size  : 18px;
         font-style : none;
@@ -83,9 +77,7 @@
 .__video_overlay_channel_content {
     display       : flex;
     flex-direction: row;
-}
 
-.__video_overlay_channel_content {
     img {
         margin-top : 25px;
         margin-left: 25px;
@@ -96,9 +88,7 @@
 .__video_overlay_channel_content_headers {
     margin-top : 35px;
     margin-left: 30px;
-}
 
-.__video_overlay_channel_content_headers {
     h6 {
         font-family: "Roboto Slab", serif;
         font-size  : 36px;
