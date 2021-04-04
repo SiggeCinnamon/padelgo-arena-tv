@@ -86,7 +86,7 @@ function Court({ match, history }) {
           padelgo.tv - stream for free
         </p>
       </nav>
-      {channels && score && <Scoreboard score={score} channels={channels} />}
+      {channels && score && <Scoreboard score={score} channels={channels} data={channels} />}
       {score === null && (
         <div className={styles.__court_noGamePlaying_div + " container"}>
           <p>No game currently playing</p>
