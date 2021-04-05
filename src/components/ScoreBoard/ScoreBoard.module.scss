@@ -53,17 +53,16 @@
 
 }
 
-.ghost {
-    opacity: 0;
-}
-
 .playerName {
-    width          : 400px;
-    color          : white;
-    margin-right   : 25px;
     display        : flex;
-    justify-content: center;
+    min-width      : 600px;
+    max-width      : 600px;
+    margin-right   : 25px;
+    padding-left   : 25px;
+    padding-right  : 25px;
     align-items    : center;
+    justify-content: center;
+    color          : white;
 }
 
 .setContainer {

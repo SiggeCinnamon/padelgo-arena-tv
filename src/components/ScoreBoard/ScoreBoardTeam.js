@@ -1,53 +1,42 @@
 import styles from "./ScoreBoard.module.scss";
 import AvatarCircle from "./AvatarCircle.js";
-import BottomChannelName from "./BottomChannelName";
 
 export default function ScoreboardTeam({ team, nameColor, channelName }) {
-
-
   return (
     <>
-      <div className="container justify-center">
+      <div className='container justify-center'>
         <div className={styles.scoreboardContainer + " d-flex"}>
           <div className={styles.scoreContainer}>
-            {channelName && (
-              <div className={styles.imgContainer + " d-flex"}>
-                <div>
-                  {channelName.length === 1 && (
-                    <div className={styles.ghost}>
-                      <AvatarCircle
-                        channelName="test"
-                        borderColor={team.backgroundColor}
-                        width={10}
-                      />
-                    </div>
-                  )}
-                  {channelName[1] && (
-                    <AvatarCircle
-                      channelName={channelName[1].channelName}
-                      borderColor={team.backgroundColor}
-                      width={200}
-                    />
-                  )}
-                </div>
-                {channelName[0] && (
-                  <div className={styles.avatarOverlap}>
-                    <AvatarCircle
-                      channelName={channelName[0].channelName}
-                      borderColor={team.backgroundColor}
-                      width={200}
-                    />
-                  </div>
-                )}
+            <div className={styles.imgContainer + " d-flex"}>
+              <div>
+                <AvatarCircle
+                  channelName={
+                    channelName && channelName[1] && channelName[1].channelName
+                      ? channelName[1].channelName
+                      : "__NoName2k__"
+                  }
+                  borderColor={team.backgroundColor}
+                  width={600}
+                />
               </div>
-            )}
+              <div className={styles.avatarOverlap}>
+                <AvatarCircle
+                  channelName={
+                    channelName && channelName[0] && channelName[0].channelName
+                      ? channelName[0].channelName
+                      : "__NoName2k__"
+                  }
+                  borderColor={team.backgroundColor}
+                  width={600}
+                />
+              </div>
+            </div>
             <div
               className={styles.playerName + " d-flex"}
               style={{
                 backgroundColor: nameColor === 0 ? "#3D3D3D" : "#FFF",
                 color: nameColor === 0 ? "#FFF" : "#3D3D3D",
-              }}
-            >
+              }}>
               <span>{team.name}</span>
             </div>
             <div className={styles.setContainer + " d-flex"}>
@@ -58,8 +47,7 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
                     className={styles.gameContainer}
                     style={{
                       backgroundColor: getScoreTileBackgroundColor(set),
-                    }}
-                  >
+                    }}>
                     <span>{set.game}</span>
                   </div>
                 );
@@ -70,8 +58,7 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
                   backgroundColor: getCurrentPointTileBackground(
                     team.currentPoint
                   ),
-                }}
-              >
+                }}>
                 <span>{team.currentPoint.score}</span>
               </div>
             </div>
