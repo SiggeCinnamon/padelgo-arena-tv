@@ -80,9 +80,15 @@ const VideoPlayer = (
     }
   };
 
-  const onEscapeHandler = (e) => {
-    if (e.keyCode === 27) {
-      history.goBack();
+  const onKeyDownHandler = (event) => {
+    if (event.defaultPrevented) return;
+
+    switch (event.key) {
+      case "Escape":
+        history.goBack();
+        break;
+      default:
+        break;
     }
   };
 
@@ -113,9 +119,9 @@ const VideoPlayer = (
   }, [player]);
 
   useEffect(() => {
-    document.addEventListener("keydown", onEscapeHandler);
+    document.addEventListener("keydown", onKeyDownHandler);
     return () => {
-      document.removeEventListener("keydown", onEscapeHandler);
+      document.removeEventListener("keydown", onKeyDownHandler);
     };
   }, []);
 
