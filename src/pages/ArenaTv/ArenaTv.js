@@ -38,7 +38,7 @@ const ArenaTv = ({ match }) => {
         description: p.description,
         avatar:
           `https://static.padelgo.tv/profilepictures/600x600/${p.channel}.jpeg` ||
-          "",
+          `https://static.padelgo.tv/profilepictures/600x600/default.jpeg`,
       });
     });
 
@@ -50,11 +50,11 @@ const ArenaTv = ({ match }) => {
     setSources(sources.concat(data));
   };
 
-  // TODO Use the proper endpoint (Waiting for it)
+  // Only fetches highlights as of now.
   const fetchPopularMedia = async (page = 1, take = 0, sortOrder = 0) => {
     const data = await getPopularMedia({
       clubId: Number(match.params.clubId),
-      stream: true,
+      stream: false,
       liveStream: false,
       highlight: true,
       video: false,

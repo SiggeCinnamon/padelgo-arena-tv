@@ -10,7 +10,7 @@ export default function BottomChannelName({ channelName }) {
   }, [channelName]);
 
   const fetchChannelData = async () => {
-    const propChannel = channelName[0].channelName;
+    const propChannel = channelName[1].channelName;
 
     if (propChannel) {
       setData(await getChannelsInfoWithChannelName(propChannel));
@@ -23,8 +23,13 @@ export default function BottomChannelName({ channelName }) {
         <div className={styles.__scoreboard_overlay_channel_content}>
           {data && (
             <img
-              src={`https://static.padelgo.tv/profilepictures/200x200/${data.name}.jpeg`}
+              src={`https://static.padelgo.tv/profilepictures/600x600/${data.name}.jpeg`}
               className='img-raised rounded-circle img-fluid'
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src =
+                  "https://static.padelgo.tv/profilepictures/600x600/default.jpeg";
+              }}
               alt='player'
             />
           )}

@@ -58,8 +58,13 @@ const VideoOverlay = ({ data, currentProgress, history }) => {
           <img
             src={
               data.avatar ||
-              "https://static.padelgo.tv/profilepictures/600x600/default.jpeg?cache=1616674604690"
+              "https://static.padelgo.tv/profilepictures/600x600/default.jpeg"
             }
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src =
+                "https://static.padelgo.tv/profilepictures/600x600/default.jpeg";
+            }}
             className='img-raised rounded-circle img-fluid'
             alt='player'
           />
