@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./ScoreBoard.module.scss";
+import styles from "./AvatarCircle.module.scss"
 
 export default function AvatarCircle({ channelName, width, borderColor }) {
   const [image, setImage] = useState();
@@ -44,7 +44,7 @@ export default function AvatarCircle({ channelName, width, borderColor }) {
       {image && (
         <img
           src={image}
-          className={styles.avatar}
+          className={styles.__avatarcircle_avatar}
           style={
             channelName && channelName === "__NoName2k__"
               ? { opacity: 0 }

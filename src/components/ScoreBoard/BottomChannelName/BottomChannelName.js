@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import styles from "./ScoreBoard.module.scss";
-import { getChannelsInfoWithChannelName } from "../../services/Channels.js";
+import styles from "./BottomChannelName.module.scss";
+import { getChannelsInfoWithChannelName } from "../../../services/Channels.js";
 
 export default function BottomChannelName({ channelName }) {
   const [data, setData] = useState([]);
@@ -19,8 +19,8 @@ export default function BottomChannelName({ channelName }) {
 
   return (
     <>
-      <div className={styles.__scoreboard_overlay_channel}>
-        <div className={styles.__scoreboard_overlay_channel_content}>
+      <div className={styles.__bottomchannelname_overlay_channel}>
+        <div className={styles.__bottomchannelname_overlay_channel_content}>
           {data && (
             <img
               src={`https://static.padelgo.tv/profilepictures/600x600/${data.name}.jpeg`}
@@ -33,7 +33,7 @@ export default function BottomChannelName({ channelName }) {
               alt='player'
             />
           )}
-          <div className={styles.__scoreboard_overlay_channel_content_headers}>
+          <div className={styles.__bottomchannelname_overlay_channel_content_headers}>
             {data && (
               <h6>
                 {data.name} - {data.description}

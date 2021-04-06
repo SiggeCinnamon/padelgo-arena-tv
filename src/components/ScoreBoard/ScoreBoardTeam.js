@@ -1,5 +1,5 @@
 import styles from "./ScoreBoard.module.scss";
-import AvatarCircle from "./AvatarCircle.js";
+import AvatarCircle from "./AvatarCircle/AvatarCircle.js";
 
 export default function ScoreboardTeam({ team, nameColor, channelName }) {
   return (

@@ -1,5 +1,5 @@
 import ScoreboardTeam from "./ScoreBoardTeam";
-import BottomChannelName from "./BottomChannelName";
+import BottomChannelName from "./BottomChannelName/BottomChannelName";
 import styles from "./ScoreBoard.module.scss";
 
 export default function scoreboard({ isManageScorePage, score, channels }) {
@@ -14,7 +14,8 @@ export default function scoreboard({ isManageScorePage, score, channels }) {
               !isManageScorePage
                 ? styles.scoresContainer
                 : styles.scoresContainerManageScore
-            }>
+            }
+          >
             <div className={styles.scoreboardContainer}>
               <div className={styles.stupidSeparator}>
                 <ScoreboardTeam
