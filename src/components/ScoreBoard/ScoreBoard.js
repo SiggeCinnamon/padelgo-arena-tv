@@ -14,7 +14,6 @@ export default function scoreboard({
   } else {
     return (
       <>
-      <NavBar />
         <div
           className={styles.wrapperScoreboard}
           style={

@@ -1,20 +1,19 @@
-import styles from "./NavBar.modules.scss";
+import { withRouter } from "react-router";
+import styles from "./NavBar.module.scss";
 
-export default function NavBar({ history }) {
-    function goBack() {
-        window.history.back();
-      }
+const NavBar = ({ history }) => {
   return (
     <>
-      <nav className={styles.navbar + " navbar"}>
+      <nav className={styles.__NavBar_bar + " navbar"}>
         <p
           onClick={() => {
-            goBack();
-          }}
-        >
+            history.goBack();
+          }}>
           padelgo.tv - stream for free
         </p>
       </nav>
     </>
   );
-}
+};
+
+export default withRouter(NavBar);
