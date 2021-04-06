@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./AvatarCircle.module.scss"
+import styles from "./AvatarCircle.module.scss";
 
 export default function AvatarCircle({ channelName, width, borderColor }) {
   const [image, setImage] = useState();
@@ -9,7 +9,7 @@ export default function AvatarCircle({ channelName, width, borderColor }) {
   }, [channelName, width]);
 
   const setImageByChannelAndWidth = (channelName, width) => {
-    if (channelName === "__NoName2k__") {
+    if (channelName === "__NoName__") {
       setImage(
         `https://static.padelgo.tv/profilepictures/600x600/default.jpeg?cache=${new Date().getTime()}`
       );
@@ -46,7 +46,7 @@ export default function AvatarCircle({ channelName, width, borderColor }) {
           src={image}
           className={styles.__avatarcircle_avatar}
           style={
-            channelName && channelName === "__NoName2k__"
+            channelName && channelName === "__NoName__"
               ? { opacity: 0 }
               : { border: "5px solid " + borderColor }
           }

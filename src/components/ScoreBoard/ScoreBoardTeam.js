@@ -13,7 +13,7 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
                   channelName={
                     channelName && channelName[1] && channelName[1].channelName
                       ? channelName[1].channelName
-                      : "__NoName2k__"
+                      : "__NoName__"
                   }
                   borderColor={team.backgroundColor}
                   width={600}
@@ -24,7 +24,7 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
                   channelName={
                     channelName && channelName[0] && channelName[0].channelName
                       ? channelName[0].channelName
-                      : "__NoName2k__"
+                      : "__NoName__"
                   }
                   borderColor={team.backgroundColor}
                   width={600}

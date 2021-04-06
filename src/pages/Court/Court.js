@@ -11,6 +11,7 @@ import styles from "./Court.module.scss";
 function Court({ match, history }) {
   const [score, setScore] = useState("");
   const [channels, setChannels] = useState("");
+  const [poster, setPoster] = useState("");
   const intervalRef = useRef();
 
   useEffect(() => {
@@ -26,9 +27,9 @@ function Court({ match, history }) {
     fetchScore();
     fetchChannels();
 
-    document.addEventListener("keydown", onEscapeHandler);
+    document.addEventListener("keydown", onKeyDownHandler);
     return () => {
-      document.removeEventListener("keydown", onEscapeHandler);
+      document.removeEventListener("keydown", onKeyDownHandler);
     };
   }, []);
 
@@ -59,6 +60,8 @@ function Court({ match, history }) {
       fetchGetStreamsWithCourtId[0] &&
       fetchGetStreamsWithCourtId[0].hasOwnProperty("liveStreamId")
     ) {
+      setPoster(await fetchGetStreamsWithCourtId[0].thumbnailURL);
+
       setScore(
         await getScoresWithLiveStreamId(
           fetchGetStreamsWithCourtId[0].liveStreamId
@@ -70,9 +73,15 @@ function Court({ match, history }) {
     }
   };
 
-  const onEscapeHandler = (e) => {
-    if (e.keyCode === 27) {
-      history.goBack();
+  const onKeyDownHandler = (event) => {
+    if (event.defaultPrevented) return;
+
+    switch (event.key) {
+      case "Escape":
+        history.goBack();
+        break;
+      default:
+        break;
     }
   };
 
@@ -86,7 +95,14 @@ function Court({ match, history }) {
           padelgo.tv - stream for free
         </p>
       </nav>
-      {channels && score && <Scoreboard score={score} channels={channels} data={channels} />}
+      {channels && score && poster && (
+        <Scoreboard
+          score={score}
+          channels={channels}
+          data={channels}
+          poster={poster}
+        />
+      )}
       {score === null && (
         <div className={styles.__court_noGamePlaying_div + " container"}>
           <p>No game currently playing</p>
