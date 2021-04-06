@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getPopularMedia } from "../../services/Media.js";
-import { getChannelsInfoWithChannelName } from "../../services/Channels.js";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.js";
 import styles from "./ArenaTv.module.scss";
 
@@ -37,16 +36,13 @@ const ArenaTv = ({ match }) => {
         mediaType: p.mediaType,
         channel: p.channel,
         description: p.description,
-        avatar: fetchChannelData(p.channel).profileImageURL || "",
+        avatar:
+          `https://static.padelgo.tv/profilepictures/600x600/${p.channel}.jpeg` ||
+          "",
       });
     });
 
     return pipeline;
-  };
-
-  const fetchChannelData = async (channel) => {
-    const data = await getChannelsInfoWithChannelName(channel);
-    return await data;
   };
 
   const onPlaylistAtEnd = async () => {

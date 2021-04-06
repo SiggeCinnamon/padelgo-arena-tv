@@ -2,8 +2,6 @@ import axios from "axios";
 
 async function getClubsAPIGETResponse(route) {
   try {
-    // setDebugLevel(1);
-
     const config = {
       baseURL: process.env.REACT_APP_CLUBS_API_BASE_URL,
       method: "GET",
