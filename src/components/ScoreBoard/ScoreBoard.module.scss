@@ -79,13 +79,13 @@
 }
 
 .currentScore {
+    display        : flex;
     height         : 120px;
     width          : 120px;
     margin-right   : 25px;
-    display        : flex;
+    margin-left    : 25px;
     align-items    : center;
     justify-content: center;
-    margin-left    : 25px;
 }
 
 .stupidSeparator {
@@ -94,7 +94,7 @@
 
 .__scoreboard_overlay_channel {
     position: absolute;
-    bottom  : 25px;
+    bottom  : 35px;
     left    : 0;
     height  : 150px;
     width   : 100%;
@@ -108,7 +108,7 @@
     flex-direction: row;
 
     img {
-        margin-top : 0px;
+        margin-top : 25px;
         margin-left: 25px;
         max-width  : 100px;
     }
@@ -116,7 +116,7 @@
 
 .__scoreboard_overlay_channel_content_headers {
     margin-top : 35px;
-    margin-left: 30px;
+    margin-left: 35px;
 
     h6 {
         font-family: "Roboto Slab", serif;
