@@ -3,14 +3,14 @@
 
 .wrapperScoreboard {
     display         : flex;
-    align-items     : center;
-    justify-content : center;
     width           : 100%;
     height          : 100%;
-    position        : absolute;
-    background-image: url("https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg");
-    background-color: blue;
     padding-bottom  : 50px;
+    position        : absolute;
+    align-items     : center;
+    justify-content : center;
+    background-color: blue;
+    background-image: url("https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg");
 
 }
 
@@ -39,18 +39,17 @@
 }
 
 .avatar {
-    border-radius: 50%;
     width        : 120px;
     height       : auto;
-    position     : relative;
     margin-left  : -75px;
     margin-right : 25px;
+    border-radius: 50%;
+    position     : relative;
 
 }
 
 .avatarOverlap {
     width: 100%;
-
 }
 
 .playerName {
@@ -70,20 +69,19 @@
 }
 
 .gameContainer {
+    display        : flex;
     height         : 120px;
     width          : 120px;
     margin-right   : 25px;
-    display        : flex;
     align-items    : center;
     justify-content: center;
 }
 
 .currentScore {
-   
+    display        : flex;
     height         : 120px;
     width          : 120px;
     margin-right   : 25px;
-    display        : flex;
     align-items    : center;
     justify-content: center;
 }
@@ -93,11 +91,11 @@
 }
 
 .__scoreboard_overlay_channel {
-    position: absolute;
-    bottom  : 25px;
-    left    : 0;
-    height  : 150px;
     width   : 100%;
+    height  : 150px;
+    position: absolute;
+    bottom  : 35px;
+    left    : 0;
     background: linear-gradient(180deg,
             rgba(196, 196, 196, 0) 0%,
             rgba(0, 0, 0, 0.92) 100%);
@@ -108,7 +106,7 @@
     flex-direction: row;
 
     img {
-        margin-top : 0px;
+        margin-top : 20px;
         margin-left: 25px;
         max-width  : 100px;
     }
@@ -116,7 +114,7 @@
 
 .__scoreboard_overlay_channel_content_headers {
     margin-top : 35px;
-    margin-left: 30px;
+    margin-left: 35px;
 
     h6 {
         font-family: "Roboto Slab", serif;

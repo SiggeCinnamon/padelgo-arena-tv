@@ -50,7 +50,10 @@ export default function AvatarCircle({ channelName, width, borderColor }) {
               ? { opacity: 0 }
               : { border: "5px solid " + borderColor }
           }
-          onError={() => setImageByChannelAndWidth("default", width)}
+          onError={(e) => {
+            e.target.onerror = null;
+            setImageByChannelAndWidth("default", width);
+          }}
           alt={channelName}
         />
       )}
