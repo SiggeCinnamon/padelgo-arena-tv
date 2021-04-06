@@ -32,3 +32,6 @@ async function getClubsAPIGETResponse(route) {
 export async function getClubDataWithClubId(clubId) {
   return await getClubsAPIGETResponse(`/Clubs/${clubId}`);
 }
+export async function getClubs() {
+  return await getClubsAPIGETResponse('Clubs');
+}
