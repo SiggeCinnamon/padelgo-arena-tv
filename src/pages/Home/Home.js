@@ -4,8 +4,8 @@ import Routes from "../../routes.json";
 import { getClubs } from "../../services/Clubs.js";
 import styles from "../Dashboard/Dashboard.module.scss";
 function Home() {
-  const [clubs, setClubs] = useState("");
-  const [club, setClub] = useState("");
+  const [clubs, setClubs] = useState();
+  const [club, setClub] = useState();
 
   useEffect(() => {
     fetchClubs();
@@ -23,8 +23,6 @@ function Home() {
       </nav>
       <div className={styles.__dashboard_container + " container"}>
         <div className="d-flex flex-wrap justify-content-center">
-         
-
           {/* Club */}
           <div className="col">
             <div className={styles.__dashboard_card + " card"}>
@@ -59,8 +57,8 @@ function Home() {
                       <option disabled="disabled">--------</option>
                       {clubs &&
                         clubs.map((c, i) => (
-                          <option value={c.clubsId} key={c.clubsId}>
-                            Club #{c.clubId} at {c.name}
+                          <option value={c.clubId} key={c.clubId}>
+                            {c.clubId} {c.name}
                           </option>
                         ))}
                     </select>
@@ -88,7 +86,6 @@ function Home() {
         </div>
       </div>
     </>
-
   );
 }
 
