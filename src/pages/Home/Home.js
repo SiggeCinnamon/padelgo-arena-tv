@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Routes from "../../routes.json";
 import { getClubs } from "../../services/Clubs.js";
 import styles from "../Dashboard/Dashboard.module.scss";
+import NavBar from "../../components/NavBar/NavBar.js";
 function Home() {
   const [clubs, setClubs] = useState();
   const [club, setClub] = useState();
@@ -18,9 +19,7 @@ function Home() {
 
   return (
     <>
-      <nav className={styles.__dashboard_navbar + " navbar"}>
-        <span>padelgo.tv - stream for free</span>
-      </nav>
+      <NavBar />
       <div className={styles.__dashboard_container + " container"}>
         <div className="d-flex flex-wrap justify-content-center">
           {/* Club */}
