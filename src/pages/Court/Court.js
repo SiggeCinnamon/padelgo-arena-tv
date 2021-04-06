@@ -6,6 +6,7 @@ import {
 } from "../../services/Streams.js";
 import { getScoresWithLiveStreamId } from "../../services/Scores.js";
 import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
+import NavBar from "../../components/NavBar/NavBar.js";
 import styles from "./Court.module.scss";
 
 function Court({ match, history }) {
@@ -78,15 +79,10 @@ function Court({ match, history }) {
 
   return (
     <>
-      <nav className={styles.__court_navbar + " navbar"}>
-        <p
-          onClick={() => {
-            history.goBack();
-          }}>
-          padelgo.tv - stream for free
-        </p>
-      </nav>
-      {channels && score && <Scoreboard score={score} channels={channels} data={channels} />}
+      <NavBar />
+      {channels && score && (
+        <Scoreboard score={score} channels={channels} data={channels} />
+      )}
       {score === null && (
         <div className={styles.__court_noGamePlaying_div + " container"}>
           <p>No game currently playing</p>

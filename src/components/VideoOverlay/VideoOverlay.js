@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./VideoOverlay.module.scss";
-
+import NavBar from "../../components/NavBar/NavBar.js"
 const VideoOverlay = ({ data, currentProgress, history }) => {
   const [icon, setIcon] = useState("");
   const [color, setcolor] = useState("");
@@ -38,11 +38,7 @@ const VideoOverlay = ({ data, currentProgress, history }) => {
 
   return (
     <>
-      <div className={styles.__video_overlay_logo}>
-        <p onClick={() => history.goBack()} alt='Go back'>
-          padelgo.tv - stream for free
-        </p>
-      </div>
+  <NavBar />
       {data && data.mediaType && (
         <div className={styles.__video_overlay_channel_type}>
           <div

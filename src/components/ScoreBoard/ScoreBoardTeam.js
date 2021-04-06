@@ -1,9 +1,10 @@
 import styles from "./ScoreBoard.module.scss";
 import AvatarCircle from "./AvatarCircle/AvatarCircle.js";
-
+import NavBar from "../../components/NavBar/NavBar.js";
 export default function ScoreboardTeam({ team, nameColor, channelName }) {
   return (
     <>
+
       <div className='container justify-center'>
         <div className={styles.scoreboardContainer + " d-flex"}>
           <div className={styles.scoreContainer}>

@@ -1,14 +1,16 @@
 import ScoreboardTeam from "./ScoreBoardTeam";
 import BottomChannelName from "./BottomChannelName/BottomChannelName";
 import styles from "./ScoreBoard.module.scss";
-
+import NavBar from "../../components/NavBar/NavBar.js";
 export default function scoreboard({ isManageScorePage, score, channels }) {
   if (!score || score.error) {
     return null;
   } else {
     return (
       <>
+
         <div className={styles.wrapperScoreboard}>
+        <NavBar />
           <div
             className={
               !isManageScorePage
