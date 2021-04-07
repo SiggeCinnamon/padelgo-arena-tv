@@ -46,8 +46,7 @@ const ArenaTv = ({ match }) => {
   };
 
   const onPlaylistAtEnd = async () => {
-    const data = pipeline(await fetchPopularMedia(1, 5));
-    setSources(sources.concat(data));
+    await fetchPopularMedia(1, 5);
   };
 
   // Only fetches highlights as of now.
@@ -64,7 +63,6 @@ const ArenaTv = ({ match }) => {
     });
 
     setPopular(await data);
-    return await data;
   };
 
   return (
