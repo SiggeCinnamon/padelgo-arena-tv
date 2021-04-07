@@ -7,7 +7,7 @@ import useFetchClubs from "../../hooks/useFetchClubs.js";
 
 function Home() {
   const [clubs, setClubs] = useFetchClubs();
-  const [club, setClub] = useState("-1");
+  const [club, setClub] = useState();
 
   return (
     <>
