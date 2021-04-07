@@ -3,6 +3,13 @@
 
 
 .__court_noGamePlaying_div {
+    margin-top: 100px;
+
+    /* W3C */
+    display  : flex;
+    box-pack : center;
+    box-align: center;
+
     /* Internet Explorer 10 */
     display       : -ms-flexbox;
     -ms-flex-pack : center;
@@ -18,15 +25,11 @@
     -webkit-box-pack : center;
     -webkit-box-align: center;
 
-    /* W3C */
-    display  : flex;
-    box-pack : center;
-    box-align: center;
-
     p {
         font-family: 'Roboto Slab', serif;
         font-size  : 18px;
         font-weight: bold;
         font-style : normal;
+        text-align : center;
     }
 }
