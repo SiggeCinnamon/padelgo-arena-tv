@@ -24,6 +24,7 @@ export default function scoreboard({
                 }
               : { backgroundImage: `url(${poster})` }
           }>
+          <NavBar />
           <div
             className={
               !isManageScorePage

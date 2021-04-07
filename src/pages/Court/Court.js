@@ -88,14 +88,22 @@ function Court({ match, history }) {
 
   return (
     <>
-      <NavBar />
       {channels && score && (
-        <Scoreboard score={score} channels={channels} data={channels} poster={poster} />
+        <Scoreboard
+          score={score}
+          channels={channels}
+          data={channels}
+          poster={poster}
+        />
       )}
+
       {score === null && (
-        <div className={styles.__court_noGamePlaying_div + " container"}>
-          <p>No game currently playing</p>
-        </div>
+        <>
+          <NavBar />
+          <div className={styles.__court_noGamePlaying_div + " container"}>
+            <p>No game currently playing</p>
+          </div>
+        </>
       )}
     </>
   );
