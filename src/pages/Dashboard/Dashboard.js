@@ -1,15 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Routes from "../../routes.json";
 import styles from "./Dashboard.module.scss";
 import NavBar from "../../components/NavBar/NavBar.js";
 import useFetchCourts from "../../hooks/useFetchCourts.js";
 import useFetchClub from "../../hooks/useFetchClub.js";
 
-function Dashboard({ match }) {
+function Dashboard({ match, history }) {
   const [court, setCourt] = useState("-1");
   const [courts, setCourts] = useFetchCourts(match.params.clubId);
   const [club, setClub] = useFetchClub(match.params.clubId);
+
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDownHandler);
+    return () => {
+      document.removeEventListener("keydown", onKeyDownHandler);
+    };
+  }, []);
+
+  const onKeyDownHandler = (event) => {
+    if (event.defaultPrevented) return;
+
+    switch (event.key) {
+      case "Escape":
+        history.goBack();
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <>
@@ -113,4 +132,4 @@ function Dashboard({ match }) {
   );
 }
 
-export default Dashboard;
+export default withRouter(Dashboard);
