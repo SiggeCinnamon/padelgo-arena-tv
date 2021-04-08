@@ -19,10 +19,8 @@ const BottomOverlay = ({ data }) => {
           alt='player'
         />
         <div className={styles.__video_overlay_channel_content_headers}>
-          <h6>
-            {data.channel} - {data.description}
-          </h6>
-          <h6>padelgo.tv/channel/{data.channel}</h6>
+          <h6>{data.description}</h6>
+          <h6>{data.channel}</h6>
         </div>
       </div>
     </div>
