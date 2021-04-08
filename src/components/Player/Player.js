@@ -2,51 +2,18 @@ import React, { useState, useEffect } from "react";
 import { getPopularMedia } from "../../services/Media.js";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.js";
 import styles from "./Player.module.scss";
+import usePipeline from "../../hooks/usePipeline.js";
 
 const Player = ({ clubId }) => {
   const [popular, setPopular] = useState([]);
-  const [sources, setSources] = useState([]);
+  const [sources, setSources] = usePipeline(popular);
 
   useEffect(() => {
-    fetchPopularMedia(1, 5);
+    fetchPopularMedia(1, 2);
   }, []);
 
-  useEffect(() => {
-    setSources(pipeline(popular));
-  }, [popular]);
-
-  const pipeline = (data) => {
-    const pipeline = [];
-
-    data.forEach((p) => {
-      pipeline.push({
-        sources: [
-          {
-            src:
-              process.env.NODE_ENV === "development"
-                ? "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                : p.url,
-            type: "video/mp4",
-          },
-        ],
-        poster:
-          process.env.NODE_ENV === "development"
-            ? "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Big_Buck_Bunny_thumbnail_vlc.png/800px-Big_Buck_Bunny_thumbnail_vlc.png"
-            : p.thumbnailURL,
-        mediaType: p.mediaType,
-        channel: p.channel,
-        description: p.description,
-        avatar:
-          `https://static.padelgo.tv/profilepictures/600x600/${p.channel}.jpeg` ||
-          `https://static.padelgo.tv/profilepictures/600x600/default.jpeg`,
-      });
-    });
-
-    return pipeline;
-  };
-
   const onPlaylistAtEnd = async () => {
-    await fetchPopularMedia(1, 5);
+    await fetchPopularMedia(1, 2);
   };
 
   // Only fetches highlights as of now.
