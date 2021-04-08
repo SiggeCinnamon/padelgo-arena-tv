@@ -7,13 +7,6 @@ const TypePill = ({ data }) => {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    console.log(
-      "mediaType:",
-      data.mediaType,
-      "| typeOf mediaType:",
-      typeof data.mediaType
-    );
-
     switch (String(data.mediaType)) {
       case "Stream": {
         setIcon("movie_filter");
