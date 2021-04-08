@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import styles from "./App.module.scss";
 import Routes from "./routes.json";
 import Home from "./pages/Home/Home.js";
 import Court from "./pages/Court/Court.js";
