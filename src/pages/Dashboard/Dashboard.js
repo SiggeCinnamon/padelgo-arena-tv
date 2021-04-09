@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import Routes from "../../routes.json";
 import styles from "./Dashboard.module.scss";
-import NavBar from "../../components/NavBar/NavBar.js";
+import NavBar from "../../components/NavBar";
 import useFetchCourts from "../../hooks/useFetchCourts.js";
 import useFetchClub from "../../hooks/useFetchClub.js";
 

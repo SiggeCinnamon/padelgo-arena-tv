@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Routes from "../../routes.json";
 import styles from "../Dashboard/Dashboard.module.scss";
-import NavBar from "../../components/NavBar/NavBar.js";
+import NavBar from "../../components/NavBar";
 import useFetchClubs from "../../hooks/useFetchClubs.js";
 
 function Home() {
@@ -10,7 +10,9 @@ function Home() {
   const [club, setClub] = useState("-1");
 
   return (
-    <>      <NavBar />
+    <>
+      {" "}
+      <NavBar />
       <div className={styles.__dashboard_container + " container"}>
         <div className='d-flex flex-wrap justify-content-center'>
           {/* Club */}
