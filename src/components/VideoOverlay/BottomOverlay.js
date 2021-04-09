@@ -15,7 +15,9 @@ const BottomOverlay = ({ data }) => {
             e.target.src =
               "https://static.padelgo.tv/profilepictures/600x600/default.jpeg";
           }}
-          className='img-raised rounded-circle img-fluid'
+          className={
+            styles.__video_overlay_image + " img-raised rounded-circle"
+          }
           alt='player'
         />
         <div className={styles.__video_overlay_channel_content_headers}>
