@@ -22,6 +22,7 @@
 .__dashboard_container {
     display        : flex;
     justify-content: space-evenly;
+    flex-wrap      : wrap;
     align-items    : center;
     padding-top    : 200px;
 }
@@ -30,9 +31,6 @@
     width           : 40vh;
     height          : 50vh;
     margin-top      : 30px;
-    margin-right    : 100px;
-    margin-bottom   : 30px;
-    margin-left     : 100px;
     border          : 1px solid #ADADAD;
     border-radius   : 10px;
     background-color: #FFF;
