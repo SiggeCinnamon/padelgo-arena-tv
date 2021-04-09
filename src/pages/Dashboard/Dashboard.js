@@ -33,7 +33,7 @@ function Dashboard({ match, history }) {
   return (
     <>
       <NavBar />
-      <div className={styles.__dashboard_container + " container"}>
+      <div className={styles.__dashboard_container + " container-fluid"}>
         {/* ARENATV */}
         <div className={styles.__dashboard_card + " card"}>
           <div className={styles.__dashboard_card_top + " card-top"}>
@@ -85,16 +85,18 @@ function Dashboard({ match, history }) {
                   onChange={(e) => {
                     setCourt(e.currentTarget.value);
                   }}>
-                  <option value='-1' style={{ fontWeight: "bold" }}>
-                    Courts
-                  </option>
-                  <option disabled='disabled'>--------</option>
-                  {courts &&
-                    courts.map((c, i) => (
-                      <option value={c.courtId} key={c.courtId}>
-                        Court #{c.courtId} at {club.name}
-                      </option>
-                    ))}
+                  <optgroup className={styles.__dashboard_optgroup}>
+                    <option value='-1' style={{ fontWeight: "bold" }}>
+                      Courts
+                    </option>
+                    <option disabled='disabled'>--------</option>
+                    {courts &&
+                      courts.map((c, i) => (
+                        <option value={c.courtId} key={c.courtId}>
+                          Court #{c.courtId} at {club.name}
+                        </option>
+                      ))}
+                  </optgroup>
                 </select>
               </div>
             </div>
