@@ -11,7 +11,8 @@
     background-color: vars.$primary-color;
 
     p {
-        margin-left: 10px;
+        margin-top : 5px;
+        margin-left: 20px;
         font-family: 'Roboto Slab', serif;
         font-size  : 18px;
         font-weight: bold;
@@ -26,6 +27,18 @@
 
         &:active {
             color: "#FFF";
+        }
+    }
+}
+
+@media screen and (min-width: 2840px) {
+    .__NavBar_bar {
+        height: 100px;
+
+        p {
+            margin-top : 20px;
+            margin-left: 50px;
+            font-size  : 38px;
         }
     }
 }
