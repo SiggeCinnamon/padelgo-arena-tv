@@ -18,7 +18,8 @@ const usePipeline = (popular) => {
               process.env.NODE_ENV === "development"
                 ? "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 : p.url,
-            type: "video/mp4",
+            type:
+              p.mediaType === "stream" ? "application/x-mpegURL" : "video/mp4",
           },
         ],
         poster:
