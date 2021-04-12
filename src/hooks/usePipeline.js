@@ -19,7 +19,9 @@ const usePipeline = (popular) => {
                 ? "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 : p.url,
             type:
-              p.mediaType === "stream" ? "application/x-mpegURL" : "video/mp4",
+              p.mediaType === "LiveStream"
+                ? "application/x-mpegURL"
+                : "video/mp4",
           },
         ],
         poster:
@@ -29,9 +31,7 @@ const usePipeline = (popular) => {
         mediaType: p.mediaType,
         channel: p.channel,
         description: p.description,
-        avatar:
-          `https://static.padelgo.tv/profilepictures/600x600/${p.channel}.jpeg` ||
-          `https://static.padelgo.tv/profilepictures/600x600/default.jpeg`,
+        avatar: `https://static.padelgo.tv/profilepictures/600x600/${p.channel}.jpeg`,
       });
     });
 
