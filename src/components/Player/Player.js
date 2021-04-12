@@ -21,7 +21,7 @@ const Player = ({ clubId }) => {
     const data = await getPopularMedia({
       clubId: Number(clubId),
       stream: false,
-      liveStream: false,
+      liveStream: true,
       highlight: true,
       video: false,
       page: page,
