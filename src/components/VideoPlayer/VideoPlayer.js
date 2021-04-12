@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { withRouter } from "react-router-dom";
 import VideoOverlay from "../../components/VideoOverlay/VideoOverlay.js";
 import "video.js/dist/video-js.css";
 import "videojs-playlist/dist/videojs-playlist.js";
@@ -39,18 +38,6 @@ const VideoPlayer = (
     }
   };
 
-  const onKeyDownHandler = (event) => {
-    if (event.defaultPrevented) return;
-
-    switch (event.key) {
-      case "Escape":
-        history.goBack();
-        break;
-      default:
-        break;
-    }
-  };
-
   const onProgressHandler = (e) => {
     setCurrentProgress(
       player.children_[7].progressControl.seekBar.progress_ * 100
@@ -77,13 +64,6 @@ const VideoPlayer = (
     };
   }, [player]);
 
-  useEffect(() => {
-    document.addEventListener("keydown", onKeyDownHandler);
-    return () => {
-      document.removeEventListener("keydown", onKeyDownHandler);
-    };
-  }, []);
-
   return (
     <div>
       <video
@@ -98,4 +78,4 @@ const VideoPlayer = (
   );
 };
 
-export default withRouter(VideoPlayer);
+export default VideoPlayer;
