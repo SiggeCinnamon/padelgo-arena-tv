@@ -4,13 +4,11 @@ import "video.js/dist/video-js.css";
 import "videojs-playlist/dist/videojs-playlist.js";
 import usePlayer from "../../hooks/usePlayer.js";
 
-const VideoPlayer = (
-  { src, controls, autoplay, onPlaylistAtEnd, history },
-  ref
-) => {
+const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd }, ref) => {
   const comp = usePlayer({ src, controls, autoplay });
   const player = comp.player;
   const sourcesRef = useRef();
+  const intervalRef = useRef();
   ref = comp.videoRef;
 
   const [videoData, setVideoData] = useState({});
@@ -44,6 +42,23 @@ const VideoPlayer = (
     );
   };
 
+  const onPlayHandler = (e) => {
+    if (player && player.currentType() === "application/x-mpegURL") {
+      const interval = setInterval(() => {
+        nextVideo();
+      }, 10000);
+
+      intervalRef.current = interval;
+    }
+  };
+
+  const nextVideo = () => {
+    clearInterval(intervalRef.current);
+    player.playlist.currentIndex() === player.playlist.lastIndex()
+      ? player.trigger("ended")
+      : player.playlist.next();
+  };
+
   useEffect(() => {
     sourcesRef.current = src;
   }, [src]);
@@ -53,13 +68,15 @@ const VideoPlayer = (
       player.on("playlistitem", onPlaylistItemHandler);
       player.on("timeupdate", onProgressHandler);
       player.on("ended", onEndingHandler);
+      player.on("play", onPlayHandler);
     }
 
     return () => {
       if (player !== null) {
-        player.off("playlistitem");
+        player.off("playlistitem", onPlaylistItemHandler);
         player.off("timeupdate", onProgressHandler);
-        player.off("ended");
+        player.off("ended", onEndingHandler);
+        player.off("play", onPlayHandler);
       }
     };
   }, [player]);
