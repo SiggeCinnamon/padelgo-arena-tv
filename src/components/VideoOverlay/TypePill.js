@@ -20,7 +20,7 @@ const TypePill = ({ data }) => {
         setText("HIGHLIGHT");
         break;
       }
-      case "stream": {
+      case "LiveStream": {
         setIcon("stop_circle");
         setcolor("#28b869");
         setText("LIVE");

@@ -9,14 +9,13 @@ const Player = ({ clubId }) => {
   const [sources, setSources] = usePipeline(popular);
 
   useEffect(() => {
-    fetchPopularMedia(1, 2);
+    fetchPopularMedia(1, 5);
   }, []);
 
   const onPlaylistAtEnd = async () => {
-    await fetchPopularMedia(1, 2);
+    await fetchPopularMedia(1, 5);
   };
 
-  // Only fetches highlights as of now.
   const fetchPopularMedia = async (page = 1, take = 0, sortOrder = 0) => {
     const data = await getPopularMedia({
       clubId: Number(clubId),
