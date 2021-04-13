@@ -101,7 +101,8 @@
 }
 
 .__video_overlay_progress {
-    height: 5px;
+    height       : 10px;
+    border-radius: 0%;
 }
 
 .__video_overlay_progress_bar {
@@ -145,5 +146,9 @@
 
     .__video_overlay_channel_type_pill {
         scale: 2.5;
+    }
+
+    .__video_overlay_progress {
+        height: 20px;
     }
 }
