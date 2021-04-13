@@ -5,13 +5,18 @@ const useFetchClubs = () => {
   const [clubs, setClubs] = useState([]);
 
   useEffect(() => {
+    const fetchClubs = async () => {
+      const fClubs = await getClubs();
+
+      const pipedClubs = fClubs.map((element) => {
+        return { id: element.clubId, name: element.name };
+      });
+
+      setClubs(pipedClubs);
+    };
+
     fetchClubs();
   }, []);
-
-  const fetchClubs = async () => {
-    const fClubs = await getClubs();
-    setClubs(fClubs);
-  };
 
   return [clubs, setClubs];
 };

@@ -5,13 +5,13 @@ const useFetchClub = (id) => {
   const [club, setClub] = useState({});
 
   useEffect(() => {
-    fetchClub();
-  }, []);
+    const fetchClub = async () => {
+      const fClub = await getClubDataWithClubId(id);
+      setClub(fClub);
+    };
 
-  const fetchClub = async () => {
-    const fClub = await getClubDataWithClubId(id);
-    setClub(fClub);
-  };
+    fetchClub();
+  }, [id]);
 
   return [club, setClub];
 };

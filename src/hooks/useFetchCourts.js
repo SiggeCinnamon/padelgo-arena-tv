@@ -5,13 +5,18 @@ const useFetchCourts = (id) => {
   const [courts, setCourts] = useState([]);
 
   useEffect(() => {
-    fetchCourts();
-  }, []);
+    const fetchCourts = async () => {
+      const fCourts = await getCourtsWithClubId(id);
 
-  const fetchCourts = async () => {
-    const fCourts = await getCourtsWithClubId(id);
-    setCourts(fCourts);
-  };
+      const pipedCourts = fCourts.map((element) => {
+        return { id: element.courtId, name: element.description };
+      });
+
+      setCourts(pipedCourts);
+    };
+
+    fetchCourts();
+  }, [id]);
 
   return [courts, setCourts];
 };
