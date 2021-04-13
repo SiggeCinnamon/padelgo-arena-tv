@@ -36,7 +36,7 @@ function Court({ match, history }) {
 
   const fetchChannels = async () => {
     const fetchGetTeamsWithLiveId = await getStreamsWithCourtId(
-      match.params.courtId
+      match.params.id
     );
 
     if (
@@ -56,7 +56,7 @@ function Court({ match, history }) {
 
   const fetchScore = async () => {
     const fetchGetStreamsWithCourtId = await getStreamsWithCourtId(
-      match.params.courtId
+      match.params.id
     );
 
     if (
