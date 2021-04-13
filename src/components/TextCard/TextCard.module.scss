@@ -3,14 +3,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
 
-.__dashboard_container {
-    display        : flex;
-    justify-content: space-evenly;
-    flex-wrap      : wrap;
-    align-items    : center;
-    padding-top    : 200px;
-}
-
 .__dashboard_card {
     width           : 40vh;
     height          : 50vh;
@@ -70,20 +62,6 @@
     }
 }
 
-.__dashboard_dropdown {
-    display        : flex;
-    margin-bottom  : 20%;
-    justify-content: center;
-    align-items    : center;
-    text-align     : center;
-    font-family    : 'Roboto', sans-serif;
-    max-width      : 300px;
-
-    select {
-        border: 1px solid vars.$primary-color;
-    }
-}
-
 @media screen and (min-width: 2860px) {
     .__dashboard_card {
         border       : 2px solid #ADADAD;
@@ -102,19 +80,5 @@
 
     .__dashboard_btn {
         scale: 2.0;
-    }
-
-    .__dashboard_dropdown {
-        max-width: 600px;
-
-        select {
-            height      : 90px;
-            font-size   : 46px;
-            border-width: 2px;
-        }
-    }
-
-    .__dashboard_optgroup {
-        font-size: 46px;
     }
 }
