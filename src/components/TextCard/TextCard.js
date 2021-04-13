@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "./TextCard.module.scss";
 
 const TextCard = ({ textHeader, textBody, linkTo }) => {
-  console.log(textHeader, "\n", textBody, "\n", linkTo);
-
   return (
     <div className={styles.__dashboard_card + " card"}>
       <div className={styles.__dashboard_card_top + " card-top"}>
