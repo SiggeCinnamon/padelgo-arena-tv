@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import {
   getStreamsWithCourtId,
-  getTeamsOnStream,
+  getTeamsOnStreamWithLiveStreamId,
 } from "../../services/Streams.js";
 import { getScoresWithLiveStreamId } from "../../services/Scores.js";
 import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
@@ -44,7 +44,9 @@ function Court({ match, history }) {
       fetchGetTeamsWithLiveId[0].hasOwnProperty("liveStreamId")
     ) {
       setChannels(
-        await getTeamsOnStream(fetchGetTeamsWithLiveId[0].liveStreamId)
+        await getTeamsOnStreamWithLiveStreamId(
+          fetchGetTeamsWithLiveId[0].liveStreamId
+        )
       );
     } else {
       setChannels(null);
