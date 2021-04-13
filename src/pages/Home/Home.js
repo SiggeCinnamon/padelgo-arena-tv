@@ -25,27 +25,37 @@ function Home() {
           </div>
 
           {/* DROPDOWNMENU */}
-          <div className={styles.__dashboard_dropdown}>
-            <div className='btn-group' role='group' aria-label='Clubs selector'>
-              <div className='select-div'>
-                <select
-                  className='form-select'
-                  aria-label='Default select example'
-                  value={club}
-                  onChange={(e) => {
-                    setClub(e.currentTarget.value);
-                  }}>
-                  <option value='-1' style={{ fontWeight: "bold" }}>
-                    Clubs
-                  </option>
-                  <option disabled='disabled'>--------</option>
-                  {clubs &&
-                    clubs.map((c, i) => (
-                      <option value={c.clubId} key={c.clubId}>
-                        {c.clubId} {c.name}
-                      </option>
-                    ))}
-                </select>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}>
+            <div className={styles.__dashboard_dropdown}>
+              <div
+                className='btn-group'
+                role='group'
+                aria-label='Clubs selector'>
+                <div className='select-div'>
+                  <select
+                    className='form-select'
+                    aria-label='Default select example'
+                    value={club}
+                    onChange={(e) => {
+                      setClub(e.currentTarget.value);
+                    }}>
+                    <option value='-1' style={{ fontWeight: "bold" }}>
+                      Clubs
+                    </option>
+                    <option disabled='disabled'>--------</option>
+                    {clubs &&
+                      clubs.map((c, i) => (
+                        <option value={c.clubId} key={c.clubId}>
+                          {c.clubId} {c.name}
+                        </option>
+                      ))}
+                  </select>
+                </div>
               </div>
             </div>
           </div>
