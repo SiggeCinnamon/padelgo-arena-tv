@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styles from "./CourtDropCard.module.scss";
-import Routes from "../../routes.json";
+import styles from "./DropCard.module.scss";
 
-const DropCard = ({ textHeader, textBody, pOptions, pAlt }) => {
+const DropCard = ({ textHeader, textBody, pOptions, optionHeader, linkTo }) => {
   const [options, setOptions] = useState(pOptions);
-  const [option, setOption] = useState();
-  const [alt, setAlt] = useState(pAlt);
+  const [option, setOption] = useState("-1");
 
   useEffect(() => {
     setOptions(pOptions);
   }, [pOptions]);
-
-  useEffect(() => {
-    setAlt(pAlt);
-  }, [pAlt]);
 
   return (
     <div className={styles.__dashboard_card + " card"}>
@@ -45,18 +39,16 @@ const DropCard = ({ textHeader, textBody, pOptions, pAlt }) => {
                 onChange={(e) => {
                   setOption(e.currentTarget.value);
                 }}>
-                <optgroup className={styles.__dashboard_optgroup}>
-                  <option value='-1' style={{ fontWeight: "bold" }}>
-                    Courts
-                  </option>
-                  <option disabled='disabled'>--------</option>
-                  {options &&
-                    options.map((o, i) => (
-                      <option value={o.courtId} key={o.courtId}>
-                        Court #{o.courtId} at {alt.name}
-                      </option>
-                    ))}
-                </optgroup>
+                <option value='-1' style={{ fontWeight: "bold" }}>
+                  {optionHeader}
+                </option>
+                <option disabled='disabled'>--------</option>
+                {options &&
+                  options.map((o, i) => (
+                    <option value={o.id} key={o.id + "-" + String(i)}>
+                      {o.name}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>
@@ -69,7 +61,7 @@ const DropCard = ({ textHeader, textBody, pOptions, pAlt }) => {
               ? styles.__dashboard_btn + " btn btn-rounded disabled"
               : styles.__dashboard_btn + " btn btn-rounded"
           }
-          to={`${Routes.COURT.replace(":courtId", option)}`}>
+          to={linkTo ? `${linkTo.replace(":id", option)}` : `#`}>
           Start
         </Link>
       </div>
