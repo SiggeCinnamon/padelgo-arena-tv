@@ -5,40 +5,30 @@ import { getScoresWithLiveStreamId } from "../services/Scores.js";
  * A custom hook used for fetching current score information from a stream with specified liveStreamId from the API
  * @author Mattias Andersen
  *
- * @param  {Number} liveStreamId A Number that represents the livestreams id, used when fetching data from API
+ * @param  {Number} streamId A Number that represents the livestreams id, used when fetching data from API
  * @return {Array} It will return a useState array consisting of the fetched score data
  */
-const useFetchScore = (liveStreamId) => {
-  const [score, setScore] = useState({
-    isLoading: false,
-    isLoaded: false,
-    result: false,
-  });
+const useFetchScore = (streamId) => {
+  const [score, setScore] = useState([]);
 
   useEffect(() => {
-    fetchScore();
-  }, [liveStreamId]);
+    if (streamId !== null) {
+      const interval = setInterval(() => {
+        const fetchScore = async () => {
+          const fScore = await getScoresWithLiveStreamId(streamId).then((score) => {
+            setScore({ isLoadede: true, result: score });
+          });
+        };
+        fetchScore();
+        console.log("loop");
+      }, 2000);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetchScore();
-      console.log("loopdiloop");
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const fetchScore = async () => {
-    if (liveStreamId !== null) {
-      setScore({ isLoading: true });
-      getScoresWithLiveStreamId(liveStreamId).then((score) => {
-        setScore({ isLoaded: true, isLoading: false, result: score });
-      });
+      return () => clearInterval(interval);
     } else {
-      console.log("else i fetchScore");
-      console.log(liveStreamId);
+      console.log("streamId = null");
     }
-  };
+  }, [streamId]);
+
   return [score, setScore];
 };
 

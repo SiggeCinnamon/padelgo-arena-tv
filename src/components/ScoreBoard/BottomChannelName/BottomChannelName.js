@@ -3,7 +3,6 @@ import styles from "./BottomChannelName.module.scss";
 import { getChannelsInfoWithChannelName } from "../../../services/Channels.js";
 
 export default function BottomChannelName({ channel }) {
-  console.log(channel,'bottomchannelname');
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -25,13 +24,12 @@ export default function BottomChannelName({ channel }) {
           {data && (
             <img
               src={`https://static.padelgo.tv/profilepictures/600x600/${data.name}.jpeg`}
-              className='img-raised rounded-circle img-fluid'
+              className="img-raised rounded-circle img-fluid"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src =
-                  "https://static.padelgo.tv/profilepictures/600x600/default.jpeg";
+                e.target.src = "https://static.padelgo.tv/profilepictures/600x600/default.jpeg";
               }}
-              alt='player'
+              alt="player"
             />
           )}
           <div className={styles.__bottomchannelname_overlay_channel_content_headers}>

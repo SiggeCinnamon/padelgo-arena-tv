@@ -3,7 +3,7 @@ import React, { useState, useContext, useEffect, useCallback, useMemo } from "re
 import BottomChannelName from "./BottomChannelName/BottomChannelName";
 import styles from "./ScoreBoard.module.scss";
 import NavBar from "../../components/NavBar/NavBar.js";
-import useFetchLiveStream from "../../hooks/useFetchLiveStream";
+
 import useFetchScore from "../../hooks/useFetchScore";
 import useFetchTeams from "../../hooks/useFetchTeams";
 /**
@@ -11,22 +11,16 @@ import useFetchTeams from "../../hooks/useFetchTeams";
  * @author Mattias Andersen
  *
  * @param  {Object} score An Object consisting of the current score data
- * @param  {Object} channels An Object consisting of data of the 1-2 players of the team
+ * @param  {Object} teams An Object consisting of data of the 1-2 players of the team
  * @param  {String} poster A String that represents the background image that should be displayed
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreBoard({ isManageScorePage, match }) {
-  console.log(match.params.courtId);
-  const [liveStream, setLiveStream] = useFetchLiveStream(match.params.courtId);
-  const [liveStreamId, setLiveStreamId] = useState("");
+export default function ScoreBoard({ liveStreamId }) {
+  /*   const [score, setScore] = useState([]);
+  const [teams, setTeams] = useState([]); */
 
-  const [score, setScore] = useFetchScore(liveStream.isLoaded === true && liveStream.result === true ? liveStream.result[0].id : null);
-  const [teams, setTeams] = useFetchTeams(liveStream.isLoaded === true && liveStream.result === true ? liveStream.result[0].id : null);
-
-  console.log(liveStream, "livestream");
-  console.log(score, "score");
-  console.log(teams, "teams");
-
+  const [score, setScore] = useFetchScore(liveStreamId);
+  const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [scoreData, setScoreData] = useState(score);
   const [teamsData, setTeamsData] = useState(teams);
   const [poster, setPoster] = useState(null);
@@ -38,7 +32,6 @@ export default function ScoreBoard({ isManageScorePage, match }) {
       setTeamsData(teams);
     }
   }, [score]);
-
 
   if (!score || score.error) {
     return null;
@@ -56,7 +49,7 @@ export default function ScoreBoard({ isManageScorePage, match }) {
           }
         >
           <NavBar />
-          <div className={!isManageScorePage ? styles.scoresContainer : styles.scoresContainerManageScore}>
+          <div className={styles.scoresContainer}>
             <div className={styles.scoreboardContainer}>
               <div className={styles.stupidSeparator}>
                 {scoreData.result && teamsData.result && <ScoreboardTeam team={scoreData.result.team[0]} nameColor={0} players={teamsData.result[0].players} />}
