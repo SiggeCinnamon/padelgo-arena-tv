@@ -29,6 +29,7 @@ const useFetchScore = (liveStreamId) => {
       });
     } else {
       console.log("else i fetchScore");
+      console.log(liveStreamId);
     }
   };
   return [score, setScore];

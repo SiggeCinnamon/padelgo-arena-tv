@@ -8,19 +8,10 @@ const useFetchLiveStream = (courtId) => {
     result: false,
   });
   useEffect(() => {
-    fetchLiveStream();
-  }, [courtId]);
 
-  const fetchLiveStream = async () => {
-    if (courtId !== null) {
-      setLiveStream({ isLoading: true });
-      getStreamsWithCourtId(courtId).then((liveStream) => {
-        setLiveStream({ isLoaded: true, isLoading: false, result: liveStream });
-      });
-    } else {
-      console.log("else i fetchLiveStream");
-    }
-  };
+  }, []);
+
+  console.log(liveStream);
   return [liveStream, setLiveStream];
 };
 export default useFetchLiveStream;

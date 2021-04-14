@@ -9,7 +9,7 @@ const useFetchTeams = (liveStreamId) => {
   });
   useEffect(() => {
     fetchTeams();
-  }, [liveStreamId]);
+  }, []);
 
   const fetchTeams = async () => {
     if (liveStreamId !== null) {
