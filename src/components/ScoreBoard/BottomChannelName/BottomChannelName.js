@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import styles from "./BottomChannelName.module.scss";
 import { getChannelsInfoWithChannelName } from "../../../services/Channels.js";
 
-export default function BottomChannelName({ channelName }) {
+export default function BottomChannelName({ channel }) {
+  console.log(channel,'bottomchannelname');
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fetchChannelData();
-  }, [channelName]);
+  }, [channel]);
 
   const fetchChannelData = async () => {
-    const propChannel = channelName[1].channelName;
+    const propChannel = channel[0].channelName;
 
     if (propChannel) {
       setData(await getChannelsInfoWithChannelName(propChannel));

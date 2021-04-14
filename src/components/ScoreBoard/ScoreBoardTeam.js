@@ -1,7 +1,10 @@
 import styles from "./ScoreBoard.module.scss";
 import AvatarCircle from "./AvatarCircle/AvatarCircle.js";
 import NavBar from "../../components/NavBar/NavBar.js";
-export default function ScoreboardTeam({ team, nameColor, channelName }) {
+export default function ScoreboardTeam({ team, nameColor, players }) {
+
+  console.log(team,'teams@scoreboardteams');
+  console.log(players,'players@scoreboardteams');
   return (
     <>
 
@@ -12,8 +15,8 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
               <div>
                 <AvatarCircle
                   channelName={
-                    channelName && channelName[1] && channelName[1].channelName
-                      ? channelName[1].channelName
+                    players && players[1] && players[1].channelName
+                      ? players[1].channelName
                       : "__NoName__"
                   }
                   borderColor={team.backgroundColor}
@@ -23,8 +26,8 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
               <div className={styles.avatarOverlap}>
                 <AvatarCircle
                   channelName={
-                    channelName && channelName[0] && channelName[0].channelName
-                      ? channelName[0].channelName
+                    players && players[0] && players[0].channelName
+                      ? players[0].channelName
                       : "__NoName__"
                   }
                   borderColor={team.backgroundColor}
