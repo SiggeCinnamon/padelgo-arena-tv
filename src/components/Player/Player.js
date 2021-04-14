@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getPopularMedia } from "../../services/Media.js";
-import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.js";
+import VideoPlayer from "../../components/VideoPlayer";
 import styles from "./Player.module.scss";
 import usePipeline from "../../hooks/usePipeline.js";
 
@@ -9,19 +9,18 @@ const Player = ({ clubId }) => {
   const [sources, setSources] = usePipeline(popular);
 
   useEffect(() => {
-    fetchPopularMedia(1, 2);
+    fetchPopularMedia(1, 5);
   }, []);
 
   const onPlaylistAtEnd = async () => {
-    await fetchPopularMedia(1, 2);
+    await fetchPopularMedia(1, 5);
   };
 
-  // Only fetches highlights as of now.
   const fetchPopularMedia = async (page = 1, take = 0, sortOrder = 0) => {
     const data = await getPopularMedia({
       clubId: Number(clubId),
       stream: false,
-      liveStream: false,
+      liveStream: true,
       highlight: true,
       video: false,
       page: page,

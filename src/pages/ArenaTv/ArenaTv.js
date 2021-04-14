@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Player from "../../components/Player";
+import { withRouter } from "react-router-dom";
 
-const ArenaTv = ({ match }) => {
+const ArenaTv = ({ match, history }) => {
+  const onKeyDownHandler = (event) => {
+    if (event.defaultPrevented) return;
+
+    switch (event.key) {
+      case "Escape":
+        history.goBack();
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDownHandler);
+    return () => {
+      document.removeEventListener("keydown", onKeyDownHandler);
+    };
+  }, []);
+
   return (
     <>
       <Player clubId={match.params.clubId} />
@@ -9,4 +29,4 @@ const ArenaTv = ({ match }) => {
   );
 };
 
-export default ArenaTv;
+export default withRouter(ArenaTv);
