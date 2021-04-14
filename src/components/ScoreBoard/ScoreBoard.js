@@ -1,5 +1,4 @@
 import ScoreboardTeam from "./ScoreBoardTeam";
-import React, { useState, useContext, useEffect, useCallback, useMemo } from "react";
 import BottomChannelName from "./BottomChannelName/BottomChannelName";
 import styles from "./ScoreBoard.module.scss";
 import NavBar from "../../components/NavBar/NavBar.js";
@@ -15,23 +14,9 @@ import useFetchTeams from "../../hooks/useFetchTeams";
  * @param  {String} poster A String that represents the background image that should be displayed
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreBoard({ liveStreamId }) {
-  /*   const [score, setScore] = useState([]);
-  const [teams, setTeams] = useState([]); */
-
+export default function ScoreBoard({ liveStreamId, poster }) {
   const [score, setScore] = useFetchScore(liveStreamId);
   const [teams, setTeams] = useFetchTeams(liveStreamId);
-  const [scoreData, setScoreData] = useState(score);
-  const [teamsData, setTeamsData] = useState(teams);
-  const [poster, setPoster] = useState(null);
-  useEffect(() => {
-    if (scoreData !== score) {
-      setScoreData(score);
-    }
-    if (teamsData !== teams) {
-      setTeamsData(teams);
-    }
-  }, [score]);
 
   if (!score || score.error) {
     return null;
@@ -52,14 +37,14 @@ export default function ScoreBoard({ liveStreamId }) {
           <div className={styles.scoresContainer}>
             <div className={styles.scoreboardContainer}>
               <div className={styles.stupidSeparator}>
-                {scoreData.result && teamsData.result && <ScoreboardTeam team={scoreData.result.team[0]} nameColor={0} players={teamsData.result[0].players} />}
+                {score.result && teams.result && <ScoreboardTeam team={score.result.team[0]} nameColor={0} players={teams.result[0].players} />}
               </div>
               <div className={styles.stupidSeparator}>
-                {scoreData.result && teamsData.result && <ScoreboardTeam team={scoreData.result.team[1]} nameColor={1} players={teamsData.result[1].players} />}
+                {score.result && teams.result && <ScoreboardTeam team={score.result.team[1]} nameColor={1} players={teams.result[1].players} />}
               </div>
             </div>
           </div>
-          <div className={styles.BottomChannelName}>{teamsData.result && <BottomChannelName channel={teamsData.result[0].players} />}</div>
+          <div className={styles.BottomChannelName}>{teams.result && <BottomChannelName channel={teams.result[0].players} />}</div>
         </div>
       </>
     );

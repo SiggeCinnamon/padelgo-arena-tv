@@ -23,8 +23,8 @@ function Court({ match, history }) {
         break;
     }
   };
-  console.log(liveStream, "court");
-  return <>{liveStream && liveStream.result && <Scoreboard liveStreamId={liveStream.result[0].id} />}</>;
+
+  return <>{liveStream && liveStream.result && <Scoreboard liveStreamId={liveStream.result[0].id} poster={liveStream.result[0].thumbnailURL} />}</>;
 }
 
 export default withRouter(Court);

@@ -12,15 +12,13 @@ const useFetchScore = (streamId) => {
   const [score, setScore] = useState([]);
 
   useEffect(() => {
+    fetchScore();
+  }, []);
+
+  useEffect(() => {
     if (streamId !== null) {
       const interval = setInterval(() => {
-        const fetchScore = async () => {
-          const fScore = await getScoresWithLiveStreamId(streamId).then((score) => {
-            setScore({ isLoadede: true, result: score });
-          });
-        };
         fetchScore();
-        console.log("loop");
       }, 2000);
 
       return () => clearInterval(interval);
@@ -29,6 +27,11 @@ const useFetchScore = (streamId) => {
     }
   }, [streamId]);
 
+  const fetchScore = async () => {
+    const fScore = await getScoresWithLiveStreamId(streamId).then((score) => {
+      setScore({ isLoadede: true, result: score });
+    });
+  };
   return [score, setScore];
 };
 
