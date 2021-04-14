@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./VideoOverlay.module.scss";
 
+/**
+ * A component that is an overlay with absolute setting, consisting of icon and text that represents the type of media the video/stream is
+ * @author Christoffer Hansen
+ *
+ * @param  {Object} data An object consisting of data of the current source
+ * @return {JSX} React JSX Rendering
+ */
 const TypePill = ({ data }) => {
   const [icon, setIcon] = useState("");
   const [color, setcolor] = useState("");

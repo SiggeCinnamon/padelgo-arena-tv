@@ -4,6 +4,14 @@ import VideoPlayer from "../../components/VideoPlayer";
 import styles from "./Player.module.scss";
 import usePipeline from "../../hooks/usePipeline.js";
 
+/**
+ * A main component that uses the sub-component VideoPlayer for rendering a video player.
+ * This component handles the conditionals and fetching of required data.
+ * @author Christoffer Hansen
+ *
+ * @param  {Number} clubId A Number representing the club that the user picked from Home page
+ * @return {JSX} React JSX Rendering
+ */
 const Player = ({ clubId }) => {
   const [popular, setPopular] = useState([]);
   const [sources, setSources] = usePipeline(popular);

@@ -1,8 +1,26 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./DropCard.module.scss";
 
-const DropCard = ({ textHeader, textBody, pOptions, optionHeader, linkTo }) => {
+/**
+ * Bootstrap Component with a SELECT
+ * @author Christoffer Hansen
+ *
+ * @param  {String} textHeader Text that appears as the header on the cards top area
+ * @param  {String} textBody Text that appears as the body on the cards middle area
+ * @param  {Array} pOptions The option elements within the SELECT
+ * @param  {String} optionHeader The very first option in the SELECT, acts as a description of what the options are
+ * @param  {String} linkTo React-Router-DOM link URL
+ * @return {JSX} React JSX Rendering
+ */
+const DropCard = ({
+  textHeader = "TEXT HEADER",
+  textBody = "TEXT BODY",
+  pOptions = ["P_OPTIONS"],
+  optionHeader = "OPTION HEADER",
+  linkTo = "#",
+}) => {
   const [options, setOptions] = useState(pOptions);
   const [option, setOption] = useState("-1");
 
@@ -61,12 +79,20 @@ const DropCard = ({ textHeader, textBody, pOptions, optionHeader, linkTo }) => {
               ? styles.__dashboard_btn + " btn btn-rounded disabled"
               : styles.__dashboard_btn + " btn btn-rounded"
           }
-          to={linkTo ? `${linkTo.replace(":id", option)}` : `#`}>
-          Start
+          to={`${linkTo.replace(":id", option)}`}>
+          Enter
         </Link>
       </div>
     </div>
   );
+};
+
+DropCard.propTypes = {
+  textHeader: PropTypes.string,
+  textBody: PropTypes.string,
+  pOptions: PropTypes.array,
+  optionHeader: PropTypes.string,
+  linkTo: PropTypes.string,
 };
 
 export default DropCard;

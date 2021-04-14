@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { getClubs } from "../services/Clubs.js";
 
+/**
+ * A custom hook used for fetching all clubs information from the API
+ * @author Christoffer Hansen
+ *
+ * @return {Array} It will return a useState array consisting of all the fetched clubs
+ */
 const useFetchClubs = () => {
   const [clubs, setClubs] = useState([]);
 

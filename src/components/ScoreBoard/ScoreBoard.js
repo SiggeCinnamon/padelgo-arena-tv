@@ -3,6 +3,15 @@ import BottomChannelName from "./BottomChannelName/BottomChannelName";
 import styles from "./ScoreBoard.module.scss";
 import NavBar from "../../components/NavBar/NavBar.js";
 
+/**
+ * A main component that calls the ScoreboardTeam component. It also calls the BottomChannelName component.
+ * @author Mattias Andersen
+ *
+ * @param  {Object} score An Object consisting of the current score data
+ * @param  {Object} channels An Object consisting of data of the 1-2 players of the team
+ * @param  {String} poster A String that represents the background image that should be displayed
+ * @return {JSX} React JSX Rendering
+ */
 export default function scoreboard({
   isManageScorePage,
   score,
