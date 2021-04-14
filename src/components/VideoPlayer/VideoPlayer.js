@@ -4,6 +4,16 @@ import "video.js/dist/video-js.css";
 import "videojs-playlist/dist/videojs-playlist.js";
 import usePlayer from "../../hooks/usePlayer.js";
 
+/**
+ * A component which renders a video player with the use of the module VideoJS
+ * @author Christoffer Hansen
+ *
+ * @param  {Array} src An array of sources that the player will try to play
+ * @param  {Boolean} controls Boolean that tells the player whether it shall have the controls visible or not
+ * @param  {Boolean} autoplay Boolean that tells the player whether it shall be autoplaying or not
+ * @param  {Function} onPlaylistAtEnd Function that is suppose to be used at the playlists end
+ * @return {JSX} React JSX Rendering
+ */
 const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd }, ref) => {
   const comp = usePlayer({ src, controls, autoplay });
   const player = comp.player;

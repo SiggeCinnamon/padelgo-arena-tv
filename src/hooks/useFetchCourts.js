@@ -1,17 +1,29 @@
 import { useEffect, useState } from "react";
 import { getCourtsWithClubId } from "../services/Court.js";
 
+/**
+ * A custom hook used for fetching all courts from a club with specified id from the API
+ * @author Christoffer Hansen
+ *
+ * @param  {Number} id A Number that represents the clubs id, used when fetching data from API
+ * @return {Array} It will return a useState array consisting of the fetched courts
+ */
 const useFetchCourts = (id) => {
   const [courts, setCourts] = useState([]);
 
   useEffect(() => {
-    fetchCourts();
-  }, []);
+    const fetchCourts = async () => {
+      const fCourts = await getCourtsWithClubId(id);
 
-  const fetchCourts = async () => {
-    const fCourts = await getCourtsWithClubId(id);
-    setCourts(fCourts);
-  };
+      const pipedCourts = fCourts.map((element) => {
+        return { id: element.courtId, name: element.description };
+      });
+
+      setCourts(pipedCourts);
+    };
+
+    fetchCourts();
+  }, [id]);
 
   return [courts, setCourts];
 };

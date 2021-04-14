@@ -1,83 +1,27 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import Routes from "../../routes.json";
 import styles from "../Dashboard/Dashboard.module.scss";
 import NavBar from "../../components/NavBar";
 import useFetchClubs from "../../hooks/useFetchClubs.js";
+import DropCard from "../../components/DropCard";
 
-function Home() {
+const Home = () => {
   const [clubs, setClubs] = useFetchClubs();
-  const [club, setClub] = useState("-1");
 
   return (
     <>
       <NavBar />
       <div className={styles.__dashboard_container + " container"}>
-        {/* Club */}
-        <div className={styles.__dashboard_card + " card"}>
-          <div className={styles.__dashboard_card_top + " card-top"}>
-            <p>Clubs</p>
-          </div>
-          <div className='card-body'>
-            <p className={styles.__dashboard_card_text + " card-text"}>
-              Pick a club from the list below.
-            </p>
-          </div>
-
-          {/* DROPDOWNMENU */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
-            <div className={styles.__dashboard_dropdown}>
-              <div
-                className='btn-group'
-                role='group'
-                aria-label='Clubs selector'>
-                <div className='select-div'>
-                  <select
-                    className='form-select'
-                    aria-label='Default select example'
-                    value={club}
-                    onChange={(e) => {
-                      setClub(e.currentTarget.value);
-                    }}>
-                    <option value='-1' style={{ fontWeight: "bold" }}>
-                      Clubs
-                    </option>
-                    <option disabled='disabled'>--------</option>
-                    {clubs &&
-                      clubs.map((c, i) => (
-                        <option value={c.clubId} key={c.clubId}>
-                          {c.clubId} {c.name}
-                        </option>
-                      ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* DROPDOWNMENU */}
-          {/* clubBUTTON */}
-          <div className={styles.__dashboard_div_btn}>
-            <Link
-              className={
-                club === "-1"
-                  ? styles.__dashboard_btn + " btn btn-rounded disabled"
-                  : styles.__dashboard_btn + " btn btn-rounded"
-              }
-              to={`${Routes.DASHBOARD.replace(":clubId", club)}`}>
-              Start
-            </Link>
-          </div>
-          {/* COURTBUTTON */}
-        </div>
+        <DropCard
+          textHeader='Clubs'
+          textBody='Pick a club from the list below'
+          pOptions={clubs}
+          optionHeader='Clubs'
+          linkTo={Routes.DASHBOARD}
+        />
       </div>
-      {/* SCORE */}
     </>
   );
-}
+};
 
 export default Home;

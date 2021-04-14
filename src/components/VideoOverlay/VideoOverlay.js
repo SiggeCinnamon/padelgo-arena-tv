@@ -4,6 +4,14 @@ import BottomOverlay from "./BottomOverlay.js";
 import ProgressbarOverlay from "./ProgressbarOverlay.js";
 import TypePill from "./TypePill.js";
 
+/**
+ * The main component of VideoOverlay that handles the rendering of all the sub-components and the required conditionals
+ * @author Christoffer Hansen
+ *
+ * @param  {Object} data An object consisting of data of the current source
+ * @param  {Number} currentProgress A number representing the current % amount played of the video/stream
+ * @return {JSX} React JSX Rendering
+ */
 const VideoOverlay = ({ data, currentProgress }) => {
   return (
     <>

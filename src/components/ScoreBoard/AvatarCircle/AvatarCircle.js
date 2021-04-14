@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styles from "./AvatarCircle.module.scss";
 
+/**
+ * A component with the data sent as arguments is able to create Avatars representing the specific channel.
+ * What renders is a circular image of the channels avatar image
+ * @author Mattias Andersen
+ *
+ * @param  {String} channelName A Number representing the club that the user picked from Home page
+ * @param  {Number} width A Number representing the club that the user picked from Home page
+ * @param  {Any} borderColor An Any variable that represents what color the border around the avatar will be
+ * @return {JSX} React JSX Rendering
+ */
 export default function AvatarCircle({ channelName, width, borderColor }) {
   const [image, setImage] = useState();
 

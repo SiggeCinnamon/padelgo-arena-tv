@@ -4,13 +4,11 @@ import Routes from "../../routes.json";
 import styles from "./Dashboard.module.scss";
 import NavBar from "../../components/NavBar";
 import useFetchCourts from "../../hooks/useFetchCourts.js";
-import useFetchClub from "../../hooks/useFetchClub.js";
 import TextCard from "../../components/TextCard";
-import CourtDropCard from "../../components/CourtDropCard";
+import DropCard from "../../components/DropCard";
 
 function Dashboard({ match, history }) {
-  const [courts, setCourts] = useFetchCourts(match.params.clubId);
-  const [club, setClub] = useFetchClub(match.params.clubId);
+  const [courts, setCourts] = useFetchCourts(match.params.id);
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
@@ -40,15 +38,16 @@ function Dashboard({ match, history }) {
           textBody={`Continuously display highlights and streams from your club in fullscreen.
 
                 Return here by clicking at padelgo.tv in the top left or press ESC.`}
-          linkTo={Routes.ARENA_TV.replace(":clubId", match.params.clubId)}
+          linkTo={Routes.ARENA_TV.replace(":id", match.params.id)}
         />
 
-        <CourtDropCard
+        <DropCard
           textHeader='Score'
           textBody='Display the current score from a live stream. Pick a court in the
               list below.'
           pOptions={courts}
-          pAlt={club}
+          optionHeader='Courts'
+          linkTo={Routes.COURT}
         />
       </div>
     </>

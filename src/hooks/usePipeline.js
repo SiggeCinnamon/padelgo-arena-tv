@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { getStreamURLWithLiveStreamId } from "../services/Streams.js";
 
+/**
+ * A custom hook used for creating an array of sources in a specific structure that the Video player can play.
+ * It also makes sure to check whether a source is a livestream or an ordinary video and will then change certain properties.
+ * @author Christoffer Hansen
+ *
+ * @param  {Array} popular An array that consists of objects fetched from the API representing the current popular videos and streams
+ * @return {Array} It will return a useState array consisting of the new structured data
+ */
 const usePipeline = (popular) => {
   const [sources, setSources] = useState([]);
 
@@ -17,10 +25,7 @@ const usePipeline = (popular) => {
     const pipeline = [];
 
     for (const d of data) {
-      const stream =
-        d.mediaType === "LiveStream"
-          ? await getStreamURLWithLiveStreamId(d.internalId)
-          : "";
+      const stream = d.mediaType === "LiveStream" ? await getStreamURLWithLiveStreamId(d.internalId) : "";
 
       pipeline.push({
         sources: [
@@ -31,12 +36,7 @@ const usePipeline = (popular) => {
                 : d.mediaType === "LiveStream"
                 ? stream.url
                 : d.url,
-            type:
-              process.env.NODE_ENV === "development"
-                ? "video/mp4"
-                : d.mediaType === "LiveStream"
-                ? "application/x-mpegURL"
-                : "video/mp4",
+            type: process.env.NODE_ENV === "development" ? "video/mp4" : d.mediaType === "LiveStream" ? "application/x-mpegURL" : "video/mp4",
           },
         ],
         poster:

@@ -24,7 +24,7 @@ const ArenaTv = ({ match, history }) => {
 
   return (
     <>
-      <Player clubId={match.params.clubId} />
+      <Player clubId={match.params.id} />
     </>
   );
 };
