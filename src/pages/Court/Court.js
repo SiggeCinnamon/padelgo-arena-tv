@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
+import Player from "../../components/Player";
 import useFetchLiveStream from "../../hooks/useFetchLiveStream";
 
 function Court({ match, history }) {
@@ -23,8 +24,16 @@ function Court({ match, history }) {
         break;
     }
   };
-
-  return <>{liveStream && liveStream.result && <Scoreboard liveStreamId={liveStream.result[0].id} poster={liveStream.result[0].thumbnailURL} />}</>;
+console.log(liveStream);
+  if (liveStream.result && liveStream.result.length > 0) {
+    return <>{liveStream && liveStream.result && <Scoreboard liveStreamId={liveStream.result[0].id} poster={liveStream.result[0].thumbnailURL} />}</>;
+  } else {
+    return (
+      <>
+        <Player clubId={match.params.id} />
+      </>
+    );
+  }
 }
 
 export default withRouter(Court);
