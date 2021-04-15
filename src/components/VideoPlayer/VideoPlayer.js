@@ -38,18 +38,13 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd }, ref) => {
   };
 
   const onEndingHandler = (e) => {
-    if (
-      player &&
-      player.playlist.currentIndex() === player.playlist.lastIndex()
-    ) {
+    if (player && player.playlist.currentIndex() === player.playlist.lastIndex()) {
       onPlaylistAtEnd();
     }
   };
 
   const onProgressHandler = (e) => {
-    setCurrentProgress(
-      player.children_[7].progressControl.seekBar.progress_ * 100
-    );
+    setCurrentProgress(player.children_[7].progressControl.seekBar.progress_ * 100);
   };
 
   const onPlayHandler = (e) => {
@@ -64,9 +59,7 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd }, ref) => {
 
   const nextVideo = () => {
     clearInterval(intervalRef.current);
-    player.playlist.currentIndex() === player.playlist.lastIndex()
-      ? player.trigger("ended")
-      : player.playlist.next();
+    player.playlist.currentIndex() === player.playlist.lastIndex() ? player.trigger("ended") : player.playlist.next();
   };
 
   useEffect(() => {
@@ -93,13 +86,7 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd }, ref) => {
 
   return (
     <div>
-      <video
-        ref={ref}
-        id='video'
-        className='video-js vjs-big-play-centered vjs-fluid'
-        width='100%'
-        height='100%'
-      />
+      <video ref={ref} id='video' className='video-js vjs-big-play-centered vjs-fluid' width='100%' height='100%' />
       <VideoOverlay data={videoData} currentProgress={currentProgress} />
     </div>
   );

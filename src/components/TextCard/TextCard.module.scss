@@ -62,7 +62,7 @@
     }
 }
 
-@media screen and (min-width: 2860px) {
+@media screen and (min-width: 3840px) {
     .__dashboard_card {
         border       : 2px solid #ADADAD;
         border-radius: 20px;
@@ -79,6 +79,6 @@
     }
 
     .__dashboard_btn {
-        scale: 2.0;
+        transform: scale(2.0);
     }
 }
