@@ -29,8 +29,11 @@ export default function ScoreBoard({ liveStreamId, poster }) {
             process.env.NODE_ENV === "development"
               ? {
                   backgroundImage: "url(https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg)",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
                 }
-              : { backgroundImage: `url(${poster})` }
+              : { backgroundImage: `url(${poster})`, backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "cover" }
           }
         >
           <NavBar />
