@@ -1,10 +1,10 @@
-import ScoreboardTeam from "./ScoreBoardTeam";
-import BottomChannelName from "./BottomChannelName/BottomChannelName";
-import styles from "./ScoreBoard.module.scss";
-import NavBar from "../../components/NavBar/NavBar.js";
+import ScoreboardTeam from './ScoreBoardTeam';
+import BottomChannelName from './BottomChannelName/BottomChannelName';
+import styles from './ScoreBoard.module.scss';
+import NavBar from '../../components/NavBar/NavBar.js';
 
-import useFetchScore from "../../hooks/useFetchScore";
-import useFetchTeams from "../../hooks/useFetchTeams";
+import useFetchScore from '../../hooks/useFetchScore';
+import useFetchTeams from '../../hooks/useFetchTeams';
 /**
  * A main component that calls the ScoreboardTeam component. It also calls the BottomChannelName component.
  * @author Mattias Andersen
@@ -26,14 +26,19 @@ export default function ScoreBoard({ liveStreamId, poster }) {
         <div
           className={styles.wrapperScoreboard}
           style={
-            process.env.NODE_ENV === "development"
+            process.env.NODE_ENV === 'development'
               ? {
-                  backgroundImage: "url(https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg)",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
+                  backgroundImage: 'url(https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg)',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover'
                 }
-              : { backgroundImage: `url(${poster})`, backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "cover" }
+              : {
+                  backgroundImage: `url(${poster})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover'
+                }
           }
         >
           <NavBar />

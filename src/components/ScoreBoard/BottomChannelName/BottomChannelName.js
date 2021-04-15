@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
-import styles from "./BottomChannelName.module.scss";
-import { getChannelsInfoWithChannelName } from "../../../services/Channels.js";
-import useFetchChannel from "../../../hooks/useFetchChannel";
+import { useEffect, useState } from 'react';
+import styles from './BottomChannelName.module.scss';
+import { getChannelsInfoWithChannelName } from '../../../services/Channels.js';
+import useFetchChannel from '../../../hooks/useFetchChannel';
 
 export default function BottomChannelName({ channels }) {
-    const [channel, setChannel] = useFetchChannel(channels[1].channelName);
-
-
-
+  const [channel, setChannel] = useFetchChannel(channels[1].channelName);
   return (
     <>
       <div className={styles.__bottomchannelname_overlay_channel}>
@@ -18,7 +15,7 @@ export default function BottomChannelName({ channels }) {
               className="img-raised rounded-circle img-fluid"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = "https://static.padelgo.tv/profilepictures/600x600/default.jpeg";
+                e.target.src = 'https://static.padelgo.tv/profilepictures/600x600/default.jpeg';
               }}
               alt="player"
             />
