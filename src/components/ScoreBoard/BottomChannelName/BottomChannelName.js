@@ -35,10 +35,10 @@ export default function BottomChannelName({ channel }) {
           <div className={styles.__bottomchannelname_overlay_channel_content_headers}>
             {data && (
               <h6>
-                {data.name} - {data.description}
+               {data.description}
               </h6>
             )}
-            {data && <h6>padelgo.tv/channel/{data.name}</h6>}
+            {data && <h6>{data.name}</h6>}
           </div>
         </div>
       </div>
