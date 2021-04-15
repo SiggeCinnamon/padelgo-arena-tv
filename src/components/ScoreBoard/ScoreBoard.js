@@ -47,7 +47,7 @@ export default function ScoreBoard({ liveStreamId, poster }) {
               </div>
             </div>
           </div>
-          <div className={styles.BottomChannelName}>{teams.result && <BottomChannelName channel={teams.result[0].players} />}</div>
+          <div className={styles.BottomChannelName}>{teams.result && <BottomChannelName channels={teams.result[0].players} />}</div>
         </div>
       </>
     );
