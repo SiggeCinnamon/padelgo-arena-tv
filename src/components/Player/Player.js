@@ -41,16 +41,7 @@ const Player = ({ clubId }) => {
 
   return (
     <div className={styles.__arenatv_wrapper}>
-      <div className={styles.__arenatv_container_video}>
-        {sources && (
-          <VideoPlayer
-            src={sources}
-            controls={false}
-            autoplay={true}
-            onPlaylistAtEnd={onPlaylistAtEnd}
-          />
-        )}
-      </div>
+      <div className={styles.__arenatv_container_video}>{sources && <VideoPlayer src={sources} controls={false} autoplay={true} onPlaylistAtEnd={onPlaylistAtEnd} />}</div>
     </div>
   );
 };

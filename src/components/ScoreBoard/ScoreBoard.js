@@ -1,3 +1,4 @@
+import react, { useState, useEffect } from "react";
 import ScoreboardTeam from "./ScoreBoardTeam";
 import BottomChannelName from "./BottomChannelName/BottomChannelName";
 import styles from "./ScoreBoard.module.scss";
@@ -15,8 +16,8 @@ import useFetchTeams from "../../hooks/useFetchTeams";
  * @return {JSX} React JSX Rendering
  */
 export default function ScoreBoard({ liveStreamId, poster }) {
-  const [score, setScore] = useFetchScore(liveStreamId);
   const [teams, setTeams] = useFetchTeams(liveStreamId);
+  const [score, setScore] = useFetchScore(liveStreamId);
 
   if (!score || score.error) {
     return null;
@@ -34,8 +35,7 @@ export default function ScoreBoard({ liveStreamId, poster }) {
                   backgroundSize: "cover",
                 }
               : { backgroundImage: `url(${poster})`, backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "cover" }
-          }
-        >
+          }>
           <NavBar />
           <div className={styles.scoresContainer}>
             <div className={styles.scoreboardContainer}>
