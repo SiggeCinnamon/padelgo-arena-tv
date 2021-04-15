@@ -23,7 +23,6 @@ const useFetchScore = (streamId) => {
 
       return () => clearInterval(interval);
     } else {
-      console.log("streamId = null");
     }
   }, [streamId]);
 
