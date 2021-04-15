@@ -34,7 +34,7 @@ function Dashboard({ match, history }) {
       <NavBar />
       <div className={styles.__dashboard_container + " container-fluid"}>
         <TextCard
-          textHeader='Showcase'
+          textHeader="Showcase"
           textBody={`Continuously display highlights and streams from your club in fullscreen.
 
                 Return here by clicking at padelgo.tv in the top left or press ESC.`}
@@ -42,12 +42,12 @@ function Dashboard({ match, history }) {
         />
 
         <DropCard
-          textHeader='Score'
-          textBody='Display the current score from a live stream. Pick a court in the
-              list below.'
+          textHeader="Score"
+          textBody="Display the current score from a live stream. Pick a court in the
+              list below."
           pOptions={courts}
-          optionHeader='Courts'
-          linkTo={Routes.COURT}
+          optionHeader="Courts"
+          linkTo={Routes.COURT.replace(":clubId", match.params.id)}
         />
       </div>
     </>

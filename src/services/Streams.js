@@ -11,10 +11,7 @@ async function getStreamsAPIGETResponse(route) {
       const result = await axios.create(config).get(route);
       return result.data;
     } catch (error) {
-      if (
-        typeof error.response !== "undefined" &&
-        error.response.status === 404
-      ) {
+      if (typeof error.response !== "undefined" && error.response.status === 404) {
         console.error("Got 404 response from court API");
         return false;
       } else {
@@ -34,9 +31,7 @@ export async function getStreamsWithCourtId(courtId) {
 }
 
 export async function getStreamURLWithLiveStreamId(liveStreamId) {
-  return await getStreamsAPIGETResponse(
-    `/Streams/url/anonymously/${liveStreamId}`
-  );
+  return await getStreamsAPIGETResponse(`/Streams/url/anonymously/${liveStreamId}`);
 }
 
 export async function getStreamThumbnailWithLiveStreamId(liveStreamId) {
@@ -44,5 +39,8 @@ export async function getStreamThumbnailWithLiveStreamId(liveStreamId) {
 }
 
 export async function getTeamsOnStreamWithLiveStreamId(liveStreamId) {
+  return await getStreamsAPIGETResponse(`/Teams/teams/${liveStreamId}`);
+}
+export async function getTeamsOnStream(liveStreamId) {
   return await getStreamsAPIGETResponse(`/Teams/teams/${liveStreamId}`);
 }

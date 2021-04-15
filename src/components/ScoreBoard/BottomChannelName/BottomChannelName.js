@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import styles from "./BottomChannelName.module.scss";
 import { getChannelsInfoWithChannelName } from "../../../services/Channels.js";
 
-export default function BottomChannelName({ channelName }) {
+export default function BottomChannelName({ channel }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fetchChannelData();
-  }, [channelName]);
+  }, [channel]);
 
   const fetchChannelData = async () => {
-    const propChannel = channelName[1].channelName;
+    const propChannel = channel[0].channelName;
 
     if (propChannel) {
       setData(await getChannelsInfoWithChannelName(propChannel));
@@ -24,22 +24,21 @@ export default function BottomChannelName({ channelName }) {
           {data && (
             <img
               src={`https://static.padelgo.tv/profilepictures/600x600/${data.name}.jpeg`}
-              className='img-raised rounded-circle img-fluid'
+              className="img-raised rounded-circle img-fluid"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src =
-                  "https://static.padelgo.tv/profilepictures/600x600/default.jpeg";
+                e.target.src = "https://static.padelgo.tv/profilepictures/600x600/default.jpeg";
               }}
-              alt='player'
+              alt="player"
             />
           )}
           <div className={styles.__bottomchannelname_overlay_channel_content_headers}>
             {data && (
               <h6>
-                {data.name} - {data.description}
+               {data.description}
               </h6>
             )}
-            {data && <h6>padelgo.tv/channel/{data.name}</h6>}
+            {data && <h6>{data.name}</h6>}
           </div>
         </div>
       </div>

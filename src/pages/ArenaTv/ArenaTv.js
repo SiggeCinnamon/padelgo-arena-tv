@@ -3,6 +3,14 @@ import Player from "../../components/Player";
 import { withRouter } from "react-router-dom";
 
 const ArenaTv = ({ match, history }) => {
+  
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDownHandler);
+    return () => {
+      document.removeEventListener("keydown", onKeyDownHandler);
+    };
+  }, []);
+
   const onKeyDownHandler = (event) => {
     if (event.defaultPrevented) return;
 
@@ -14,13 +22,6 @@ const ArenaTv = ({ match, history }) => {
         break;
     }
   };
-
-  useEffect(() => {
-    document.addEventListener("keydown", onKeyDownHandler);
-    return () => {
-      document.removeEventListener("keydown", onKeyDownHandler);
-    };
-  }, []);
 
   return (
     <>

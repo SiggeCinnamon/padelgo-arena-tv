@@ -6,3 +6,15 @@
     border-radius: 50%;
     position     : relative;
 }
+
+@media screen and (min-width: 3840px) {
+    .__avatarcircle_avatar {
+        width        : 240px;
+        height       : auto;
+        margin-left  : -150px;
+        margin-right : 50px;
+        border-radius: 50%;
+        position     : relative;
+        
+    }
+}

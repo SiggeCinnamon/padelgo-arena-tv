@@ -10,7 +10,7 @@ import AvatarCircle from "./AvatarCircle/AvatarCircle.js";
  * @param  {Object} channelName An Object consisting of data of the 1-2 players of the team
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreboardTeam({ team, nameColor, channelName }) {
+export default function ScoreboardTeam({ team, nameColor, players }) {
   return (
     <>
       <div className='container justify-center'>
@@ -19,22 +19,14 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
             <div className={styles.imgContainer + " d-flex"}>
               <div>
                 <AvatarCircle
-                  channelName={
-                    channelName && channelName[1] && channelName[1].channelName
-                      ? channelName[1].channelName
-                      : "__NoName__"
-                  }
+                  channelName={players && players[1] && players[1].channelName ? players[1].channelName : "__NoName__"}
                   borderColor={team.backgroundColor}
                   width={600}
                 />
               </div>
               <div className={styles.avatarOverlap}>
                 <AvatarCircle
-                  channelName={
-                    channelName && channelName[0] && channelName[0].channelName
-                      ? channelName[0].channelName
-                      : "__NoName__"
-                  }
+                  channelName={players && players[0] && players[0].channelName ? players[0].channelName : "__NoName__"}
                   borderColor={team.backgroundColor}
                   width={600}
                 />
@@ -45,7 +37,8 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
               style={{
                 backgroundColor: nameColor === 0 ? "#3D3D3D" : "#FFF",
                 color: nameColor === 0 ? "#FFF" : "#3D3D3D",
-              }}>
+              }}
+            >
               <span>{team.name}</span>
             </div>
             <div className={styles.setContainer + " d-flex"}>
@@ -56,7 +49,8 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
                     className={styles.gameContainer}
                     style={{
                       backgroundColor: getScoreTileBackgroundColor(set),
-                    }}>
+                    }}
+                  >
                     <span>{set.game}</span>
                   </div>
                 );
@@ -64,10 +58,9 @@ export default function ScoreboardTeam({ team, nameColor, channelName }) {
               <div
                 className={styles.currentScore}
                 style={{
-                  backgroundColor: getCurrentPointTileBackground(
-                    team.currentPoint
-                  ),
-                }}>
+                  backgroundColor: getCurrentPointTileBackground(team.currentPoint),
+                }}
+              >
                 <span>{team.currentPoint.score}</span>
               </div>
             </div>
