@@ -19,7 +19,7 @@ const useFetchChannel = (id) => {
 
     fetchChannel();
   }, [id]);
-  console.log(channel,'aaaaaaaaaaaaaaaaaaa');
+
 
   return [channel,setChannel];
 };

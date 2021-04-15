@@ -18,7 +18,6 @@ const useFetchTeams = (liveStreamId) => {
         setTeams({ isLoaded: true, isLoading: false, result: teams });
       });
     } else {
-      console.log("else i fetchTeams");
     }
   };
   return [teams, setTeams];

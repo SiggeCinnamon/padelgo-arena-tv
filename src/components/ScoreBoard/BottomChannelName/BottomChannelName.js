@@ -7,8 +7,6 @@ export default function BottomChannelName({ channels }) {
     const [channel, setChannel] = useFetchChannel(channels[1].channelName);
 
 
-  console.log(channels, "channels");
-  console.log(channel, "channel");
 
   return (
     <>
