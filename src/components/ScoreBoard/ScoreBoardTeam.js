@@ -9,7 +9,7 @@ import SetContainer from "./SetContainer/SetContainer.js";
  *
  * @param  {Object} team An Object consisting of most of the data about the team
  * @param  {Number} nameColor A Number that represents which team (0 or 1), this can then be used to determine what color the team should have
- * @param  {Object} channelName An Object consisting of data of the 1-2 players of the team
+ * @param  {Object} players An Object consisting of data of the 1-2 players of the team
  * @return {JSX} React JSX Rendering
  */
 export default function ScoreboardTeam({ team, nameColor, players }) {
