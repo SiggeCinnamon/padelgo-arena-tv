@@ -51,7 +51,7 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd }, ref) => {
     if (player && player.currentType() === "application/x-mpegURL") {
       const interval = setInterval(() => {
         nextVideo();
-      }, 10000);
+      }, 600000);
 
       intervalRef.current = interval;
     }
