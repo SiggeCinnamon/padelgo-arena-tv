@@ -17,11 +17,11 @@ const Player = ({ clubId }) => {
   const [sources, setSources] = usePipeline(popular);
 
   useEffect(() => {
-    fetchPopularMedia(1, 5);
+    fetchPopularMedia(1, 20);
   }, []);
 
   const onPlaylistAtEnd = async () => {
-    await fetchPopularMedia(1, 5);
+    await fetchPopularMedia(1, 20);
   };
 
   const fetchPopularMedia = async (page = 1, take = 0, sortOrder = 0) => {
