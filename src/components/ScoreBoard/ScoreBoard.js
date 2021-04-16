@@ -6,6 +6,8 @@ import Routes from "../../routes.json";
 import useFetchScore from '../../hooks/useFetchScore';
 import useFetchTeams from '../../hooks/useFetchTeams';
 import TextCard from '../TextCard';
+import Player from "../Player";
+
 /**
  * A main component that calls   the ScoreboardTeam component. It also calls the BottomChannelName component.
  * @author Mattias Andersen
@@ -18,8 +20,10 @@ import TextCard from '../TextCard';
 export default function ScoreBoard({ liveStreamId, poster }) {
   const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [score, setScore] = useFetchScore(liveStreamId);
-  console.log(teams, 'teams');
-  console.log(score, 'score');
+
+  // console.log(teams, 'teams');
+  // console.log(score, 'score');
+
   if (!score || score.result && score.result.hasOwnProperty("error")) {
     return (
       <>
@@ -29,11 +33,9 @@ export default function ScoreBoard({ liveStreamId, poster }) {
         
         Clicka start to view ArenaTV meanwhile.`} linkTo={Routes.ARENA_TV.replace(":id", liveStreamId)} />
         </div>
-
       </>
     )
   } else {
-
     return (
       <>
         <div
