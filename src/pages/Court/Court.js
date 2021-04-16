@@ -14,7 +14,7 @@ function Court({ match, history }) {
   useEffect(() => {
     const interval = setInterval(() => {
       setIdTemp(new Number(id));
-    }, 2000);
+    }, 30000);
 
     return () => {
       clearInterval(interval);
@@ -22,19 +22,16 @@ function Court({ match, history }) {
   }, []);
 
   useEffect(() => {
-    const test = async () => {
+    const matchPlaying = async () => {
       const liveStreamTempHash = await HashGen(liveStreamTemp);
       const liveStreamHash = await HashGen(liveStream);
 
       if (liveStreamTempHash !== liveStreamHash) {
-        console.log("teamsTemp:", liveStreamTemp, "-", "HashCode:", liveStreamTempHash, "\nliveStream:", liveStream, "-", "HashCode:", liveStreamHash);
         setId(new Number(id));
-      } else {
-        console.log("teamsTemp:", liveStreamTemp, "-", "HashCode:", liveStreamTempHash, "\nliveStream:", liveStream, "-", "HashCode:", liveStreamHash);
       }
     };
 
-    test();
+    matchPlaying();
   }, [liveStreamTemp]);
 
 
@@ -61,7 +58,7 @@ function Court({ match, history }) {
   if (liveStream && liveStream.result && liveStream.result.length > 0) {
     return <Scoreboard liveStreamId={liveStream.result[0].id} poster={liveStream.result[0].thumbnailURL} />;
   } else if (liveStream && liveStream.result && liveStream.result.length === 0) {
-    return <Player clubId={match.params.courtId} />;
+    return <Player clubId={match.params.clubId} />;
   }
 }
 

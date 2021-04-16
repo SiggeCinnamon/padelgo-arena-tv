@@ -28,7 +28,6 @@ const useFetchScore = (streamId) => {
 
   const fetchScore = async () => {
     const fScore = await getScoresWithLiveStreamId(streamId).then((score) => {
-      //  isLoadede: true,
       setScore({ result: score });
     });
   };
