@@ -15,8 +15,8 @@ import useFetchTeams from '../../hooks/useFetchTeams';
  * @return {JSX} React JSX Rendering
  */
 export default function ScoreBoard({ liveStreamId, poster }) {
-  const [score, setScore] = useFetchScore(liveStreamId);
   const [teams, setTeams] = useFetchTeams(liveStreamId);
+  const [score, setScore] = useFetchScore(liveStreamId);
 
   if (!score || score.error) {
     return null;
@@ -28,17 +28,17 @@ export default function ScoreBoard({ liveStreamId, poster }) {
           style={
             process.env.NODE_ENV === 'development'
               ? {
-                  backgroundImage: 'url(https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg)',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover'
-                }
+                backgroundImage: 'url(https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg)',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover'
+              }
               : {
-                  backgroundImage: `url(${poster})`,
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover'
-                }
+                backgroundImage: `url(${poster})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover'
+              }
           }
         >
           <NavBar />

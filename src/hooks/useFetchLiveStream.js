@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { getStreamsWithCourtId } from '../services/Streams.js';
 
 const useFetchLiveStream = (courtId) => {
-  const [liveStream, setLiveStream] = useState({ isLoading: false, isLoaded: false, result: [] });
+  // isLoading: false, isLoaded: false,
+  const [liveStream, setLiveStream] = useState({ result: [] });
 
   useEffect(() => {
     const fetchLiveStream = async () => {
-      setLiveStream({ isLoading: true });
+      // setLiveStream({ isLoading: true });
       const fLive = await getStreamsWithCourtId(courtId).then((liveStream) => {
-        setLiveStream({ isLoaded: true, isLoading: false, result: liveStream });
+        // isLoaded: true, isLoading: false,
+        setLiveStream({ result: liveStream });
       });
     };
     fetchLiveStream();
