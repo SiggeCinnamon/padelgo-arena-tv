@@ -3,8 +3,6 @@ import { getTeamsOnStream } from "../services/Streams.js";
 
 const useFetchTeams = (liveStreamId) => {
   const [teams, setTeams] = useState({
-    // isLoading: false,
-    // isLoaded: false,
     result: false,
   });
   useEffect(() => {
@@ -13,9 +11,7 @@ const useFetchTeams = (liveStreamId) => {
 
   const fetchTeams = async () => {
     if (liveStreamId !== null) {
-      // setTeams({ isLoading: true });
       getTeamsOnStream(liveStreamId).then((teams) => {
-        //isLoaded: true, isLoading: false,
         setTeams({ result: teams });
       });
     }
