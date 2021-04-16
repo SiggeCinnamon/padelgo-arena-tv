@@ -1,5 +1,5 @@
 @use '../../utilities/variables'as vars;
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100&display=swap%27");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
 
 .__video_overlay_logo {
     position        : absolute;
@@ -15,7 +15,7 @@
         margin-left: 10px;
         font-family: "Roboto Slab", serif;
         font-style : normal;
-        font-weight: bold;
+        font-weight: 700;
         font-size  : 18px;
         color      : #FFF;
         user-select: none;
@@ -86,7 +86,7 @@
         font-family: "Roboto Slab", serif;
         font-size  : 36px;
         font-style : normal;
-        font-weight: bold;
+        font-weight: 700;
         line-height: 30px;
         text-align : left;
         color      : #FFF;
