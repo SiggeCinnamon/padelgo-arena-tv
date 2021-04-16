@@ -6,7 +6,7 @@ import NavBar from '../../components/NavBar/NavBar.js';
 import useFetchScore from '../../hooks/useFetchScore';
 import useFetchTeams from '../../hooks/useFetchTeams';
 /**
- * A main component that calls the ScoreboardTeam component. It also calls the BottomChannelName component.
+ * A main component that calls   the ScoreboardTeam component. It also calls the BottomChannelName component.
  * @author Mattias Andersen
  *
  * @param  {Object} score An Object consisting of the current score data
@@ -52,7 +52,7 @@ export default function ScoreBoard({ liveStreamId, poster }) {
               </div>
             </div>
           </div>
-          <div className={styles.BottomChannelName}>{teams.result && <BottomChannelName channels={teams.result[0].players} />}</div>
+          <div className={styles.BottomChannelName}>{teams.result && <BottomChannelName channels={teams.result[0].players[0].channelName} />}</div>
         </div>
       </>
     );
