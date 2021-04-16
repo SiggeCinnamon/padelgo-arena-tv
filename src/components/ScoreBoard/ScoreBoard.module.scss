@@ -12,7 +12,13 @@
     background-color: black;
     
 }
-
+.errorContainer{
+    display        : flex;
+    justify-content: space-evenly;
+    flex-wrap      : wrap;
+    align-items    : center;
+    padding-top    : 200px;
+}
 
 .BottomChannelName {
     padding-bottom: 50px;
