@@ -15,11 +15,12 @@ import TextCard from '../TextCard';
  * @param  {String} poster A String that represents the background image that should be displayed
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreBoard({ liveStreamId, poster }) {
+export default function ScoreBoard({ liveStreamId, poster, match}) {
   const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [score, setScore] = useFetchScore(liveStreamId);
   console.log(teams, 'teams');
   console.log(score, 'score');
+
   if (!score || score.result && score.result.hasOwnProperty("error")) {
     return (
       <>
@@ -27,7 +28,7 @@ export default function ScoreBoard({ liveStreamId, poster }) {
         <div className={styles.errorContainer + " container"}>
           <TextCard textHeader="Missing Teams" textBody={`Please add teamname to display scoreboard.
         
-        Clicka start to view ArenaTV meanwhile.`} linkTo={Routes.ARENA_TV.replace(":id", liveStreamId)} />
+        Clicka start to view ArenaTV meanwhile.`} linkTo={Routes.ARENA_TV.replace(":id",match.params.clubId )} />
         </div>
 
       </>
