@@ -52,7 +52,7 @@ function Court({ match, history }) {
     }
   };
 
-  if (liveStream && liveStream.result && liveStream.result.length > 0 && liveStream.result.) {
+  if (liveStream && liveStream.result && liveStream.result.length > 0) {
     return <Scoreboard liveStreamId={liveStream.result[0].id} poster={liveStream.result[0].thumbnailURL} match={match} />;
   } else if (liveStream && liveStream.result && liveStream.result.length === 0) {
     return <Player clubId={match.params.clubId} />;
