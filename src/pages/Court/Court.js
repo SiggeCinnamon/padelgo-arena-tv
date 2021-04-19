@@ -34,16 +34,13 @@ function Court({ match, history }) {
     matchPlaying();
   }, [liveStreamTemp]);
 
-
-
-
-
   useEffect(() => {
     document.addEventListener('keydown', onKeyDownHandler);
     return () => {
       document.removeEventListener('keydown', onKeyDownHandler);
     };
   }, []);
+
   const onKeyDownHandler = (event) => {
     if (event.defaultPrevented) return;
     switch (event.key) {
