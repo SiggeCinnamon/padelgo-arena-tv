@@ -22,7 +22,6 @@ const useFetchScore = (streamId) => {
       }, 2000);
 
       return () => clearInterval(interval);
-    } else {
     }
   }, [streamId]);
 

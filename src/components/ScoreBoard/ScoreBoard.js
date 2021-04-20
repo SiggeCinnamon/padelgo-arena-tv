@@ -20,7 +20,8 @@ import Player from "../Player";
 export default function ScoreBoard({ liveStreamId, poster, match}) {
   const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [score, setScore] = useFetchScore(liveStreamId);
-  if (!score || score.result && score.result.hasOwnProperty("error") || teams.result && teams.result === false) {
+
+  if (!score || score.result && score.result.hasOwnProperty("error")) {
     return (
       <>
         <NavBar />
@@ -60,7 +61,7 @@ export default function ScoreBoard({ liveStreamId, poster, match}) {
                 {score.result && score.result.team[0] && teams.result && teams.result[0].players && <ScoreboardTeam team={score.result.team[0]} nameColor={0} players={teams.result[0].players} />}
               </div>
               <div className={styles.stupidSeparator}>
-                {score.result && score.result.team[1] && teams.result && teams.result[0].players && <ScoreboardTeam team={score.result.team[1]} nameColor={1} players={teams.result[1].players} />}
+                {score.result && score.result.team[1] && teams.result && teams.result[1].players && <ScoreboardTeam team={score.result.team[1]} nameColor={1} players={teams.result[1].players} />}
               </div>
             </div>
           </div>

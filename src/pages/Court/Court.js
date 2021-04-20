@@ -10,11 +10,10 @@ function Court({ match, history }) {
   const [idTemp, setIdTemp] = useState(match.params.id);
   const [liveStream, setLiveStream] = useFetchLiveStream(id);
   const [liveStreamTemp, setLiveStreamTemp] = useFetchLiveStream(idTemp);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setIdTemp(new Number(id));
-    }, 30000);
+    }, 10000);
 
     return () => {
       clearInterval(interval);
@@ -25,7 +24,6 @@ function Court({ match, history }) {
     const matchPlaying = async () => {
       const liveStreamTempHash = await HashGen(liveStreamTemp);
       const liveStreamHash = await HashGen(liveStream);
-
       if (liveStreamTempHash !== liveStreamHash) {
         setId(new Number(id));
       }
@@ -52,10 +50,10 @@ function Court({ match, history }) {
     }
   };
 
-  if (liveStream && liveStream.result && liveStream.result.length > 0) {
-    return <Scoreboard liveStreamId={liveStream.result[0].id} poster={liveStream.result[0].thumbnailURL} match={match} />;
-  } else if (liveStream && liveStream.result && liveStream.result.length === 0) {
+  if (liveStream.result.length === 0) {
     return <Player clubId={match.params.clubId} />;
+  } else {
+    return <Scoreboard liveStreamId={liveStream.result[0].id} poster={liveStream.result[0].thumbnailURL} match={match} />;
   }
 }
 
