@@ -2,11 +2,11 @@ import ScoreboardTeam from './ScoreBoardTeam';
 import BottomChannelName from './BottomChannelName/BottomChannelName';
 import styles from './ScoreBoard.module.scss';
 import NavBar from '../../components/NavBar/NavBar.js';
-import Routes from "../../routes.json";
+import Routes from '../../routes.json';
 import useFetchScore from '../../hooks/useFetchScore';
 import useFetchTeams from '../../hooks/useFetchTeams';
 import TextCard from '../TextCard';
-import Player from "../Player";
+import Player from '../Player';
 
 /**
  * A main component that calls   the ScoreboardTeam component. It also calls the BottomChannelName component.
@@ -17,23 +17,20 @@ import Player from "../Player";
  * @param  {String} poster A String that represents the background image that should be displayed
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreBoard({ liveStreamId, poster, match}) {
+export default function ScoreBoard({ liveStreamId, poster, match }) {
   const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [score, setScore] = useFetchScore(liveStreamId);
 
-  if (!score || score.result && score.result.hasOwnProperty("error")) {
+  if (!score || (score.result && score.result.hasOwnProperty('error'))) {
     return (
       <>
         <NavBar />
-        <div className={styles.errorContainer + " container"}>
-          <TextCard textHeader="Missing Teams" textBody={`Please add teamname to display scoreboard.
-        
-        Clicka start to view ArenaTV meanwhile.`} linkTo={Routes.ARENA_TV.replace(":id",match.params.clubId )} />
+        <div className={styles.errorContainer + ' container'}>
+          <TextCard textHeader="Not done" textBody={`Please add teamname and/or members to each teams`} removeStartBtn={{ display: 'none' }} />
         </div>
       </>
-    )
-  } 
-  else {
+    );
+  } else {
     return (
       <>
         <div
@@ -41,27 +38,31 @@ export default function ScoreBoard({ liveStreamId, poster, match}) {
           style={
             process.env.NODE_ENV === 'development'
               ? {
-                backgroundImage: 'url(https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg)',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                backgroundSize: 'cover'
-              }
+                  backgroundImage: 'url(https://thumbnails.padelgo.tv/e45nWz1EXUL.jpg)',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover'
+                }
               : {
-                backgroundImage: `url(${poster})`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                backgroundSize: 'cover'
-              }
+                  backgroundImage: `url(${poster})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover'
+                }
           }
         >
           <NavBar />
           <div className={styles.scoresContainer}>
             <div className={styles.scoreboardContainer}>
               <div className={styles.stupidSeparator}>
-                {score.result && score.result.team[0] && teams.result && teams.result[0].players && <ScoreboardTeam team={score.result.team[0]} nameColor={0} players={teams.result[0].players} />}
+                {score.result && score.result.team[0] && teams.result && teams.result[0].players && (
+                  <ScoreboardTeam team={score.result.team[0]} nameColor={0} players={teams.result[0].players} />
+                )}
               </div>
               <div className={styles.stupidSeparator}>
-                {score.result && score.result.team[1] && teams.result && teams.result[1].players && <ScoreboardTeam team={score.result.team[1]} nameColor={1} players={teams.result[1].players} />}
+                {score.result && score.result.team[1] && teams.result && teams.result[1].players && (
+                  <ScoreboardTeam team={score.result.team[1]} nameColor={1} players={teams.result[1].players} />
+                )}
               </div>
             </div>
           </div>
