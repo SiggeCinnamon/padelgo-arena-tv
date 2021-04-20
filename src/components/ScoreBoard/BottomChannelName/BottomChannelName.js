@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
 import styles from './BottomChannelName.module.scss';
 import useFetchChannel from '../../../hooks/useFetchChannel';
 
 export default function BottomChannelName({ channels }) {
-  const [channel, setChannel] = useFetchChannel(channels);
+  const [channel] = useFetchChannel(channels);
   return (
     <>
       <div className={styles.__bottomchannelname_overlay_channel}>

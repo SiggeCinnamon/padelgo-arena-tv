@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getScoresWithLiveStreamId } from "../services/Scores.js";
+import { useEffect, useState } from 'react';
+import { getScoresWithLiveStreamId } from '../services/Scores.js';
 
 /**
  * A custom hook used for fetching current score information from a stream with specified liveStreamId from the API
@@ -12,24 +12,19 @@ const useFetchScore = (streamId) => {
   const [score, setScore] = useState([]);
 
   useEffect(() => {
-    fetchScore();
-  }, []);
-
-  useEffect(() => {
     if (streamId !== null) {
       const interval = setInterval(() => {
+        const fetchScore = async () => {
+          const fScore = await getScoresWithLiveStreamId(streamId).then((score) => {
+            setScore({ result: score });
+          });
+        };
         fetchScore();
       }, 2000);
-
       return () => clearInterval(interval);
     }
   }, [streamId]);
 
-  const fetchScore = async () => {
-    const fScore = await getScoresWithLiveStreamId(streamId).then((score) => {
-      setScore({ result: score });
-    });
-  };
   return [score, setScore];
 };
 

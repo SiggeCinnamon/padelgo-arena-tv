@@ -2,11 +2,10 @@ import ScoreboardTeam from './ScoreBoardTeam';
 import BottomChannelName from './BottomChannelName/BottomChannelName';
 import styles from './ScoreBoard.module.scss';
 import NavBar from '../../components/NavBar/NavBar.js';
-import Routes from '../../routes.json';
 import useFetchScore from '../../hooks/useFetchScore';
 import useFetchTeams from '../../hooks/useFetchTeams';
 import TextCard from '../TextCard';
-import Player from '../Player';
+
 
 /**
  * A main component that calls   the ScoreboardTeam component. It also calls the BottomChannelName component.
@@ -17,7 +16,7 @@ import Player from '../Player';
  * @param  {String} poster A String that represents the background image that should be displayed
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreBoard({ liveStreamId, poster, match }) {
+export default function ScoreBoard({ liveStreamId, poster }) {
   const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [score, setScore] = useFetchScore(liveStreamId);
 

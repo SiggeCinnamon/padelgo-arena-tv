@@ -33,22 +33,23 @@ function Court({ match, history }) {
   }, [liveStreamTemp]);
 
   useEffect(() => {
+    const onKeyDownHandler = (event) => {
+      if (event.defaultPrevented) return;
+      switch (event.key) {
+        case 'Escape':
+          history.goBack();
+          break;
+        default:
+          break;
+      }
+    };
+  
     document.addEventListener('keydown', onKeyDownHandler);
     return () => {
       document.removeEventListener('keydown', onKeyDownHandler);
     };
   }, []);
 
-  const onKeyDownHandler = (event) => {
-    if (event.defaultPrevented) return;
-    switch (event.key) {
-      case 'Escape':
-        history.goBack();
-        break;
-      default:
-        break;
-    }
-  };
 
   if (liveStream.result.length === 0) {
     return <Player clubId={match.params.clubId} />;
