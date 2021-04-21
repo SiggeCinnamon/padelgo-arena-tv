@@ -34,10 +34,10 @@ const usePipeline = (popular) => {
               process.env.NODE_ENV === "development"
                 ? "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 : d.mediaType === "LiveStream"
-                  ? stream.url
-                  : d.url,
-            type: process.env.NODE_ENV === "development" ? "video/mp4" : d.mediaType === "LiveStream" ? "application/x-mpegURL" : "video/mp4",
-          },
+                ? stream.url
+                : d.url,
+            type: process.env.NODE_ENV === "development" ? "video/mp4" : d.mediaType === "LiveStream" ? "application/x-mpegURL" : "video/mp4"
+          }
         ],
         poster:
           process.env.NODE_ENV === "development"
@@ -47,6 +47,7 @@ const usePipeline = (popular) => {
         channel: d.channel,
         description: d.description,
         avatar: `https://static.padelgo.tv/profilepictures/600x600/${d.channel}.jpeg`,
+        internalId: d.internalId
       });
     }
 
