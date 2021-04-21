@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
 import Player from "../../components/Player";
+import NavBar from "../../components/NavBar";
 import useFetchLiveStream from "../../hooks/useFetchLiveStream";
 import HashGen from "../../utilities/HashGen.js";
 
@@ -35,16 +36,16 @@ function Court({ match, history }) {
   }, [liveStreamTemp]);
 
   useEffect(() => {
-    document.addEventListener('keydown', onKeyDownHandler);
+    document.addEventListener("keydown", onKeyDownHandler);
     return () => {
-      document.removeEventListener('keydown', onKeyDownHandler);
+      document.removeEventListener("keydown", onKeyDownHandler);
     };
   }, []);
 
   const onKeyDownHandler = (event) => {
     if (event.defaultPrevented) return;
     switch (event.key) {
-      case 'Escape':
+      case "Escape":
         history.goBack();
         break;
       default:
@@ -53,9 +54,18 @@ function Court({ match, history }) {
   };
 
   if (liveStream && liveStream.result && liveStream.result.length > 0) {
-    return <Scoreboard liveStreamId={liveStream.result[0].id} poster={liveStream.result[0].thumbnailURL} />;
+    return (
+      <>
+        <NavBar clubId={match.params.clubId} />
+        <Scoreboard liveStreamId={liveStream.result[0].id} poster={liveStream.result[0].thumbnailURL} />
+      </>
+    );
   } else if (liveStream && liveStream.result && liveStream.result.length === 0) {
-    return <Player clubId={match.params.clubId} />;
+    return (
+      <>
+        <Player clubId={match.params.clubId} />
+      </>
+    );
   }
 }
 
