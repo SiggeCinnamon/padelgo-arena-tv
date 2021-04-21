@@ -3,6 +3,7 @@ import VideoOverlay from "../../components/VideoOverlay/VideoOverlay.js";
 import "video.js/dist/video-js.css";
 import "videojs-playlist/dist/videojs-playlist.js";
 import usePlayer from "../../hooks/usePlayer.js";
+import { getStreamsDataWithStreamId } from "../../services/Streams.js";
 
 /**
  * A component which renders a video player with the use of the module VideoJS
@@ -12,27 +13,39 @@ import usePlayer from "../../hooks/usePlayer.js";
  * @param  {Boolean} controls Boolean that tells the player whether it shall have the controls visible or not
  * @param  {Boolean} autoplay Boolean that tells the player whether it shall be autoplaying or not
  * @param  {Function} onPlaylistAtEnd Function that is suppose to be used at the playlists end
+ * @param  {Number} clubId Number that represents the current club
  * @return {JSX} React JSX Rendering
  */
-const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd }, ref) => {
+const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) => {
+  const maxLiveDuration = 600000; // In milliseconds!
   const comp = usePlayer({ src, controls, autoplay });
   const player = comp.player;
   const sourcesRef = useRef();
   const intervalRef = useRef();
+  const timeIntervalRef = useRef();
+  const retriesRef = useRef(0);
   ref = comp.videoRef;
 
   const [videoData, setVideoData] = useState({});
   const [currentProgress, setCurrentProgress] = useState({});
 
-  const onPlaylistItemHandler = (e) => {
+  const onPlaylistItemHandler = async (e) => {
     if (player && player.playlist.currentIndex() !== -1) {
       const currentItem = sourcesRef.current[player.playlist.currentIndex()];
+
+      if (currentItem.mediaType === "LiveStream") {
+        const stream = await getStreamsDataWithStreamId(currentItem.internalId);
+
+        if (stream && stream.isLive === false) {
+          nextVideo();
+        }
+      }
 
       setVideoData({
         channel: currentItem.channel,
         description: currentItem.description,
         avatar: currentItem.avatar,
-        mediaType: currentItem.mediaType,
+        mediaType: currentItem.mediaType
       });
     }
   };
@@ -44,22 +57,53 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd }, ref) => {
   };
 
   const onProgressHandler = (e) => {
-    setCurrentProgress(player.children_[7].progressControl.seekBar.progress_ * 100);
+    const currentItem = sourcesRef.current[player.playlist.currentIndex()];
+
+    if (currentItem.mediaType === "Highlight") {
+      setCurrentProgress(player.children_[7].progressControl.seekBar.progress_ * 100);
+    } else if (currentItem.mediaType === "LiveStream") {
+      // Turn current livestream elapsed time into milliseconds then get what that product is in % for maxLiveDuration. Progressbar handles width in %
+      setCurrentProgress((player.tech(true).vhs.stats.currentTime * 1000 * 100) / maxLiveDuration);
+    }
   };
 
   const onPlayHandler = (e) => {
     if (player && player.currentType() === "application/x-mpegURL") {
+      // After maxLiveDuration next video will be called. This to prevent Livestreams going on "forever"
       const interval = setInterval(() => {
         nextVideo();
-      }, 600000);
+      }, maxLiveDuration);
 
       intervalRef.current = interval;
     }
   };
 
-  const nextVideo = () => {
+  const nextVideo = async () => {
+    // Clears all relating intervals for streaming. Then tell it to either trigger ended event if at last index else go to next video
     clearInterval(intervalRef.current);
-    player.playlist.currentIndex() === player.playlist.lastIndex() ? player.trigger("ended") : player.playlist.next();
+    clearInterval(timeIntervalRef.current);
+    setCurrentProgress(0);
+
+    player.pause();
+    player.playlist.currentIndex() === player.playlist.lastIndex() ? await player.trigger("ended") : await player.playlist.next();
+    player.play();
+  };
+
+  const onErrorHandler = (e) => {
+    // In case an error happends we would like to know what kind of error it is!
+    console.error("E:", e);
+    console.error("Player.E:", player.error());
+    console.trace("trace.E:", e);
+  };
+
+  const onRetryPlaylist = (e) => {
+    // Let videojs try reconnecting to the livestream 3 times, then tell it to go to next video
+    retriesRef.current += 1;
+
+    if (retriesRef.current === 3) {
+      retriesRef.current = 0;
+      nextVideo();
+    }
   };
 
   useEffect(() => {
@@ -72,6 +116,8 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd }, ref) => {
       player.on("timeupdate", onProgressHandler);
       player.on("ended", onEndingHandler);
       player.on("play", onPlayHandler);
+      player.on("error", onErrorHandler);
+      player.tech(true).on("retryplaylist", onRetryPlaylist); // This happends if client loses connection to livestream
     }
 
     return () => {
@@ -80,14 +126,19 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd }, ref) => {
         player.off("timeupdate", onProgressHandler);
         player.off("ended", onEndingHandler);
         player.off("play", onPlayHandler);
+        player.off("error", onErrorHandler);
+        player.tech(true).off("retryplaylist", onRetryPlaylist);
       }
+
+      setCurrentProgress(0);
+      clearInterval(intervalRef.current);
     };
   }, [player]);
 
   return (
     <div>
-      <video ref={ref} id='video' className='video-js vjs-big-play-centered vjs-fluid' width='100%' height='100%' />
-      <VideoOverlay data={videoData} currentProgress={currentProgress} />
+      <video ref={ref} id="video" className="video-js vjs-big-play-centered vjs-fluid" width="100%" height="100%" />
+      <VideoOverlay clubId={clubId} data={videoData} currentProgress={currentProgress} />
     </div>
   );
 };
