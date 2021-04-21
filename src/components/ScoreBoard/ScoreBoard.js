@@ -1,7 +1,7 @@
 import ScoreboardTeam from "./ScoreBoardTeam";
 import BottomChannelName from "./BottomChannelName/BottomChannelName";
 import styles from "./ScoreBoard.module.scss";
-import Routes from "../../routes.json";
+import NavBar from "../../components/NavBar/NavBar.js";
 import useFetchScore from "../../hooks/useFetchScore";
 import useFetchTeams from "../../hooks/useFetchTeams";
 import TextCard from "../TextCard";
@@ -15,21 +15,16 @@ import TextCard from "../TextCard";
  * @param  {String} poster A String that represents the background image that should be displayed
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreBoard({ liveStreamId, poster }) {
+export default function ScoreBoard({ liveStreamId, poster, match }) {
   const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [score, setScore] = useFetchScore(liveStreamId);
 
   if (!score || (score.result && score.result.hasOwnProperty("error"))) {
     return (
       <>
+        <NavBar />
         <div className={styles.errorContainer + " container"}>
-          <TextCard
-            textHeader="Missing Teams"
-            textBody={`Please add teamname to display scoreboard.
-        
-        Clicka start to view ArenaTV meanwhile.`}
-            linkTo={Routes.ARENA_TV.replace(":id", liveStreamId)}
-          />
+          <TextCard textHeader="Not done" textBody={`Please add teamname and/or members to each teams`} removeStartBtn={{ display: "none" }} />
         </div>
       </>
     );
@@ -62,7 +57,7 @@ export default function ScoreBoard({ liveStreamId, poster }) {
                 )}
               </div>
               <div className={styles.stupidSeparator}>
-                {score.result && score.result.team[1] && teams.result && teams.result[0].players && (
+                {score.result && score.result.team[1] && teams.result && teams.result[1].players && (
                   <ScoreboardTeam team={score.result.team[1]} nameColor={1} players={teams.result[1].players} />
                 )}
               </div>

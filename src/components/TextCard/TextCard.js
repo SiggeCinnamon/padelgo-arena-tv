@@ -16,7 +16,9 @@ const TextCard = ({
   textHeader = "TEXT HEADER",
   textBody = "TEXT BODY",
   linkTo = "#",
+  removeStartBtn,
 }) => {
+
   return (
     <div className={styles.__dashboard_card + " card"}>
       <div className={styles.__dashboard_card_top + " card-top"}>
@@ -31,7 +33,7 @@ const TextCard = ({
           </p>
         </div>
       </div>
-      <div className={styles.__dashboard_div_btn}>
+      <div className={styles.__dashboard_div_btn} style={removeStartBtn}>
         <Link
           type='button'
           className={styles.__dashboard_btn + " btn btn-rounded"}

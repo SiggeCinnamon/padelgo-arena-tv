@@ -1,21 +1,29 @@
-import { useEffect, useState } from "react";
-import { getTeamsOnStream } from "../services/Streams.js";
+import { useEffect, useState } from 'react';
+import { getTeamsOnStream } from '../services/Streams.js';
 
-const useFetchTeams = (liveStreamId) => {
-  const [teams, setTeams] = useState({
-    result: false,
-  });
+const useFetchTeams = (streamId) => {
+  const [teams, setTeams] = useState([]);
+
   useEffect(() => {
     fetchTeams();
   }, []);
 
-  const fetchTeams = async () => {
-    if (liveStreamId !== null) {
-      getTeamsOnStream(liveStreamId).then((teams) => {
-        setTeams({ result: teams });
-      });
+  useEffect(() => {
+    if (streamId !== null) {
+      const interval = setInterval(() => {
+        fetchTeams();
+      }, 20000);
+
+      return () => clearInterval(interval);
     }
+  }, [streamId]);
+
+  const fetchTeams = async () => {
+    const fteams = await getTeamsOnStream(streamId).then((teams) => {
+      setTeams({ result: teams });
+    });
   };
   return [teams, setTeams];
 };
+
 export default useFetchTeams;
