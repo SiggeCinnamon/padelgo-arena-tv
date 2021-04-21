@@ -31,7 +31,7 @@ function Dashboard({ match, history }) {
 
   return (
     <>
-      <NavBar />
+      <NavBar clubId={match.params.id} />
       <div className={styles.__dashboard_container + " container-fluid"}>
         <TextCard
           textHeader="Showcase"
@@ -45,7 +45,7 @@ function Dashboard({ match, history }) {
           textHeader="Score"
           textBody="Display the current score from a live stream. Pick a court in the
               list below."
-          pOptions={courts}
+          pOptions={courts.sort((a, b) => a.name.localeCompare(b.name, "se", { numeric: true }))}
           optionHeader="Courts"
           linkTo={Routes.COURT.replace(":clubId", match.params.id)}
         />
