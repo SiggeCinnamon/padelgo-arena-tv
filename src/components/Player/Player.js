@@ -33,7 +33,7 @@ const Player = ({ clubId }) => {
       video: false,
       page: page,
       take: take,
-      sortOrder: sortOrder,
+      sortOrder: sortOrder
     });
 
     const highlightData = await getPopularMedia({
@@ -44,35 +44,49 @@ const Player = ({ clubId }) => {
       video: false,
       page: page,
       take: take,
-      sortOrder: sortOrder,
+      sortOrder: sortOrder
     });
 
-    setPopular(liveStreamData.length > 0 ? await spliceData(liveStreamData, highlightData) : highlightData);
+    // If there is livestreams and highlights available
+    if (liveStreamData.length > 0 && highlightData.length > 0) {
+      setPopular(await spliceData(liveStreamData, highlightData));
+
+      // If there is livestreams but no highlights available
+    } else if (liveStreamData.length > 0 && highlightData.length <= 0) {
+      setPopular(liveStreamData);
+
+      // If there is no livestreams available but there is highlights
+    } else if (liveStreamData.length <= 0 && highlightData.length > 0) {
+      setPopular(highlightData);
+    } else {
+      // No highlight nor livestreams available!!!
+    }
   };
 
   const spliceData = async (streamData, highData) => {
     let splicedData = [];
     let diff = Math.round(highData.length / streamData.length);
-    let x = 0;
-    let y = 0;
+    let y = diff;
 
     for (let i = 0; i < highData.length; i++) {
       if (i === y) {
-        splicedData.push(streamData[x]);
+        splicedData.push(streamData.shift());
         splicedData.push(highData[i]);
-        x++;
         y += diff;
       } else {
         splicedData.push(highData[i]);
       }
     }
 
-    return splicedData;
+    splicedData = [...splicedData, ...streamData];
+    return splicedData.filter(Boolean);
   };
 
   return (
     <div className={styles.__arenatv_wrapper}>
-      <div className={styles.__arenatv_container_video}>{sources && <VideoPlayer src={sources} controls={false} autoplay={true} onPlaylistAtEnd={onPlaylistAtEnd} />}</div>
+      <div className={styles.__arenatv_container_video}>
+        {sources && <VideoPlayer src={sources} controls={false} autoplay={true} onPlaylistAtEnd={onPlaylistAtEnd} clubId={clubId} />}
+      </div>
     </div>
   );
 };
