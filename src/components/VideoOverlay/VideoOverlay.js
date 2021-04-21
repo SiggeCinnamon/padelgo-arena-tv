@@ -12,15 +12,13 @@ import TypePill from "./TypePill.js";
  * @param  {Number} currentProgress A number representing the current % amount played of the video/stream
  * @return {JSX} React JSX Rendering
  */
-const VideoOverlay = ({ data, currentProgress }) => {
+const VideoOverlay = ({ clubId, data, currentProgress }) => {
   return (
     <>
-      <NavBar />
+      <NavBar clubId={clubId} />
       {data && data.mediaType && <TypePill data={data} />}
       {data && <BottomOverlay data={data} />}
-      {currentProgress && (
-        <ProgressbarOverlay currentProgress={currentProgress} />
-      )}
+      {currentProgress && <ProgressbarOverlay currentProgress={currentProgress} />}
     </>
   );
 };

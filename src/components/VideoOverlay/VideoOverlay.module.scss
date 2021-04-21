@@ -43,7 +43,6 @@
     padding-top    : 18px;
     padding-right  : 5px;
     padding-bottom : 0px;
-    padding-right  : 5px;
     border-radius  : 25px;
     justify-content: center;
     text-align     : center;
@@ -140,12 +139,12 @@
     }
 
     .__video_overlay_channel_type {
-        top : 300px;
-        left: 300px;
+        top : 200px;
+        left: 200px;
     }
 
     .__video_overlay_channel_type_pill {
-        transform: scale(2.0);
+        transform: scale(1.5);
     }
 
     .__video_overlay_progress {
