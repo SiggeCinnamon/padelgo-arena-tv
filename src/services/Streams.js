@@ -4,7 +4,7 @@ async function getStreamsAPIGETResponse(route) {
   try {
     const config = {
       baseURL: process.env.REACT_APP_STREAMS_API_BASE_URL,
-      method: "GET",
+      method: "GET"
     };
 
     try {
@@ -28,6 +28,10 @@ async function getStreamsAPIGETResponse(route) {
 
 export async function getStreamsWithCourtId(courtId) {
   return await getStreamsAPIGETResponse(`/Streams/court/${courtId}`);
+}
+
+export async function getStreamsDataWithStreamId(streamId) {
+  return await getStreamsAPIGETResponse(`/Streams/${streamId}`);
 }
 
 export async function getStreamURLWithLiveStreamId(liveStreamId) {
