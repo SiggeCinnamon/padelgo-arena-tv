@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { getTeamsOnStream } from '../services/Streams.js';
+import { useEffect, useState } from "react";
+import { getTeamsOnStream } from "../services/Streams.js";
 
 const useFetchTeams = (streamId) => {
   const [teams, setTeams] = useState([]);
@@ -19,7 +19,7 @@ const useFetchTeams = (streamId) => {
   }, [streamId]);
 
   const fetchTeams = async () => {
-    const fteams = await getTeamsOnStream(streamId).then((teams) => {
+    await getTeamsOnStream(streamId).then((teams) => {
       setTeams({ result: teams });
     });
   };

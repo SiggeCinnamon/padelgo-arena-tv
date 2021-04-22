@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import styles from "./NavBar.module.scss";
 import { getClubDataWithClubId } from "../../services/Clubs.js";
@@ -7,6 +7,7 @@ import { getClubDataWithClubId } from "../../services/Clubs.js";
  * A component that is an overlay with absolute setting, consisting of one link that brings you back to the page you were on previously
  * @author Mattias Andersen
  *
+ * @param  {Number} clubId A Number representing the club that the user picked from Home page
  * @param  {Function} history A react-router function that allows us to send the user back to previous pages
  * @return {JSX} React JSX Rendering
  */

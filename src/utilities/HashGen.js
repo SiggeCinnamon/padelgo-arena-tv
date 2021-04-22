@@ -1,6 +1,10 @@
-// ! NOT IN USE
-// # HashGen creates a hashcode of the passed argument
-
+/**
+ * Utility module that allows the creation of a hash string from the passed argument
+ * @author Christoffer Hansen
+ *
+ * @param  {Any} args Any variable type that the created hash String will represent
+ * @return {String} Returns the hash String that represents the passed argument
+ */
 export default async function Hash(args) {
   if (typeof args === "object") {
     args = Object.keys(args)

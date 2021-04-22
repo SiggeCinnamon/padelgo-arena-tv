@@ -3,13 +3,13 @@ import { getChannelsInfoWithChannelName } from "../services/Channels.js";
 
 /**
  * A custom hook used for fetching a specific clubs information with the clubs id from the API
- * @author Kalle Anka
+ * @author Mattias Andersen
  *
  * @param  {Number} id A Number that represents the player id, used when fetching data from API
  * @return {Array} It will return a useState array consisting of the fetched club
  */
 const useFetchChannel = (id) => {
-  const [channel,setChannel] = useState({});
+  const [channel, setChannel] = useState({});
   useEffect(() => {
     const fetchChannel = async () => {
       const fChannel = await getChannelsInfoWithChannelName(id);
@@ -19,8 +19,7 @@ const useFetchChannel = (id) => {
     fetchChannel();
   }, [id]);
 
-
-  return [channel,setChannel];
+  return [channel, setChannel];
 };
 
 export default useFetchChannel;

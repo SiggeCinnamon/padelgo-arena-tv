@@ -11,6 +11,7 @@ function Court({ match, history }) {
   const [idTemp, setIdTemp] = useState(match.params.id);
   const [liveStream, setLiveStream] = useFetchLiveStream(id);
   const [liveStreamTemp, setLiveStreamTemp] = useFetchLiveStream(idTemp);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setIdTemp(new Number(id));

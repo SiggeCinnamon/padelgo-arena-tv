@@ -13,7 +13,7 @@ import { getStreamsDataWithStreamId } from "../../services/Streams.js";
  * @param  {Boolean} controls Boolean that tells the player whether it shall have the controls visible or not
  * @param  {Boolean} autoplay Boolean that tells the player whether it shall be autoplaying or not
  * @param  {Function} onPlaylistAtEnd Function that is suppose to be used at the playlists end
- * @param  {Number} clubId Number that represents the current club
+ * @param  {Number} clubId A Number representing the club that the user picked from Home page
  * @return {JSX} React JSX Rendering
  */
 const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) => {
