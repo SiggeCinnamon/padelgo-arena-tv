@@ -1,11 +1,36 @@
 import axios from "axios";
 
+async function getMediaAPIGETResponse(route) {
+  try {
+    const config = {
+      baseURL: process.env.REACT_APP_STREAMS_API_BASE_URL,
+      method: "GET"
+    };
+
+    try {
+      const result = await axios.create(config).get(route);
+      return result.data;
+    } catch (error) {
+      if (typeof error.response !== "undefined" && error.response.status === 404) {
+        console.error("Got 404 response from media API");
+        return false;
+      } else {
+        console.log("Generic error in media API. we should log this.");
+        console.error(error);
+        throw error;
+      }
+    }
+  } catch (error) {
+    console.log("There was an error calling the court API.");
+    console.error(error);
+  }
+}
 
 async function getMediaAPIPOSTResponse(route, payload) {
   try {
     const config = {
       baseURL: process.env.REACT_APP_STREAMS_API_BASE_URL,
-      method: "POST",
+      method: "POST"
     };
 
     try {
@@ -17,16 +42,11 @@ async function getMediaAPIPOSTResponse(route, payload) {
         return result.data;
       }
     } catch (error) {
-      if (
-        typeof error.response !== "undefined" &&
-        error.response.status === 404
-      ) {
+      if (typeof error.response !== "undefined" && error.response.status === 404) {
         console.log("Got 404 response from stream API");
         throw error;
       } else {
-        console.log(
-          `Generic error in stream API for route ${route}. we should log this.`
-        );
+        console.log(`Generic error in stream API for route ${route}. we should log this.`);
         console.error(error);
         throw error;
       }
@@ -44,4 +64,8 @@ export async function getTrendingMedia(filter) {
 
 export async function getPopularMedia(filter) {
   return await getMediaAPIPOSTResponse(`/Media/popular`, filter);
+}
+
+export async function getMediaWithClubId(clubId) {
+  return await getMediaAPIGETResponse(`/Media/clubId?clubId=${clubId}`);
 }

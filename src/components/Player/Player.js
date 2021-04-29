@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getPopularMedia } from "../../services/Media.js";
+import { getMediaWithClubId } from "../../services/Media.js";
 import VideoPlayer from "../../components/VideoPlayer";
 import styles from "./Player.module.scss";
 import usePipeline from "../../hooks/usePipeline.js";
@@ -17,69 +17,21 @@ const Player = ({ clubId }) => {
   const [sources, setSources] = usePipeline(popular);
 
   useEffect(() => {
-    fetchPopularMedia(1, 20);
+    fetchMedia();
   }, []);
 
   const onPlaylistAtEnd = async () => {
-    await fetchPopularMedia(1, 20);
+    await fetchMedia();
   };
 
-  const fetchPopularMedia = async (page = 1, take = 20, sortOrder = 0) => {
-    const liveStreamData = await getPopularMedia({
-      clubId: Number(clubId),
-      stream: false,
-      liveStream: true,
-      highlight: false,
-      video: false,
-      page: page,
-      take: take,
-      sortOrder: sortOrder
-    });
+  const fetchMedia = async () => {
+    const showcaseData = await getMediaWithClubId(clubId);
 
-    const highlightData = await getPopularMedia({
-      clubId: Number(clubId),
-      stream: false,
-      liveStream: false,
-      highlight: true,
-      video: false,
-      page: page,
-      take: take,
-      sortOrder: sortOrder
-    });
-
-    // If there is livestreams and highlights available
-    if (liveStreamData.length > 0 && highlightData.length > 0) {
-      setPopular(await spliceData(liveStreamData, highlightData));
-
-      // If there is livestreams but no highlights available
-    } else if (liveStreamData.length > 0 && highlightData.length <= 0) {
-      setPopular(liveStreamData);
-
-      // If there is no livestreams available but there is highlights
-    } else if (liveStreamData.length <= 0 && highlightData.length > 0) {
-      setPopular(highlightData);
+    if (showcaseData) {
+      setPopular(showcaseData);
     } else {
-      // No highlight nor livestreams available!!!
+      // It's empty OMFG!
     }
-  };
-
-  const spliceData = async (streamData, highData) => {
-    let splicedData = [];
-    let diff = Math.round(highData.length / streamData.length);
-    let y = diff;
-
-    for (let i = 0; i < highData.length; i++) {
-      if (i === y) {
-        splicedData.push(streamData.shift());
-        splicedData.push(highData[i]);
-        y += diff;
-      } else {
-        splicedData.push(highData[i]);
-      }
-    }
-
-    splicedData = [...splicedData, ...streamData];
-    return splicedData.filter(Boolean);
   };
 
   return (
