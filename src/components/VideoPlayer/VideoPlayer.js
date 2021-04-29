@@ -28,10 +28,12 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
 
   const [videoData, setVideoData] = useState({});
   const [currentProgress, setCurrentProgress] = useState({});
+  const [currentMedia, setCurrentMedia] = useState();
 
   const onPlaylistItemHandler = async (e) => {
     if (player && player.playlist.currentIndex() !== -1) {
       const currentItem = sourcesRef.current[player.playlist.currentIndex()];
+      setCurrentMedia(currentItem);
 
       if (currentItem.mediaType === "LiveStream") {
         const stream = await getStreamsDataWithStreamId(currentItem.internalId);
@@ -138,7 +140,7 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
   return (
     <div>
       <video ref={ref} id="video" className="video-js vjs-big-play-centered vjs-fluid" width="100%" height="100%" />
-      <VideoOverlay clubId={clubId} data={videoData} currentProgress={currentProgress} />
+      {currentMedia && currentMedia.mediaType !== "ad" && <VideoOverlay clubId={clubId} data={videoData} currentProgress={currentProgress} />}
     </div>
   );
 };
