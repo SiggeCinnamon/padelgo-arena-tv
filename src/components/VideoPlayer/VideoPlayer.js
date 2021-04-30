@@ -151,6 +151,13 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
     connIntervalRef.current = interval;
   };
 
+  const onStalledHandler = (e) => {
+    console.error(
+      "PLAYER HAS STALLED! - [Fires when the browser is trying to get media data, but data is not available.]\nPlease inform your local VideoJs pro!"
+    );
+    console.error("ERROR ARGUMENT:", { e: e });
+  };
+
   useEffect(() => {
     sourcesRef.current = src;
   }, [src]);
@@ -163,6 +170,7 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
       player.on("play", onPlayHandler);
       player.on("play", onPlayConnectionHandler);
       player.on("error", onErrorHandler);
+      player.on("stalled", onStalledHandler);
       player.tech(true).on("retryplaylist", onRetryPlaylist); // This happends if client loses connection to livestream
     }
 
@@ -174,6 +182,7 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
         player.off("play", onPlayHandler);
         player.off("play", onPlayConnectionHandler);
         player.off("error", onErrorHandler);
+        player.off("stalled", onStalledHandler);
         player.tech(true).off("retryplaylist", onRetryPlaylist);
       }
 
