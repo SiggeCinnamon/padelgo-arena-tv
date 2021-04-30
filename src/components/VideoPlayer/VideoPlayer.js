@@ -97,9 +97,12 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
 
   const onErrorHandler = (e) => {
     // In case an error happends we would like to know what kind of error it is!
-    console.error("E:", e);
     console.error("Player.E:", player.error());
-    console.trace("trace.E:", e);
+
+    if (player.error().code === 2) {
+      // Network issue error aka lost connection to internet
+      console.log("Network issue error aka lost connection to internet!");
+    }
   };
 
   const onRetryPlaylist = (e) => {
