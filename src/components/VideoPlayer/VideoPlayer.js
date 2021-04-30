@@ -23,6 +23,8 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
   const sourcesRef = useRef();
   const intervalRef = useRef();
   const timeIntervalRef = useRef();
+  const connIntervalRef = useRef();
+  const connRetriesRef = useRef(0);
   const retriesRef = useRef(0);
   ref = comp.videoRef;
 
@@ -87,7 +89,9 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
     setCurrentProgress(0);
 
     player.pause();
-    player.playlist.currentIndex() === player.playlist.lastIndex() ? await player.trigger("ended") : await player.playlist.next();
+    player.playlist.currentIndex() === player.playlist.lastIndex()
+      ? await player.trigger("ended")
+      : await player.playlist.next();
     player.play();
   };
 
@@ -108,6 +112,45 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
     }
   };
 
+  const onPlayConnectionHandler = (e) => {
+    clearInterval(connIntervalRef.current);
+
+    let oldCurrentTime = 0;
+    let oldBufferedPercent = 0;
+    let oldCurrentItem = sourcesRef.current[player.playlist.currentIndex()];
+
+    const interval = setInterval(() => {
+      const currentItem = sourcesRef.current[player.playlist.currentIndex()];
+
+      if (
+        player.currentTime() === oldCurrentTime &&
+        player.bufferedPercent() === oldBufferedPercent &&
+        currentItem === oldCurrentItem &&
+        currentItem.mediaType === "Highlight" &&
+        !player.paused()
+      ) {
+        if (connRetriesRef.current === 3) {
+          connRetriesRef.current = 0;
+          nextVideo();
+        } else {
+          connRetriesRef.current += 1;
+        }
+      }
+
+      if (currentItem !== oldCurrentItem) {
+        oldCurrentItem = 0;
+        oldBufferedPercent = 0;
+        connRetriesRef.current = 0;
+        oldCurrentItem = sourcesRef.current[player.playlist.currentIndex()];
+      } else {
+        oldCurrentTime = player.currentTime();
+        oldBufferedPercent = player.bufferedPercent();
+      }
+    }, 2000);
+
+    connIntervalRef.current = interval;
+  };
+
   useEffect(() => {
     sourcesRef.current = src;
   }, [src]);
@@ -118,6 +161,7 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
       player.on("timeupdate", onProgressHandler);
       player.on("ended", onEndingHandler);
       player.on("play", onPlayHandler);
+      player.on("play", onPlayConnectionHandler);
       player.on("error", onErrorHandler);
       player.tech(true).on("retryplaylist", onRetryPlaylist); // This happends if client loses connection to livestream
     }
@@ -128,19 +172,23 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
         player.off("timeupdate", onProgressHandler);
         player.off("ended", onEndingHandler);
         player.off("play", onPlayHandler);
+        player.off("play", onPlayConnectionHandler);
         player.off("error", onErrorHandler);
         player.tech(true).off("retryplaylist", onRetryPlaylist);
       }
 
       setCurrentProgress(0);
       clearInterval(intervalRef.current);
+      clearInterval(connIntervalRef.current);
     };
   }, [player]);
 
   return (
     <div>
       <video ref={ref} id="video" className="video-js vjs-big-play-centered vjs-fluid" width="100%" height="100%" />
-      {currentMedia && currentMedia.mediaType !== "ad" && <VideoOverlay clubId={clubId} data={videoData} currentProgress={currentProgress} />}
+      {currentMedia && currentMedia.mediaType !== "ad" && (
+        <VideoOverlay clubId={clubId} data={videoData} currentProgress={currentProgress} />
+      )}
     </div>
   );
 };
