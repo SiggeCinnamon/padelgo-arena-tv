@@ -17,7 +17,7 @@ import { getStreamsDataWithStreamId } from "../../services/Streams.js";
  * @return {JSX} React JSX Rendering
  */
 const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) => {
-  const maxLiveDuration = 600000; // In milliseconds!
+  const maxLiveDuration = 120000; // In milliseconds!
   const comp = usePlayer({ src, controls, autoplay });
   const player = comp.player;
   const sourcesRef = useRef();
