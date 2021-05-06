@@ -32,16 +32,6 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
   const [currentProgress, setCurrentProgress] = useState({});
   const [currentMedia, setCurrentMedia] = useState();
 
-  function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      }
-    }
-  }
-
   const onPlaylistItemHandler = async (e) => {
     if (player && player.playlist.currentIndex() !== -1) {
       const currentItem = sourcesRef.current[player.playlist.currentIndex()];
@@ -82,9 +72,6 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
   };
 
   const onPlayHandler = (e) => {
-    if (!document.fullscreenElement && document.fullscreenEnabled) {
-      toggleFullScreen();
-    }
     if (player && player.currentType() === "application/x-mpegURL") {
       // After maxLiveDuration next video will be called. This to prevent Livestreams going on "forever"
       const interval = setInterval(() => {
