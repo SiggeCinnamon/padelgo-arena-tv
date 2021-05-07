@@ -1,3 +1,4 @@
+import React from "react";
 import ScoreboardTeam from "./ScoreBoardTeam";
 import BottomChannelName from "./BottomChannelName/BottomChannelName";
 import styles from "./ScoreBoard.module.scss";
@@ -10,21 +11,26 @@ import TextCard from "../TextCard";
  * A main component that calls   the ScoreboardTeam component. It also calls the BottomChannelName component.
  * @author Mattias Andersen
  *
+ * @param  {String} clubName A String representing the clubs name
  * @param  {Object} score An Object consisting of the current score data
  * @param  {Object} teams An Object consisting of data of the 1-2 players of the team
  * @param  {String} poster A String that represents the background image that should be displayed
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreBoard({ liveStreamId, poster, match }) {
+export default function ScoreBoard({ clubName, liveStreamId, poster, match }) {
   const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [score, setScore] = useFetchScore(liveStreamId);
 
   if (!score || (score.result && score.result.hasOwnProperty("error"))) {
     return (
       <>
-        <NavBar />
+        <NavBar clubName={clubName} />
         <div className={styles.errorContainer + " container"}>
-          <TextCard textHeader="Not done" textBody={`Please add teamname and/or members to each teams`} removeStartBtn={{ display: "none" }} />
+          <TextCard
+            textHeader="Not done"
+            textBody={`Please add teamname and/or members to each teams`}
+            removeStartBtn={{ display: "none" }}
+          />
         </div>
       </>
     );
@@ -49,6 +55,7 @@ export default function ScoreBoard({ liveStreamId, poster, match }) {
                 }
           }
         >
+          <NavBar clubName={clubName} />
           <div className={styles.scoresContainer}>
             <div className={styles.scoreboardContainer}>
               <div className={styles.stupidSeparator}>
@@ -63,7 +70,9 @@ export default function ScoreBoard({ liveStreamId, poster, match }) {
               </div>
             </div>
           </div>
-          <div className={styles.BottomChannelName}>{teams.result && <BottomChannelName channels={teams.result[0].players[0].channelName} />}</div>
+          <div className={styles.BottomChannelName}>
+            {teams.result && <BottomChannelName channels={teams.result[0].players[0].channelName} />}
+          </div>
         </div>
       </>
     );
