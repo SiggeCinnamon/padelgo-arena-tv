@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100&display=swap');
 
 .__NavBar_bar {
+    display         : flex;
     position        : absolute;
     top             : 0;
     left            : 0;
@@ -9,16 +10,22 @@
     height          : 40px;
     user-select     : none;
     background-color: vars.$primary-color;
+    justify-content : space-between;
 
     p {
         margin-top : 5px;
-        margin-left: 20px;
         font-family: 'Roboto Slab', serif;
         font-size  : 18px;
         font-weight: bold;
         font-style : normal;
         user-select: none;
         color      : #FFF;
+    }
+}
+
+.__NavBar_title {
+    p {
+        margin-left: 20px;
         cursor     : pointer;
 
         &:hover {
@@ -31,26 +38,27 @@
     }
 }
 
-@media screen and (min-width: 2840px) {
+.__NavBar_clubName {
+    p {
+        padding-right: 20px;
+    }
+}
+
+@media screen and (min-width: 3840px) {
 
     .__NavBar_bar {
-        position        : absolute;
-        top             : 0;
-        left            : 0;
-        width           : 100%;
-        height          : 80px;
-        user-select     : none;
-        background-color: vars.$primary-color;
+        height: 80px;
 
         p {
-            margin-top : 10px;
+            margin-top: 10px;
+            font-size : 36px;
+
+        }
+    }
+
+    .__NavBar_title {
+        p {
             margin-left: 40px;
-            font-family: 'Roboto Slab', serif;
-            font-size  : 36px;
-            font-weight: bold;
-            font-style : normal;
-            user-select: none;
-            color      : #FFF;
             cursor     : pointer;
 
             &:hover {
@@ -60,6 +68,12 @@
             &:active {
                 color: "#FFF";
             }
+        }
+    }
+
+    .__NavBar_clubName {
+        p {
+            padding-right: 40px;
         }
     }
 }

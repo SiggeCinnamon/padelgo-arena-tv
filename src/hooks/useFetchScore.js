@@ -22,13 +22,12 @@ const useFetchScore = (streamId) => {
       }, 2000);
 
       return () => clearInterval(interval);
-    } else {
     }
   }, [streamId]);
 
   const fetchScore = async () => {
     const fScore = await getScoresWithLiveStreamId(streamId).then((score) => {
-      setScore({ isLoadede: true, result: score });
+      setScore({ result: score });
     });
   };
   return [score, setScore];

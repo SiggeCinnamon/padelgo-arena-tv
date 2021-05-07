@@ -1,5 +1,5 @@
 @use '../../utilities/variables'as vars;
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100&display=swap%27");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
 
 .__video_overlay_logo {
     position        : absolute;
@@ -15,7 +15,7 @@
         margin-left: 10px;
         font-family: "Roboto Slab", serif;
         font-style : normal;
-        font-weight: bold;
+        font-weight: 700;
         font-size  : 18px;
         color      : #FFF;
         user-select: none;
@@ -43,7 +43,6 @@
     padding-top    : 18px;
     padding-right  : 5px;
     padding-bottom : 0px;
-    padding-right  : 5px;
     border-radius  : 25px;
     justify-content: center;
     text-align     : center;
@@ -86,7 +85,7 @@
         font-family: "Roboto Slab", serif;
         font-size  : 36px;
         font-style : normal;
-        font-weight: bold;
+        font-weight: 700;
         line-height: 30px;
         text-align : left;
         color      : #FFF;
@@ -117,7 +116,7 @@
     margin-left: 25px;
 }
 
-@media screen and (min-width: 2840px) {
+@media screen and (min-width: 3840px) {
     .__video_overlay_channel {
         height: 300px;
     }
@@ -140,12 +139,12 @@
     }
 
     .__video_overlay_channel_type {
-        top : 300px;
-        left: 300px;
+        top : 200px;
+        left: 200px;
     }
 
     .__video_overlay_channel_type_pill {
-        scale: 2.5;
+        transform: scale(1.5);
     }
 
     .__video_overlay_progress {

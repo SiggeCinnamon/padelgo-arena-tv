@@ -4,7 +4,7 @@ async function getStreamsAPIGETResponse(route) {
   try {
     const config = {
       baseURL: process.env.REACT_APP_STREAMS_API_BASE_URL,
-      method: "GET",
+      method: "GET"
     };
 
     try {
@@ -12,22 +12,26 @@ async function getStreamsAPIGETResponse(route) {
       return result.data;
     } catch (error) {
       if (typeof error.response !== "undefined" && error.response.status === 404) {
-        console.error("Got 404 response from court API");
+        console.error("Got 404 response from stream API");
         return false;
       } else {
-        console.log("Generic error in court API. we should log this.");
+        console.log("Generic error in stream API. we should log this.");
         console.error(error);
         throw error;
       }
     }
   } catch (error) {
-    console.log("There was an error calling the court API.");
+    console.log("There was an error calling the stream API.");
     console.error(error);
   }
 }
 
 export async function getStreamsWithCourtId(courtId) {
   return await getStreamsAPIGETResponse(`/Streams/court/${courtId}`);
+}
+
+export async function getStreamsDataWithStreamId(streamId) {
+  return await getStreamsAPIGETResponse(`/Streams/${streamId}`);
 }
 
 export async function getStreamURLWithLiveStreamId(liveStreamId) {

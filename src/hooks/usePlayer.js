@@ -19,12 +19,12 @@ const usePlayer = ({ src, controls, autoplay }) => {
     muted: true,
     preload: "auto",
     html5: {
-      hls: {
+      vhs: {
         enableLowInitialPlaylist: true,
         smoothQualityChange: true,
-        overrideNative: true,
-      },
-    },
+        overrideNative: true
+      }
+    }
   };
   const videoRef = useRef(null);
   const [player, setPlayer] = useState(null);
@@ -33,7 +33,7 @@ const usePlayer = ({ src, controls, autoplay }) => {
     const vjsPlayer = videojs(videoRef.current, {
       ...options,
       controls,
-      autoplay,
+      autoplay
     });
     setPlayer(vjsPlayer);
 
