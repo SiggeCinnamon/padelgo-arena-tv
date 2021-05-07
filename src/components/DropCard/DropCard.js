@@ -23,6 +23,7 @@ const DropCard = ({
 }) => {
   const [options, setOptions] = useState(pOptions);
   const [option, setOption] = useState("-1");
+  const [name, setName] = useState("");
 
   useEffect(() => {
     setOptions(pOptions);
@@ -52,9 +53,11 @@ const DropCard = ({
               <select
                 className="form-select"
                 aria-label="Default select example"
-                value={option}
+                value={option + "<->" + name}
                 onChange={(e) => {
-                  setOption(e.currentTarget.value.split("<->"));
+                  const data = e.currentTarget.value.split("<->");
+                  setOption(data[0]);
+                  setName(data[1]);
                 }}
               >
                 <option value="-1" style={{ fontWeight: "bold" }}>
@@ -80,9 +83,9 @@ const DropCard = ({
               : styles.__dashboard_btn + " btn btn-rounded"
           }
           to={{
-            pathname: `${linkTo.replace(":id", option[0])}`,
+            pathname: `${linkTo.replace(":id", option)}`,
             state: {
-              name: option[1]
+              name: name
             }
           }}
         >
