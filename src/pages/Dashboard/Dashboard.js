@@ -31,7 +31,7 @@ function Dashboard({ match, history }) {
 
   return (
     <>
-      <NavBar clubId={match.params.id} />
+      <NavBar clubName={history.location.state.name} />
       <div className={styles.__dashboard_container + " container-fluid"}>
         <TextCard
           textHeader="Showcase"
