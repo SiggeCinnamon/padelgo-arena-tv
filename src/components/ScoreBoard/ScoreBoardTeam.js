@@ -16,7 +16,7 @@ export default function ScoreboardTeam({ team, nameColor, players }) {
 
   return (
     <>
-      <div className="container justify-center">
+      <div className="container">
         <div className={styles.scoreboardContainer + " d-flex"}>
           <div className={styles.scoreContainer}>
             <div className={styles.imgContainer + " d-flex"}>
