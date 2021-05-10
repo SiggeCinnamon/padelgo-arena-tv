@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import styles from "./BottomChannelName.module.scss";
 import useFetchChannel from "../../../hooks/useFetchChannel";
 
-export default function BottomChannelName({ channels }) {
+export default function BottomChannelName({ channels, stream }) {
   const [channel, setChannel] = useFetchChannel(channels);
+  console.log(stream);
   return (
     <>
       <div className={styles.__bottomchannelname_overlay_channel}>
@@ -20,7 +21,7 @@ export default function BottomChannelName({ channels }) {
             />
           )}
           <div className={styles.__bottomchannelname_overlay_channel_content_headers}>
-            {channel && channel.description && <h6>{channel.description}</h6>}
+            {stream.result && <h6>{stream.result[0].description}</h6>}
             {channel && channel.name && <h6 style={{ fontWeight: "400" }}>{channel.name}</h6>}
           </div>
         </div>
