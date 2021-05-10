@@ -36,7 +36,12 @@ const usePipeline = (popular) => {
                 : d.mediaType === "LiveStream"
                 ? stream.url
                 : d.url,
-            type: process.env.NODE_ENV === "development" ? "video/mp4" : d.mediaType === "LiveStream" ? "application/x-mpegURL" : "video/mp4"
+            type:
+              process.env.NODE_ENV === "development"
+                ? "video/mp4"
+                : d.mediaType === "LiveStream"
+                ? "application/x-mpegURL"
+                : "video/mp4"
           }
         ],
         poster:
@@ -47,7 +52,8 @@ const usePipeline = (popular) => {
         channel: d.channel,
         description: d.description,
         avatar: `https://static.padelgo.tv/profilepictures/600x600/${d.channel}.jpeg`,
-        internalId: d.internalId
+        internalId: d.internalId,
+        clubName: d.clubName
       });
     }
 

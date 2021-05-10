@@ -1,3 +1,4 @@
+import React from "react";
 import ScoreboardTeam from "./ScoreBoardTeam";
 import BottomChannelName from "./BottomChannelName/BottomChannelName";
 import styles from "./ScoreBoard.module.scss";
@@ -9,12 +10,13 @@ import useFetchTeams from "../../hooks/useFetchTeams";
  * A main component that calls   the ScoreboardTeam component. It also calls the BottomChannelName component.
  * @author Mattias Andersen
  *
+ * @param  {String} clubName A String representing the clubs name
  * @param  {Object} score An Object consisting of the current score data
  * @param  {Object} teams An Object consisting of data of the 1-2 players of the team
  * @param  {String} poster A String that represents the background image that should be displayed
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreBoard({ liveStreamId, poster, match }) {
+export default function ScoreBoard({ clubName, liveStreamId, poster, match }) {
   const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [score, setScore] = useFetchScore(liveStreamId);
   console.log(match.params.clubId);

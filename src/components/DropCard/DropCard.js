@@ -19,10 +19,11 @@ const DropCard = ({
   textBody = "TEXT BODY",
   pOptions = ["P_OPTIONS"],
   optionHeader = "OPTION HEADER",
-  linkTo = "#",
+  linkTo = "#"
 }) => {
   const [options, setOptions] = useState(pOptions);
   const [option, setOption] = useState("-1");
+  const [name, setName] = useState("");
 
   useEffect(() => {
     setOptions(pOptions);
@@ -33,10 +34,8 @@ const DropCard = ({
       <div className={styles.__dashboard_card_top + " card-top"}>
         <p>{textHeader}</p>
       </div>
-      <div className='card-body'>
-        <p
-          className={styles.__dashboard_card_text + " card-text"}
-          style={{ whiteSpace: "pre-line" }}>
+      <div className="card-body">
+        <p className={styles.__dashboard_card_text + " card-text"} style={{ whiteSpace: "pre-line" }}>
           {textBody}
         </p>
       </div>
@@ -45,25 +44,29 @@ const DropCard = ({
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-        }}>
+          justifyContent: "center"
+        }}
+      >
         <div className={styles.__dashboard_dropdown}>
-          <div className='btn-group' role='group' aria-label='Court selector'>
-            <div className='select-div'>
+          <div className="btn-group" role="group" aria-label="Court selector">
+            <div className="select-div">
               <select
-                className='form-select'
-                aria-label='Default select example'
-                value={option}
+                className="form-select"
+                aria-label="Default select example"
+                value={option + "<->" + name}
                 onChange={(e) => {
-                  setOption(e.currentTarget.value);
-                }}>
-                <option value='-1' style={{ fontWeight: "bold" }}>
+                  const data = e.currentTarget.value.split("<->");
+                  setOption(data[0]);
+                  setName(data[1]);
+                }}
+              >
+                <option value="-1" style={{ fontWeight: "bold" }}>
                   {optionHeader}
                 </option>
-                <option disabled='disabled'>--------</option>
+                <option disabled="disabled">--------</option>
                 {options &&
                   options.map((o, i) => (
-                    <option value={o.id} key={o.id + "-" + String(i)}>
+                    <option value={o.id + "<->" + o.name} key={o.id + "-" + String(i)}>
                       {o.name}
                     </option>
                   ))}
@@ -79,7 +82,13 @@ const DropCard = ({
               ? styles.__dashboard_btn + " btn btn-rounded disabled"
               : styles.__dashboard_btn + " btn btn-rounded"
           }
-          to={`${linkTo.replace(":id", option)}`}>
+          to={{
+            pathname: `${linkTo.replace(":id", option)}`,
+            state: {
+              name: name
+            }
+          }}
+        >
           Enter
         </Link>
       </div>
@@ -92,7 +101,7 @@ DropCard.propTypes = {
   textBody: PropTypes.string,
   pOptions: PropTypes.array,
   optionHeader: PropTypes.string,
-  linkTo: PropTypes.string,
+  linkTo: PropTypes.string
 };
 
 export default DropCard;

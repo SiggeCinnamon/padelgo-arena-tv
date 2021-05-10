@@ -49,7 +49,8 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
         channel: currentItem.channel,
         description: currentItem.description,
         avatar: currentItem.avatar,
-        mediaType: currentItem.mediaType
+        mediaType: currentItem.mediaType,
+        clubName: currentItem.clubName
       });
     }
   };
@@ -199,7 +200,7 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
     <div>
       <video ref={ref} id="video" className="video-js vjs-big-play-centered vjs-fluid" width="100%" height="100%" />
       {currentMedia && currentMedia.mediaType !== "ad" && (
-        <VideoOverlay clubId={clubId} data={videoData} currentProgress={currentProgress} />
+        <VideoOverlay data={videoData} currentProgress={currentProgress} />
       )}
     </div>
   );
