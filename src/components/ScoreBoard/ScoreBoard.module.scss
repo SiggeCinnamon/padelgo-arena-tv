@@ -2,22 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@800;900&display=swap');
 
 .wrapperScoreboard {
-    display         : flex;
-    width           : 100%;
-    height          : 100%;
-    padding-bottom  : 50px;
+    display       : flex;
+    width         : 100%;
+    height        : 100%;
+    padding-bottom: 50px;
+
     position        : absolute;
     align-items     : center;
     justify-content : center;
     background-color: black;
-    
-}
-.errorContainer{
-    display        : flex;
-    justify-content: space-evenly;
-    flex-wrap      : wrap;
-    align-items    : center;
-    padding-top    : 200px;
 }
 
 .BottomChannelName {
@@ -41,7 +34,6 @@
 
 .imgcontainer {
     position: absolute;
-
 }
 
 .avatarOverlap {
@@ -96,39 +88,39 @@
         align-items     : center;
         justify-content : center;
         background-color: black;
-        
+
     }
-    
-    
+
+
     .BottomChannelName {
         padding-bottom: 10px;
     }
-    
+
     .scoreboardContainer {
-       
+
         font-family: 'Roboto Slab', serif;
         font-size  : 128px;
         font-style : bold;
         font-weight: 700;
         line-height: 198px;
-       
+
     }
-    
+
     .scoreContainer {
         display: flex;
-        
+
         margin-left: -400px;
     }
-    
+
     .imgcontainer {
         position: absolute;
-    
+
     }
-    
+
     .avatarOverlap {
         width: 100%;
     }
-    
+
     .playerName {
         display        : flex;
         min-width      : 1200px;
@@ -140,11 +132,11 @@
         justify-content: center;
         color          : white;
     }
-    
+
     .setContainer {
         color: white;
     }
-    
+
     .gameContainer {
         display        : flex;
         height         : 240px;
@@ -153,7 +145,7 @@
         align-items    : center;
         justify-content: center;
     }
-    
+
     .currentScore {
         display        : flex;
         height         : 240px;
@@ -162,7 +154,7 @@
         align-items    : center;
         justify-content: center;
     }
-    
+
     .stupidSeparator {
         margin-bottom: 40px;
     }

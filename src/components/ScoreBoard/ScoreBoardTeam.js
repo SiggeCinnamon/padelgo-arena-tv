@@ -1,7 +1,7 @@
-import styles from './ScoreBoard.module.scss';
-import AvatarCircle from './AvatarCircle/AvatarCircle.js';
-import PlayerName from './PlayerName/PlayerName.js';
-import SetContainer from './SetContainer/SetContainer.js';
+import styles from "./ScoreBoard.module.scss";
+import AvatarCircle from "./AvatarCircle/AvatarCircle.js";
+import PlayerName from "./PlayerName/PlayerName.js";
+import SetContainer from "./SetContainer/SetContainer.js";
 
 /**
  * A component that is rendering the AvatarCircle sub-component and also renders the jsx that represents the teams name and their current scores
@@ -16,31 +16,30 @@ export default function ScoreboardTeam({ team, nameColor, players }) {
   return (
     <>
       <div className="container justify-center">
-        <div className={styles.scoreboardContainer + ' d-flex'}>
+        <div className={styles.scoreboardContainer + " d-flex"}>
           <div className={styles.scoreContainer}>
-            <div className={styles.imgContainer + ' d-flex'}>
-              <div>
-                {players && players[1] && (
-                  <AvatarCircle
-                    channelName={players && players[1] && players[1].channelName ? players[1].channelName : '__NoName__'}
-                    borderColor={team.backgroundColor}
-                    width={600}
-                  />
-                )}
-              </div>
+            <div className={styles.imgContainer + " d-flex"}>
+              {players && players[1] ? (
+                <AvatarCircle
+                  channelName={players && players[1] && players[1].channelName ? players[1].channelName : "__NoName__"}
+                  borderColor={team.backgroundColor}
+                />
+              ) : null}
+
               <div className={styles.avatarOverlap}>
-                {players && players[0] && (
+                {players && players[0] ? (
                   <AvatarCircle
-                    channelName={players && players[0] && players[0].channelName ? players[0].channelName : '__NoName__'}
+                    channelName={
+                      players && players[0] && players[0].channelName ? players[0].channelName : "__NoName__"
+                    }
                     borderColor={team.backgroundColor}
-                    width={600}
                   />
-                )}
+                ) : null}
               </div>
             </div>
-            <PlayerName teamName={team.name} nameColor={nameColor} />
-            <SetContainer team={team} />
           </div>
+          <PlayerName teamName={team.name} nameColor={nameColor} />
+          <SetContainer team={team} />
         </div>
       </div>
     </>
