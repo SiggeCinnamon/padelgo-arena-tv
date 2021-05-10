@@ -50,7 +50,7 @@ function Court({ match, history }) {
         break;
     }
   };
-  console.log(liveStream);
+
   if (liveStream && liveStream.result && liveStream.result.length > 0) {
     return (
       <>

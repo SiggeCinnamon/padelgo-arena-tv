@@ -13,7 +13,7 @@ import SetContainer from "./SetContainer/SetContainer.js";
  * @return {JSX} React JSX Rendering
  */
 export default function ScoreboardTeam({ team, nameColor, players }) {
-  console.log(players);
+
   return (
     <>
       <div className="container justify-center">

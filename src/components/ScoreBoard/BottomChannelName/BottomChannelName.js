@@ -4,7 +4,7 @@ import useFetchChannel from "../../../hooks/useFetchChannel";
 
 export default function BottomChannelName({ channels, stream }) {
   const [channel, setChannel] = useFetchChannel(channels);
-  console.log(stream);
+
   return (
     <>
       <div className={styles.__bottomchannelname_overlay_channel}>
