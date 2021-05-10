@@ -16,13 +16,12 @@ import useFetchTeams from "../../hooks/useFetchTeams";
  * @param  {String} poster A String that represents the background image that should be displayed
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreBoard({ clubName, liveStreamId, poster, match }) {
+export default function ScoreBoard({ clubName, liveStreamId, poster }) {
   const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [score, setScore] = useFetchScore(liveStreamId);
-  console.log(match.params.clubId);
+  console.log(teams);
   return (
     <>
-      <NavBar clubId={match.params.clubId} />
       <div
         className={styles.wrapperScoreboard}
         style={
@@ -41,6 +40,7 @@ export default function ScoreBoard({ clubName, liveStreamId, poster, match }) {
               }
         }
       >
+        <NavBar clubName={clubName} />
         <div className={styles.scoresContainer}>
           <div className={styles.scoreboardContainer}>
             <div className={styles.stupidSeparator}>

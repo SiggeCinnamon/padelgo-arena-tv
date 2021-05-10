@@ -13,6 +13,7 @@ import SetContainer from "./SetContainer/SetContainer.js";
  * @return {JSX} React JSX Rendering
  */
 export default function ScoreboardTeam({ team, nameColor, players }) {
+  console.log(players);
   return (
     <>
       <div className="container justify-center">
@@ -21,20 +22,24 @@ export default function ScoreboardTeam({ team, nameColor, players }) {
             <div className={styles.imgContainer + " d-flex"}>
               {players && players[1] ? (
                 <AvatarCircle
-                  channelName={players && players[1] && players[1].channelName ? players[1].channelName : "__NoName__"}
+                  channelName={players && players[1].channelName}
                   borderColor={team.backgroundColor}
+                  width={600}
                 />
-              ) : null}
+              ) : (
+                <AvatarCircle channelName={"avatarCirclePlaceholder"} borderColor={team.backgroundColor} />
+              )}
 
               <div className={styles.avatarOverlap}>
                 {players && players[0] ? (
                   <AvatarCircle
-                    channelName={
-                      players && players[0] && players[0].channelName ? players[0].channelName : "__NoName__"
-                    }
+                    channelName={players && players[0].channelName}
                     borderColor={team.backgroundColor}
+                    width={600}
                   />
-                ) : null}
+                ) : (
+                  <AvatarCircle channelName={"avatarCirclePlaceholder"} borderColor={team.backgroundColor} />
+                )}
               </div>
             </div>
           </div>
