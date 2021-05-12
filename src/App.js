@@ -4,8 +4,15 @@ import Home from "./pages/Home";
 import Court from "./pages/Court";
 import Dashboard from "./pages/Dashboard";
 import ArenaTv from "./pages/ArenaTv";
+import TagManager from "react-gtm-module";
 
 function App() {
+  const tagManagerArgs = {
+    gtmId: "GTM-P9R6PDC"
+  };
+
+  TagManager.initialize(tagManagerArgs);
+
   return (
     <Router>
       <Switch>
