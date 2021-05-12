@@ -16,10 +16,11 @@ import useFetchTeams from "../../hooks/useFetchTeams";
  * @param  {String} poster A String that represents the background image that should be displayed
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreBoard({ clubName, liveStreamId, poster }) {
+export default function ScoreBoard({ clubName, liveStreamId, poster, stream }) {
   const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [score, setScore] = useFetchScore(liveStreamId);
-  console.log(teams);
+
+
   return (
     <>
       <div
@@ -64,7 +65,14 @@ export default function ScoreBoard({ clubName, liveStreamId, poster }) {
           </div>
         </div>
         <div className={styles.BottomChannelName}>
-          {teams.result && <BottomChannelName channels={teams.result[0].players[0].channelName} />}
+          {teams.result && (
+            <BottomChannelName
+              stream={stream}
+              channels={
+                teams.result[0].players[teams.result && teams.result[0].players.length === 1 ? 0 : 1].channelName
+              }
+            />
+          )}
         </div>
       </div>
     </>

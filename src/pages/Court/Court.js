@@ -58,7 +58,7 @@ function Court({ match, history }) {
           clubName={liveStream.result[0].clubName}
           liveStreamId={liveStream.result[0].id}
           poster={liveStream.result[0].thumbnailURL}
-          match={match}
+          stream={liveStream}
         />
       </>
     );

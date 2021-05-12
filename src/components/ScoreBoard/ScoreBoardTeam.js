@@ -13,10 +13,10 @@ import SetContainer from "./SetContainer/SetContainer.js";
  * @return {JSX} React JSX Rendering
  */
 export default function ScoreboardTeam({ team, nameColor, players }) {
-  console.log(players);
+
   return (
     <>
-      <div className="container justify-center">
+      <div className="container">
         <div className={styles.scoreboardContainer + " d-flex"}>
           <div className={styles.scoreContainer}>
             <div className={styles.imgContainer + " d-flex"}>
