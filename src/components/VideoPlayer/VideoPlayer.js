@@ -183,7 +183,6 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
   useEffect(() => {
     if (player !== null) {
       GTM("atv started", {
-        uuid: uuidv4(),
         clubId: clubId,
         session: readCookie("_gid")
       });
