@@ -3,7 +3,6 @@ import Player from "../../components/Player";
 import { withRouter } from "react-router-dom";
 
 const ArenaTv = ({ match, history }) => {
-  
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
     return () => {
