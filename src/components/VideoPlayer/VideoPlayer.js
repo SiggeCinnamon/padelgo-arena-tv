@@ -42,7 +42,7 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
         GTM("atv ad", {
           description: currentItem.description,
           mediaType: currentItem.mediaType,
-          source: currentItem.sources[0]
+          source: currentItem.sources[0].src
         });
       }
 
