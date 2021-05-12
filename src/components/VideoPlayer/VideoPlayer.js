@@ -4,6 +4,7 @@ import "video.js/dist/video-js.css";
 import "videojs-playlist/dist/videojs-playlist.js";
 import usePlayer from "../../hooks/usePlayer.js";
 import { getStreamsDataWithStreamId } from "../../services/Streams.js";
+import GTM from "../../utilities/GTM";
 
 /**
  * A component which renders a video player with the use of the module VideoJS
@@ -36,6 +37,14 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
     if (player && player.playlist.currentIndex() !== -1) {
       const currentItem = sourcesRef.current[player.playlist.currentIndex()];
       setCurrentMedia(currentItem);
+
+      if (currentItem.mediaType === "ad") {
+        GTM("atv ad", {
+          description: currentItem.description,
+          mediaType: currentItem.mediaType,
+          source: currentItem.sources[0]
+        });
+      }
 
       if (currentItem.mediaType === "LiveStream") {
         const stream = await getStreamsDataWithStreamId(currentItem.internalId);
@@ -168,6 +177,10 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
 
   useEffect(() => {
     if (player !== null) {
+      GTM("atv started", {
+        clubId: clubId
+      });
+
       player.on("playlistitem", onPlaylistItemHandler);
       player.on("timeupdate", onProgressHandler);
       player.on("ended", onEndingHandler);
