@@ -1,7 +1,11 @@
+// General imports
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./TextCard.module.scss";
+
+// Components
+import ToggleSwitch from "../../components/ToggleSwitch";
 
 /**
  * Bootstrap Component with a SELECT
@@ -16,7 +20,6 @@ const TextCard = ({
   textHeader = "TEXT HEADER",
   textBody = "TEXT BODY",
   linkTo = "#",
-  removeStartBtn,
 }) => {
 
   return (
@@ -33,7 +36,7 @@ const TextCard = ({
           </p>
         </div>
       </div>
-      <div className={styles.__dashboard_div_btn} style={removeStartBtn}>
+      <div className={styles.__dashboard_div_btn}>
         <Link
           type='button'
           className={styles.__dashboard_btn + " btn btn-rounded"}
