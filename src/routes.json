@@ -2,5 +2,6 @@
     "HOME": "/",
     "COURT": "/court/:clubId/:id",
     "DASHBOARD": "/dashboard/:id",
-    "ARENA_TV": "/arenatv/:id"
+    "ARENA_TV": "/arenatv/:id",
+    "TEST": "/testpage"
 }
