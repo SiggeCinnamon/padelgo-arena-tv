@@ -1,7 +1,7 @@
-export const setAppState = (store, state) => {
-  store.setState(state);
+export const setAppState = (vault, state) => {
+  vault.setState(state);
 };
 
-export const setShowLivestreams = (store, state) => {
-  store.setState({ showLivestreams: state });
+export const setShowLivestreams = (vault, state) => {
+  vault.setState({ showLivestreams: state });
 };
