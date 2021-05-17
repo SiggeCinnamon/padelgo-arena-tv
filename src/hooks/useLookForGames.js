@@ -4,7 +4,7 @@ import { getStreamsWithCourtId } from "../services/Streams.js";
 
 const useLookForGames = (clubId) => {
   const [games, setGames] = useState([]);
-  
+
   const [courts, setCourts] = useFetchCourts(clubId);
 
   const getStream = courts;
@@ -19,13 +19,12 @@ const useLookForGames = (clubId) => {
       } else {
         console.log("else", games);
       }
-
     }
   };
   useEffect(() => {
     forLoop();
   }, [courts]);
-
+  console.log("useLookForGames:::", games);
   return [games, setGames];
 };
 
