@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
 import Player from "../../components/Player";
 import useFetchLiveStream from "../../hooks/useFetchLiveStream";
+import useLookForGames from "../../hooks/useLookForGames";
 import HashGen from "../../utilities/HashGen.js";
 
 function Court({ match, history }) {
@@ -59,6 +60,7 @@ function Court({ match, history }) {
           liveStreamId={liveStream.result[0].id}
           poster={liveStream.result[0].thumbnailURL}
           stream={liveStream}
+          match={match}
         />
       </>
     );
