@@ -6,9 +6,23 @@ import NavBar from "../../components/NavBar";
 import useFetchCourts from "../../hooks/useFetchCourts.js";
 import TextCard from "../../components/TextCard";
 import DropCard from "../../components/DropCard";
+import useGlobal from "../../vault";
 
 function Dashboard({ match, history }) {
   const [courts, setCourts] = useFetchCourts(match.params.id);
+  const [globalState, globalAction] = useGlobal();
+
+  useEffect(() => {
+    if (history.location.state.name && globalState.clubName !== history.location.state.name) {
+      globalAction.setClubName(history.location.state.name);
+    }
+  }, [history]);
+
+  useEffect(() => {
+    if (match.params.id) {
+      globalAction.setClubId(match.params.id);
+    }
+  }, [match.params.id]);
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
