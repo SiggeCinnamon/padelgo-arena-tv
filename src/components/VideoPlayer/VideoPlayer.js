@@ -40,18 +40,16 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId, clubNam
       setCurrentMedia(currentItem);
 
       if (currentItem.mediaType === "ad") {
-        console.log("currentItem:", currentItem);
-
         GTM("ad_playback", {
           ad_id: currentItem.internalId,
           ad_name: currentItem.description,
-          club_id: currentItem.mediaType,
-          club_name: currentItem.sources[0].src
+          club_id: clubId,
+          club_name: clubName
         });
       }
 
       if (currentItem.mediaType === "LiveStream") {
-        const stream = await getStreamsDataWithStreamId(currentItem.internalId);
+        const stream = await getStreamsDataWithStreamId(currentItem.internalId, clubId, clubName);
 
         if (stream && stream.isLive === false) {
           nextVideo();
