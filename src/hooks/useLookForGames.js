@@ -1,31 +1,61 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useFetchCourts from "./useFetchCourts";
 import { getStreamsWithCourtId } from "../services/Streams.js";
 
 const useLookForGames = (clubId) => {
   const [games, setGames] = useState([]);
-
   const [courts, setCourts] = useFetchCourts(clubId);
-
-  const getStream = courts;
+  const [numberOfGames, setNumberOfGames] = useState(null);
+  const gameRef = useRef(0);
+  const [gameToWatch, setGameToWatch] = useState();
+  const [index, setIndex] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
   const forLoop = async (_) => {
-    for (let index = 0; index < getStream.length; index++) {
-      const ids = getStream[index];
+    let temp = [];
+    for (let index = 0; index < courts.length; index++) {
+      const ids = courts[index];
       const stream = await getStreamsWithCourtId(ids.id);
-
       if (stream.length > 0) {
-        setGames((liveStream) => liveStream.concat(stream));
-      } else {
-        console.log("else", games);
+        temp.push(stream[0]);
       }
     }
+    setGames(temp);
+    setNumberOfGames(temp.length);
   };
+
   useEffect(() => {
     forLoop();
+  }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      forLoop();
+    }, 5000);
+    return () => clearInterval(interval);
   }, [courts]);
-  console.log("useLookForGames:::", games);
-  return [games, setGames];
+
+  const gameHandler = () => {
+    gameRef = current
+
+  };
+
+  /*   useEffect(() => {
+    let interval = null;
+    if (numberOfGames !== 0) {
+      interval = setInterval(() => {
+        for (let i = 0; i < numberOfGames; i) console.log(i);
+        setIndex((games) => index + 1);
+        setGameToWatch(games[index]);
+      }, 5000);
+    } else if (!isActive && index !== 0) {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval);
+  }, [isActive, index, games]);
+ */
+
+  return [games, setGames, numberOfGames, gameToWatch];
 };
 
 export default useLookForGames;
