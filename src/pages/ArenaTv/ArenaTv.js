@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import Player from "../../components/Player";
 import { withRouter } from "react-router-dom";
+import useGlobal from "../../vault";
 
 const ArenaTv = ({ match, history }) => {
+  const [globalState] = useGlobal();
+
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
     return () => {
@@ -24,7 +27,7 @@ const ArenaTv = ({ match, history }) => {
 
   return (
     <>
-      <Player clubId={match.params.id} />
+      <Player clubId={match.params.id} clubName={globalState.clubName} />
     </>
   );
 };
