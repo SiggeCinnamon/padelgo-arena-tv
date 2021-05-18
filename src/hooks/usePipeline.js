@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getStreamURLWithLiveStreamId } from "../services/Streams.js";
+import useGlobal from "../vault";
 
 /**
  * A custom hook used for creating an array of sources in a specific structure that the Video player can play.
@@ -11,6 +12,7 @@ import { getStreamURLWithLiveStreamId } from "../services/Streams.js";
  */
 const usePipeline = (popular) => {
   const [sources, setSources] = useState([]);
+  const [globalState] = useGlobal();
 
   useEffect(() => {
     const pipeIt = async () => {
@@ -25,7 +27,10 @@ const usePipeline = (popular) => {
     const pipeline = [];
 
     for (const d of data) {
-      const stream = d.mediaType === "LiveStream" ? await getStreamURLWithLiveStreamId(d.internalId) : "";
+      const stream =
+        d.mediaType === "LiveStream"
+          ? await getStreamURLWithLiveStreamId(d.internalId, globalState.clubId, globalState.clubName)
+          : "";
 
       pipeline.push({
         sources: [

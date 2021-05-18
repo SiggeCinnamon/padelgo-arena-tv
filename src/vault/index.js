@@ -4,7 +4,9 @@ import useGlobalHook from "./GlobalState";
 import * as actions from "../actions";
 
 const initialState = {
-  showLivestreams: true
+  showLivestreams: true,
+  clubId: undefined,
+  clubName: undefined
 };
 
 // eslint-disable-next-line react-hooks/rules-of-hooks

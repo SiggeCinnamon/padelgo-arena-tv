@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getClubDataWithClubId } from "../services/Clubs.js";
-
+import useGlobal from "../vault";
 /**
  * A custom hook used for fetching a specific clubs information with the clubs id from the API
  * @author Christoffer Hansen
@@ -10,10 +10,11 @@ import { getClubDataWithClubId } from "../services/Clubs.js";
  */
 const useFetchClub = (id) => {
   const [club, setClub] = useState({});
+  const [globalState] = useGlobal();
 
   useEffect(() => {
     const fetchClub = async () => {
-      const fClub = await getClubDataWithClubId(id);
+      const fClub = await getClubDataWithClubId(id, globalState.clubName);
       setClub(fClub);
     };
 

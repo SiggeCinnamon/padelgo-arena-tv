@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCourtsWithClubId } from "../services/Court.js";
+import useGlobal from "../vault";
 
 /**
  * A custom hook used for fetching all courts from a club with specified id from the API
@@ -10,10 +11,11 @@ import { getCourtsWithClubId } from "../services/Court.js";
  */
 const useFetchCourts = (id) => {
   const [courts, setCourts] = useState([]);
+  const [globalState] = useGlobal();
 
   useEffect(() => {
     const fetchCourts = async () => {
-      const fCourts = await getCourtsWithClubId(id);
+      const fCourts = await getCourtsWithClubId(id, globalState.clubName);
 
       const pipedCourts = fCourts.map((element) => {
         return { id: element.courtId, name: element.description };

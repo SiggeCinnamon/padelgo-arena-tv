@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getChannelsInfoWithChannelName } from "../services/Channels.js";
+import useGlobal from "../utilities/GTM";
 
 /**
  * A custom hook used for fetching a specific clubs information with the clubs id from the API
@@ -10,9 +11,11 @@ import { getChannelsInfoWithChannelName } from "../services/Channels.js";
  */
 const useFetchChannel = (id) => {
   const [channel, setChannel] = useState({});
+  const [globalState] = useGlobal();
+
   useEffect(() => {
     const fetchChannel = async () => {
-      const fChannel = await getChannelsInfoWithChannelName(id);
+      const fChannel = await getChannelsInfoWithChannelName(id, globalState.clubId, globalState.clubName);
       setChannel(fChannel);
     };
 

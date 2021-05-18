@@ -1,4 +1,5 @@
 import axios from "axios";
+import GTM from "../utilities/GTM";
 
 async function getStreamsAPIGETResponse(route) {
   try {
@@ -30,11 +31,21 @@ export async function getStreamsWithCourtId(courtId) {
   return await getStreamsAPIGETResponse(`/Streams/court/${courtId}`);
 }
 
-export async function getStreamsDataWithStreamId(streamId) {
+export async function getStreamsDataWithStreamId(streamId, clubId, clubName) {
+  GTM("media_request", {
+    club_id: clubId,
+    club_name: clubName
+  });
+
   return await getStreamsAPIGETResponse(`/Streams/${streamId}`);
 }
 
-export async function getStreamURLWithLiveStreamId(liveStreamId) {
+export async function getStreamURLWithLiveStreamId(liveStreamId, clubId, clubName) {
+  GTM("media_request", {
+    club_id: clubId,
+    club_name: clubName
+  });
+
   return await getStreamsAPIGETResponse(`/Streams/url/anonymously/${liveStreamId}`);
 }
 
@@ -45,6 +56,11 @@ export async function getStreamThumbnailWithLiveStreamId(liveStreamId) {
 export async function getTeamsOnStreamWithLiveStreamId(liveStreamId) {
   return await getStreamsAPIGETResponse(`/Teams/teams/${liveStreamId}`);
 }
-export async function getTeamsOnStream(liveStreamId) {
+export async function getTeamsOnStream(liveStreamId, clubId, clubName) {
+  GTM("media_request", {
+    clubId,
+    clubName
+  });
+
   return await getStreamsAPIGETResponse(`/Teams/teams/${liveStreamId}`);
 }
