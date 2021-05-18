@@ -5,8 +5,6 @@ import "videojs-playlist/dist/videojs-playlist.js";
 import usePlayer from "../../hooks/usePlayer.js";
 import { getStreamsDataWithStreamId } from "../../services/Streams.js";
 import GTM from "../../utilities/GTM";
-import readCookie from "../../utilities/Cookies";
-import { v4 as uuidv4 } from "uuid";
 
 /**
  * A component which renders a video player with the use of the module VideoJS
@@ -17,9 +15,10 @@ import { v4 as uuidv4 } from "uuid";
  * @param  {Boolean} autoplay Boolean that tells the player whether it shall be autoplaying or not
  * @param  {Function} onPlaylistAtEnd Function that is suppose to be used at the playlists end
  * @param  {Number} clubId A Number representing the club that the user picked from Home page
+ * @param  {String} clubName A String representing the club that the user picked from Home page
  * @return {JSX} React JSX Rendering
  */
-const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) => {
+const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId, clubName }, ref) => {
   const maxLiveDuration = 120000; // In milliseconds!
   const comp = usePlayer({ src, controls, autoplay });
   const player = comp.player;
@@ -41,13 +40,13 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
       setCurrentMedia(currentItem);
 
       if (currentItem.mediaType === "ad") {
-        GTM("atv ad", {
-          uuid: uuidv4(),
-          description: currentItem.description,
-          mediaType: currentItem.mediaType,
-          source: currentItem.sources[0].src,
-          clubId: clubId,
-          session: readCookie("_gid")
+        console.log("currentItem:", currentItem);
+
+        GTM("ad_playback", {
+          ad_id: currentItem.internalId,
+          ad_name: currentItem.description,
+          club_id: currentItem.mediaType,
+          club_name: currentItem.sources[0].src
         });
       }
 
@@ -182,11 +181,6 @@ const VideoPlayer = ({ src, controls, autoplay, onPlaylistAtEnd, clubId }, ref) 
 
   useEffect(() => {
     if (player !== null) {
-      GTM("atv started", {
-        clubId: clubId,
-        session: readCookie("_gid")
-      });
-
       player.on("playlistitem", onPlaylistItemHandler);
       player.on("timeupdate", onProgressHandler);
       player.on("ended", onEndingHandler);
