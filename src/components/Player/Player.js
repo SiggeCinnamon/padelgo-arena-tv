@@ -3,6 +3,7 @@ import { getMediaWithClubId } from "../../services/Media.js";
 import VideoPlayer from "../../components/VideoPlayer";
 import styles from "./Player.module.scss";
 import usePipeline from "../../hooks/usePipeline.js";
+import useGlobal from "../../vault";
 
 /**
  * A main component that uses the sub-component VideoPlayer for rendering a video player.
@@ -15,6 +16,7 @@ import usePipeline from "../../hooks/usePipeline.js";
 const Player = ({ clubId }) => {
   const [popular, setPopular] = useState([]);
   const [sources, setSources] = usePipeline(popular);
+  const [globalState] = useGlobal();
 
   useEffect(() => {
     fetchMedia();
@@ -25,7 +27,7 @@ const Player = ({ clubId }) => {
   };
 
   const fetchMedia = async () => {
-    const showcaseData = await getMediaWithClubId(clubId);
+    const showcaseData = globalState.showLivestreams ? await getMediaWithClubId(clubId) : [];
 
     if (showcaseData) {
       setPopular(showcaseData);

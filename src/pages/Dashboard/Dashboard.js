@@ -39,6 +39,7 @@ function Dashboard({ match, history }) {
 
                 Return here by clicking at padelgo.tv in the top left or press ESC.`}
           linkTo={Routes.ARENA_TV.replace(":id", match.params.id)}
+          toggleSwitch={true}
         />
 
         <DropCard

@@ -3,7 +3,9 @@ import useGlobalHook from "./GlobalState";
 
 import * as actions from "../actions";
 
-const initialState = {};
+const initialState = {
+  showLivestreams: true
+};
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const useGlobal = useGlobalHook(React, initialState, actions);

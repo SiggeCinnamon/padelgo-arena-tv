@@ -8,7 +8,7 @@ import TagManager from "react-gtm-module";
 
 function App() {
   const tagManagerArgs = {
-    gtmId: "GTM-P9R6PDC"
+    gtmId: process.env.REACT_APP_GTM_ID
   };
 
   TagManager.initialize(tagManagerArgs);
