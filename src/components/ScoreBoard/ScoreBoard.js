@@ -20,7 +20,6 @@ export default function ScoreBoard({ clubName, liveStreamId, poster, stream }) {
   const [teams, setTeams] = useFetchTeams(liveStreamId);
   const [score, setScore] = useFetchScore(liveStreamId);
 
-
   return (
     <>
       <div

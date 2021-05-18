@@ -13,7 +13,7 @@ import useGlobal from "../../vault";
  * @param  {Number} clubId A Number representing the club that the user picked from Home page
  * @return {JSX} React JSX Rendering
  */
-const Player = ({ clubId }) => {
+const Player = ({ clubId, clubName }) => {
   const [popular, setPopular] = useState([]);
   const [sources, setSources] = usePipeline(popular);
   const [globalState] = useGlobal();
@@ -27,7 +27,7 @@ const Player = ({ clubId }) => {
   };
 
   const fetchMedia = async () => {
-    const showcaseData = globalState.showLivestreams ? await getMediaWithClubId(clubId) : [];
+    const showcaseData = globalState.showLivestreams ? await getMediaWithClubId(clubId, clubName) : [];
 
     if (showcaseData) {
       setPopular(showcaseData);
@@ -46,6 +46,7 @@ const Player = ({ clubId }) => {
             autoplay={true}
             onPlaylistAtEnd={onPlaylistAtEnd}
             clubId={clubId}
+            clubName={clubName}
           />
         )}
       </div>
