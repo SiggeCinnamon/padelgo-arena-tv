@@ -46,22 +46,14 @@ const DropCard = ({
         <p className={styles.__dashboard_card_text + " card-text"} style={{ whiteSpace: "pre-line" }}>
           {textBody}
         </p>
+        <div style={{ textAlign: "center" }}>
+          {toggleSwitch && <span className={styles.__dashboard_card_text + " card-text"}>Cycle Scoreboards? </span>}
+          {toggleSwitch && (
+            <ToggleSwitch className="__dashboard_scoreboard_toggleswitch" value={value} onChange={onChange} />
+          )}
+        </div>
       </div>
-
-      <div style={{ textAlign: "center" }}>
-        {toggleSwitch && <span className={styles.__dashboard_card_text + " card-text"}>Cycle Scoreboards? </span>}
-        {toggleSwitch && (
-          <ToggleSwitch className="__dashboard_scoreboard_toggleswitch" value={value} onChange={onChange} />
-        )}
-      </div>
-      <p></p>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-      >
+      <div className={styles.__dashboard_div_btn}>
         <div className={styles.__dashboard_dropdown}>
           <div className="btn-group" role="group" aria-label="Court selector">
             <div className="select-div">
