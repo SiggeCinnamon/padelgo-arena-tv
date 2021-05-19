@@ -6,7 +6,6 @@ import NavBar from "../../components/NavBar/NavBar.js";
 import useFetchScore from "../../hooks/useFetchScore";
 import useFetchTeams from "../../hooks/useFetchTeams";
 
-
 /**
  * A main component that calls   the ScoreboardTeam component. It also calls the BottomChannelName component.
  * @author Mattias Andersen

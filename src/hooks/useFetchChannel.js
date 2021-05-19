@@ -11,11 +11,12 @@ import useGlobal from "../utilities/GTM";
  */
 const useFetchChannel = (id) => {
   const [channel, setChannel] = useState({});
-  const [globalState] = useGlobal();
+
 
   useEffect(() => {
     const fetchChannel = async () => {
-      const fChannel = await getChannelsInfoWithChannelName(id, globalState.clubId, globalState.clubName);
+      // const fChannel = await getChannelsInfoWithChannelName(id, globalState.clubId, globalState.clubName);
+      const fChannel = await getChannelsInfoWithChannelName(id);
       setChannel(fChannel);
     };
 

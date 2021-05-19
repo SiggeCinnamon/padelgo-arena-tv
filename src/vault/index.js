@@ -5,6 +5,7 @@ import * as actions from "../actions";
 
 const initialState = {
   showLivestreams: true,
+  cycleScoreBoard: true,
   clubId: undefined,
   clubName: undefined
 };
