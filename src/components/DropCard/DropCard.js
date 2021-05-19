@@ -30,7 +30,7 @@ const DropCard = ({
   const [value, setValue] = useState(globalState.cycleScoreBoard !== undefined ? globalState.cycleScoreBoard : false);
 
   const onChange = (e) => {
-    globalActions.setShowLivestreams(!value);
+    globalActions.setCycleScoreBoard(!value);
     setValue(!value);
   };
   useEffect(() => {
@@ -53,15 +53,16 @@ const DropCard = ({
           )}
         </div>
       </div>
-      <div className={styles.__dashboard_div_btn}>
+      <div className={styles.__dashboard_div_btn} style={{ marginBottom: toggleSwitch ? "-20%" : "0%" }}>
         <div className={styles.__dashboard_dropdown}>
           <div className="btn-group" role="group" aria-label="Court selector">
             <div className="select-div">
               <select
+                style={{ marginBottom: toggleSwitch ? "5%" : "0%" }}
                 className="form-select"
                 aria-label="Default select example"
                 value={option + "<->" + name}
-                disabled={value}
+                disabled={toggleSwitch ? value : false}
                 onChange={(e) => {
                   const data = e.currentTarget.value.split("<->");
                   setOption(data[0]);
@@ -85,9 +86,12 @@ const DropCard = ({
       </div>
       <div className={styles.__dashboard_div_btn}>
         <Link
-          disabled={value}
           className={
-            option === "0"
+            toggleSwitch && value
+              ? styles.__dashboard_btn + " btn btn-rounded"
+              : toggleSwitch && !value && option === "-1"
+              ? styles.__dashboard_btn + " btn btn-rounded disabled"
+              : !toggleSwitch && option === "-1"
               ? styles.__dashboard_btn + " btn btn-rounded disabled"
               : styles.__dashboard_btn + " btn btn-rounded"
           }

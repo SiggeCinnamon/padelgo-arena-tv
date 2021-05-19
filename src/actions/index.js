@@ -13,3 +13,6 @@ export const setClubId = (vault, state) => {
 export const setClubName = (vault, state) => {
   vault.setState({ clubName: state });
 };
+export const setCycleScoreBoard = (vault, state) => {
+  vault.setState({ cycleScoreBoard: state });
+};

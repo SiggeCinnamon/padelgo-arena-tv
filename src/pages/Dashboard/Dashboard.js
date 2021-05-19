@@ -59,8 +59,7 @@ function Dashboard({ match, history }) {
         <DropCard
           textHeader="Score"
           textBody={`Show scores from ongoing games.
-          
-              Return here by clicking at padelgo.tv in the top left or press ESC.`}
+                        Return here by clicking at padelgo.tv in the top left or press ESC.`}
           pOptions={courts.sort((a, b) => a.name.localeCompare(b.name, "se", { numeric: true }))}
           optionHeader="Courts"
           linkTo={Routes.COURT.replace(":clubId", match.params.id)}
