@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./DropCard.module.scss";
-
+import ToggleSwitch from "../../components/ToggleSwitch";
+import useGlobal from "../../vault";
 /**
  * Bootstrap Component with a SELECT
  * @author Christoffer Hansen
@@ -19,12 +20,19 @@ const DropCard = ({
   textBody = "TEXT BODY",
   pOptions = ["P_OPTIONS"],
   optionHeader = "OPTION HEADER",
-  linkTo = "#"
+  linkTo = "#",
+  toggleSwitch = false
 }) => {
   const [options, setOptions] = useState(pOptions);
   const [option, setOption] = useState("-1");
   const [name, setName] = useState("");
+  const [globalState, globalActions] = useGlobal();
+  const [value, setValue] = useState(globalState.cycleScoreBoard !== undefined ? globalState.cycleScoreBoard : false);
 
+  const onChange = (e) => {
+    globalActions.setShowLivestreams(!value);
+    setValue(!value);
+  };
   useEffect(() => {
     setOptions(pOptions);
   }, [pOptions]);
@@ -40,6 +48,13 @@ const DropCard = ({
         </p>
       </div>
 
+      <div style={{ textAlign: "center" }}>
+        {toggleSwitch && <span className={styles.__dashboard_card_text + " card-text"}>Cycle Scoreboards? </span>}
+        {toggleSwitch && (
+          <ToggleSwitch className="__dashboard_scoreboard_toggleswitch" value={value} onChange={onChange} />
+        )}
+      </div>
+      <p></p>
       <div
         style={{
           display: "flex",
@@ -54,6 +69,7 @@ const DropCard = ({
                 className="form-select"
                 aria-label="Default select example"
                 value={option + "<->" + name}
+                disabled={value}
                 onChange={(e) => {
                   const data = e.currentTarget.value.split("<->");
                   setOption(data[0]);
@@ -77,8 +93,9 @@ const DropCard = ({
       </div>
       <div className={styles.__dashboard_div_btn}>
         <Link
+          disabled={value}
           className={
-            option === "-1"
+            option === "0"
               ? styles.__dashboard_btn + " btn btn-rounded disabled"
               : styles.__dashboard_btn + " btn btn-rounded"
           }

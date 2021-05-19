@@ -63,6 +63,7 @@ function Dashboard({ match, history }) {
           pOptions={courts.sort((a, b) => a.name.localeCompare(b.name, "se", { numeric: true }))}
           optionHeader="Courts"
           linkTo={Routes.COURT.replace(":clubId", match.params.id)}
+          toggleSwitch={true}
         />
       </div>
     </>
