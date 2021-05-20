@@ -17,6 +17,7 @@ const Home = () => {
           textBody="Pick a club from the list below"
           pOptions={clubs.sort((a, b) => a.name.localeCompare(b.name, "se", { numeric: true }))}
           optionHeader="Clubs"
+          useOptionName={true}
           linkTo={Routes.DASHBOARD}
         />
       </div>
