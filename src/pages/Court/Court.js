@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
 import Player from "../../components/Player";
@@ -8,6 +8,9 @@ import useGlobal from "../../vault";
 function Court({ match, history }) {
   const [games, setGames, numberOfGames, gamesIndex] = useLookForGames(match.params.clubId);
   const [globalState, globalAction] = useGlobal();
+  console.log(games);
+  console.log(match);
+
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
     return () => {
@@ -21,24 +24,19 @@ function Court({ match, history }) {
       case "Escape":
         history.goBack();
         break;
+
       default:
         break;
     }
   };
   useEffect(() => {
     if (match.params.id) {
-      globalAction.setClubId(match.params.id);
+      globalAction.setClubId(match.params.clubI);
       globalAction.setClubName(match.params.clubName);
     }
   }, [match.params.id]);
 
-  if (numberOfGames && numberOfGames === 0) {
-    return (
-      <>
-        <Player clubId={match.params.clubId} />
-      </>
-    );
-  } else
+  if (numberOfGames && games) {
     return (
       <>
         {numberOfGames && (
@@ -49,10 +47,16 @@ function Court({ match, history }) {
             poster={games[gamesIndex].thumbnailURL}
             stream={games}
             match={match}
-            
           />
         )}
       </>
     );
+  } else {
+    return (
+      <>
+        <Player clubId={match.params.clubId} />
+      </>
+    );
+  }
 }
 export default withRouter(Court);
