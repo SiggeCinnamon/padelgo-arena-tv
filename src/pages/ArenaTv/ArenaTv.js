@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import Player from "../../components/Player";
-import { withRouter } from "react-router-dom";
-import useGlobal from "../../vault";
+import { withRouter, useParams } from "react-router-dom";
+import useRouteQuery from "../../hooks/useRouteQuery";
 
-const ArenaTv = ({ match, history }) => {
-  const [globalState] = useGlobal();
+const ArenaTv = ({ history }) => {
+  const params = useParams();
+  const query = useRouteQuery();
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
@@ -27,7 +28,11 @@ const ArenaTv = ({ match, history }) => {
 
   return (
     <>
-      <Player clubId={match.params.id} clubName={globalState.clubName} />
+      <Player
+        clubId={params.clubId}
+        clubName={params.clubName}
+        include={query.has("include") ? query.get("include") : true}
+      />
     </>
   );
 };
