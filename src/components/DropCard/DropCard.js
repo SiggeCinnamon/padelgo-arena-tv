@@ -13,6 +13,9 @@ import useGlobal from "../../vault";
  * @param  {Array} pOptions The option elements within the SELECT
  * @param  {String} optionHeader The very first option in the SELECT, acts as a description of what the options are
  * @param  {String} linkTo React-Router-DOM link URL
+ * @param  {String} clubName A String representing the clubs name
+ * @param  {Boolean} useOptionName Boolean that defines whether or not to use the selected options name as club name
+ * @param  {Boolean} toggleSwitch Boolean that informs the card whether it should have a ToggleSwitch component or not
  * @return {JSX} React JSX Rendering
  */
 const DropCard = ({
@@ -21,6 +24,8 @@ const DropCard = ({
   pOptions = ["P_OPTIONS"],
   optionHeader = "OPTION HEADER",
   linkTo = "#",
+  clubName = undefined,
+  useOptionName = false,
   toggleSwitch = false
 }) => {
   const [options, setOptions] = useState(pOptions);
@@ -97,7 +102,10 @@ const DropCard = ({
               : styles.__dashboard_btn + " btn btn-rounded"
           }
           to={{
-            pathname: `${linkTo.replace(":clubId", option).replace(":clubName", name)}`,
+            pathname: `${linkTo
+              .replace(":clubId", option)
+              .replace(":clubName", useOptionName ? name : clubName)
+              .replace(linkTo.includes(":courtId") && ":courtId", option)}`,
             state: {
               clubId: option,
               name: name
@@ -116,7 +124,10 @@ DropCard.propTypes = {
   textBody: PropTypes.string,
   pOptions: PropTypes.array,
   optionHeader: PropTypes.string,
-  linkTo: PropTypes.string
+  linkTo: PropTypes.string,
+  clubName: PropTypes.string,
+  useOptionName: PropTypes.bool,
+  toggleSwitch: PropTypes.bool
 };
 
 export default DropCard;
