@@ -10,14 +10,6 @@
     align-items     : center;
     justify-content : center;
     background-color: black;
-    
-}
-.errorContainer{
-    display        : flex;
-    justify-content: space-evenly;
-    flex-wrap      : wrap;
-    align-items    : center;
-    padding-top    : 200px;
 }
 
 .BottomChannelName {
@@ -32,6 +24,7 @@
     font-weight: 700;
     line-height: 84px;
     margin     : auto;
+
 }
 
 .scoreContainer {
@@ -41,7 +34,6 @@
 
 .imgcontainer {
     position: absolute;
-
 }
 
 .avatarOverlap {
@@ -55,8 +47,9 @@
     margin-right   : 25px;
     padding-left   : 25px;
     padding-right  : 25px;
-    align-items    : center;
-    justify-content: center;
+    text-align     : left;
+    align-items     : center;
+  
     color          : white;
 }
 
@@ -87,7 +80,7 @@
 }
 
 @media screen and (min-width: 3840px) {
-    wrapperScoreboard {
+    .wrapperScoreboard {
         display         : flex;
         width           : 100%;
         height          : 100%;
@@ -96,39 +89,39 @@
         align-items     : center;
         justify-content : center;
         background-color: black;
-        
+
     }
-    
-    
+
+
     .BottomChannelName {
         padding-bottom: 10px;
     }
-    
+
     .scoreboardContainer {
-       
+
         font-family: 'Roboto Slab', serif;
         font-size  : 128px;
         font-style : bold;
         font-weight: 700;
         line-height: 198px;
-       
+
     }
-    
+
     .scoreContainer {
         display: flex;
-        
+
         margin-left: -400px;
     }
-    
+
     .imgcontainer {
         position: absolute;
-    
+
     }
-    
+
     .avatarOverlap {
         width: 100%;
     }
-    
+
     .playerName {
         display        : flex;
         min-width      : 1200px;
@@ -140,11 +133,11 @@
         justify-content: center;
         color          : white;
     }
-    
+
     .setContainer {
         color: white;
     }
-    
+
     .gameContainer {
         display        : flex;
         height         : 240px;
@@ -153,7 +146,7 @@
         align-items    : center;
         justify-content: center;
     }
-    
+
     .currentScore {
         display        : flex;
         height         : 240px;
@@ -162,7 +155,7 @@
         align-items    : center;
         justify-content: center;
     }
-    
+
     .stupidSeparator {
         margin-bottom: 40px;
     }

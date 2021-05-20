@@ -1,4 +1,5 @@
 import axios from "axios";
+import GTM from "../utilities/GTM";
 
 async function getCourtsAPIGETResponse(route) {
   try {
@@ -6,17 +7,14 @@ async function getCourtsAPIGETResponse(route) {
 
     const config = {
       baseURL: process.env.REACT_APP_COURTS_API_BASE_URL,
-      method: "GET",
+      method: "GET"
     };
 
     try {
       const result = await axios.create(config).get(route);
       return result.data;
     } catch (error) {
-      if (
-        typeof error.response !== "undefined" &&
-        error.response.status === 404
-      ) {
+      if (typeof error.response !== "undefined" && error.response.status === 404) {
         console.error("Got 404 response from court API");
         return false;
       } else {
@@ -31,6 +29,11 @@ async function getCourtsAPIGETResponse(route) {
   }
 }
 
-export async function getCourtsWithClubId(clubId) {
+export async function getCourtsWithClubId(clubId, clubName) {
+  GTM("media_request", {
+    club_id: clubId,
+    club_name: clubName
+  });
+
   return await getCourtsAPIGETResponse(`/Courts/${clubId}`);
 }

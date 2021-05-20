@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getPopularMedia } from "../../services/Media.js";
+import PropTypes from "prop-types";
+import { getMediaWithClubId } from "../../services/Media.js";
 import VideoPlayer from "../../components/VideoPlayer";
 import styles from "./Player.module.scss";
 import usePipeline from "../../hooks/usePipeline.js";
@@ -9,72 +10,56 @@ import usePipeline from "../../hooks/usePipeline.js";
  * This component handles the conditionals and fetching of required data.
  * @author Christoffer Hansen
  *
- * @param  {Number} clubId A Number representing the club that the user picked from Home page
+ * @param  {String} clubId A String representing the clubs id that the user picked from Home page
+ * @param  {String} clubName A String representing the clubs name that the user picked from Home page
+ * @param  {String} include A String that informs Player whether to include livestreams or not
  * @return {JSX} React JSX Rendering
  */
-const Player = ({ clubId }) => {
+const Player = ({ clubId, clubName, include = true }) => {
   const [popular, setPopular] = useState([]);
   const [sources, setSources] = usePipeline(popular);
 
   useEffect(() => {
-    fetchPopularMedia(1, 20);
+    fetchMedia();
   }, []);
 
   const onPlaylistAtEnd = async () => {
-    await fetchPopularMedia(1, 20);
+    await fetchMedia();
   };
 
-  const fetchPopularMedia = async (page = 1, take = 20, sortOrder = 0) => {
-    const liveStreamData = await getPopularMedia({
-      clubId: Number(clubId),
-      stream: false,
-      liveStream: true,
-      highlight: false,
-      video: false,
-      page: page,
-      take: take,
-      sortOrder: sortOrder,
-    });
+  const fetchMedia = async () => {
+    // include === "true" ? await getMediaWithClubId(clubId, clubName) : []
+    const showcaseData = await getMediaWithClubId(clubId, clubName);
 
-    const highlightData = await getPopularMedia({
-      clubId: Number(clubId),
-      stream: false,
-      liveStream: false,
-      highlight: true,
-      video: false,
-      page: page,
-      take: take,
-      sortOrder: sortOrder,
-    });
-
-    setPopular(liveStreamData.length > 0 ? await spliceData(liveStreamData, highlightData) : highlightData);
-  };
-
-  const spliceData = async (streamData, highData) => {
-    let splicedData = [];
-    let diff = Math.round(highData.length / streamData.length);
-    let x = 0;
-    let y = 0;
-
-    for (let i = 0; i < highData.length; i++) {
-      if (i === y) {
-        splicedData.push(streamData[x]);
-        splicedData.push(highData[i]);
-        x++;
-        y += diff;
-      } else {
-        splicedData.push(highData[i]);
-      }
+    if (showcaseData) {
+      setPopular(showcaseData);
+    } else {
+      // It's empty OMFG!
     }
-
-    return splicedData;
   };
 
   return (
     <div className={styles.__arenatv_wrapper}>
-      <div className={styles.__arenatv_container_video}>{sources && <VideoPlayer src={sources} controls={false} autoplay={true} onPlaylistAtEnd={onPlaylistAtEnd} />}</div>
+      <div className={styles.__arenatv_container_video}>
+        {sources && (
+          <VideoPlayer
+            src={sources}
+            controls={false}
+            autoplay={true}
+            onPlaylistAtEnd={onPlaylistAtEnd}
+            clubId={clubId}
+            clubName={clubName}
+          />
+        )}
+      </div>
     </div>
   );
+};
+
+Player.propTypes = {
+  clubId: PropTypes.string,
+  clubName: PropTypes.string,
+  include: PropTypes.string
 };
 
 export default Player;

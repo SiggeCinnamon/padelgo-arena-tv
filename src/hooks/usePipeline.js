@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getStreamURLWithLiveStreamId } from "../services/Streams.js";
+import useGlobal from "../vault";
 
 /**
  * A custom hook used for creating an array of sources in a specific structure that the Video player can play.
@@ -11,6 +12,7 @@ import { getStreamURLWithLiveStreamId } from "../services/Streams.js";
  */
 const usePipeline = (popular) => {
   const [sources, setSources] = useState([]);
+  const [globalState] = useGlobal();
 
   useEffect(() => {
     const pipeIt = async () => {
@@ -25,7 +27,10 @@ const usePipeline = (popular) => {
     const pipeline = [];
 
     for (const d of data) {
-      const stream = d.mediaType === "LiveStream" ? await getStreamURLWithLiveStreamId(d.internalId) : "";
+      const stream =
+        d.mediaType === "LiveStream"
+          ? await getStreamURLWithLiveStreamId(d.internalId, globalState.clubId, globalState.clubName)
+          : "";
 
       pipeline.push({
         sources: [
@@ -34,10 +39,15 @@ const usePipeline = (popular) => {
               process.env.NODE_ENV === "development"
                 ? "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 : d.mediaType === "LiveStream"
-                  ? stream.url
-                  : d.url,
-            type: process.env.NODE_ENV === "development" ? "video/mp4" : d.mediaType === "LiveStream" ? "application/x-mpegURL" : "video/mp4",
-          },
+                ? stream.url
+                : d.url,
+            type:
+              process.env.NODE_ENV === "development"
+                ? "video/mp4"
+                : d.mediaType === "LiveStream"
+                ? "application/x-mpegURL"
+                : "video/mp4"
+          }
         ],
         poster:
           process.env.NODE_ENV === "development"
@@ -47,6 +57,8 @@ const usePipeline = (popular) => {
         channel: d.channel,
         description: d.description,
         avatar: `https://static.padelgo.tv/profilepictures/600x600/${d.channel}.jpeg`,
+        internalId: d.internalId,
+        clubName: d.clubName
       });
     }
 

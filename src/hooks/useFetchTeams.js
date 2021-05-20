@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import { getTeamsOnStream } from '../services/Streams.js';
+import { useEffect, useState } from "react";
+import { getTeamsOnStream } from "../services/Streams.js";
+import useGlobal from "../vault";
 
 const useFetchTeams = (streamId) => {
   const [teams, setTeams] = useState([]);
+  const [globalState] = useGlobal();
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -28,6 +30,11 @@ const useFetchTeams = (streamId) => {
     }
   }, [streamId]);
 
+  const fetchTeams = async () => {
+    await getTeamsOnStream(streamId, globalState.clubId, globalState.clubName).then((teams) => {
+      setTeams({ result: teams });
+    });
+  };
   return [teams, setTeams];
 };
 

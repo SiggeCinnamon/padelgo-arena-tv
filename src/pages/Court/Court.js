@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
-import Scoreboard from '../../components/ScoreBoard/ScoreBoard.js';
-import Player from '../../components/Player';
-import useFetchLiveStream from '../../hooks/useFetchLiveStream';
-import HashGen from '../../utilities/HashGen.js';
+import React, { useEffect } from "react";
+import { withRouter } from "react-router-dom";
+import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
+import Player from "../../components/Player";
+import useLookForGames from "../../hooks/useLookForGames";
+import useGlobal from "../../vault";
 
 function Court({ match, history }) {
-  const [id, setId] = useState(match.params.id);
-  const [idTemp, setIdTemp] = useState(match.params.id);
-  const [liveStream, setLiveStream] = useFetchLiveStream(id);
-  const [liveStreamTemp, setLiveStreamTemp] = useFetchLiveStream(idTemp);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIdTemp(new Number(id));
-    }, 10000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  const [games, setGames, numberOfGames, gamesIndex] = useLookForGames(match.params.clubId);
+  const [globalState, globalAction] = useGlobal();
 
   useEffect(() => {
     const matchPlaying = async () => {
@@ -46,16 +35,47 @@ function Court({ match, history }) {
   
     document.addEventListener('keydown', onKeyDownHandler);
     return () => {
-      document.removeEventListener('keydown', onKeyDownHandler);
+      document.removeEventListener("keydown", onKeyDownHandler);
     };
   }, []);
 
+  const onKeyDownHandler = (event) => {
+    if (event.defaultPrevented) return;
+    switch (event.key) {
+      case "Escape":
+        history.goBack();
+        break;
+      default:
+        break;
+    }
+  };
+  useEffect(() => {
+    if (match.params.id) {
+      globalAction.setClubId(match.params.id);
+      globalAction.setClubName(match.params.clubName);
+    }
+  }, [match.params.id]);
 
-  if (liveStream.result.length === 0) {
-    return <Player clubId={match.params.clubId} />;
-  } else {
-    return <Scoreboard liveStreamId={liveStream.result[0].id} poster={liveStream.result[0].thumbnailURL} match={match} />;
-  }
+  if (numberOfGames && numberOfGames === 0) {
+    return (
+      <>
+        <Player clubId={match.params.clubId} />
+      </>
+    );
+  } else
+    return (
+      <>
+        {numberOfGames && (
+          <Scoreboard
+            clubName={games[gamesIndex].clubName}
+            liveStreamId={games[gamesIndex].liveEventExtId}
+            fTeams={games[gamesIndex].id}
+            poster={games[gamesIndex].thumbnailURL}
+            stream={games}
+            match={match}
+          />
+        )}
+      </>
+    );
 }
-
 export default withRouter(Court);

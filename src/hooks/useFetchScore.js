@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { getScoresWithLiveStreamId } from '../services/Scores.js';
+import { useEffect, useState } from "react";
+import { getScoresWithLiveStreamId } from "../services/Scores.js";
+import useGlobal from "../vault";
 
 /**
  * A custom hook used for fetching current score information from a stream with specified liveStreamId from the API
@@ -10,6 +11,7 @@ import { getScoresWithLiveStreamId } from '../services/Scores.js';
  */
 const useFetchScore = (streamId) => {
   const [score, setScore] = useState([]);
+  const [globalState] = useGlobal();
 
   useEffect(() => {
     if (streamId !== null) {
@@ -25,6 +27,11 @@ const useFetchScore = (streamId) => {
     }
   }, [streamId]);
 
+  const fetchScore = async () => {
+    const fScore = await getScoresWithLiveStreamId(streamId, globalState.clubId, globalState.clubName).then((score) => {
+      setScore({ result: score });
+    });
+  };
   return [score, setScore];
 };
 

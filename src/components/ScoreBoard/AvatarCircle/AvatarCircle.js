@@ -19,16 +19,12 @@ export default function AvatarCircle({ channelName, width, borderColor }) {
   }, [channelName, width]);
 
   const setImageByChannelAndWidth = (channelName, width) => {
-    if (channelName === "__NoName__") {
-      setImage(
-        `https://static.padelgo.tv/profilepictures/600x600/default.jpeg?cache=${new Date().getTime()}`
-      );
+    if (channelName === "avatarCirclePlaceholder") {
+      setImage(`https://static.padelgo.tv/profilepictures/600x600/default.jpeg?cache=${new Date().getTime()}`);
     } else {
       switch (width) {
         case 64:
-          setImage(
-            `https://static.padelgo.tv/profilepictures/64x64/${channelName}.jpeg?cache=${new Date().getTime()}`
-          );
+          setImage(`https://static.padelgo.tv/profilepictures/64x64/${channelName}.jpeg?cache=${new Date().getTime()}`);
           break;
         case 200:
           setImage(
@@ -41,9 +37,7 @@ export default function AvatarCircle({ channelName, width, borderColor }) {
           );
           break;
         default:
-          setImage(
-            `https://static.padelgo.tv/profilepictures/600x600/default.jpeg?cache=${new Date().getTime()}`
-          );
+          setImage(`https://static.padelgo.tv/profilepictures/600x600/default.jpeg?cache=${new Date().getTime()}`);
           break;
       }
     }
@@ -54,9 +48,10 @@ export default function AvatarCircle({ channelName, width, borderColor }) {
       {image && (
         <img
           src={image}
+          alt={channelName}
           className={styles.__avatarcircle_avatar}
           style={
-            channelName && channelName === "__NoName__"
+            channelName && channelName === "avatarCirclePlaceholder"
               ? { opacity: 0 }
               : { border: "5px solid " + borderColor }
           }
@@ -64,7 +59,6 @@ export default function AvatarCircle({ channelName, width, borderColor }) {
             e.target.onerror = null;
             setImageByChannelAndWidth("default", width);
           }}
-          alt={channelName}
         />
       )}
     </>

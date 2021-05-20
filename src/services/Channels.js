@@ -1,20 +1,18 @@
 import axios from "axios";
+import GTM from "../utilities/GTM";
 
 async function getChannelsAPIGETResponse(route) {
   try {
     const config = {
       baseURL: process.env.REACT_APP_CHANNELS_API_BASE_URL,
-      method: "GET",
+      method: "GET"
     };
 
     try {
       const result = await axios.create(config).get(route);
       return result.data;
     } catch (error) {
-      if (
-        typeof error.response !== "undefined" &&
-        error.response.status === 404
-      ) {
+      if (typeof error.response !== "undefined" && error.response.status === 404) {
         console.error("Got 404 response from channels API");
         return false;
       } else {
@@ -29,6 +27,11 @@ async function getChannelsAPIGETResponse(route) {
   }
 }
 
-export async function getChannelsInfoWithChannelName(channelName) {
+export async function getChannelsInfoWithChannelName(channelName, clubId, clubName) {
+  GTM("media_request", {
+    club_id: clubId,
+    club_name: clubName
+  });
+
   return await getChannelsAPIGETResponse(`/Channels/channel/${channelName}`);
 }

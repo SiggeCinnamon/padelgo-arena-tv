@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./DropCard.module.scss";
-
+import ToggleSwitch from "../../components/ToggleSwitch";
+import useGlobal from "../../vault";
 /**
  * Bootstrap Component with a SELECT
  * @author Christoffer Hansen
@@ -12,6 +13,9 @@ import styles from "./DropCard.module.scss";
  * @param  {Array} pOptions The option elements within the SELECT
  * @param  {String} optionHeader The very first option in the SELECT, acts as a description of what the options are
  * @param  {String} linkTo React-Router-DOM link URL
+ * @param  {String} clubName A String representing the clubs name
+ * @param  {Boolean} useOptionName Boolean that defines whether or not to use the selected options name as club name
+ * @param  {Boolean} toggleSwitch Boolean that informs the card whether it should have a ToggleSwitch component or not
  * @return {JSX} React JSX Rendering
  */
 const DropCard = ({
@@ -20,9 +24,20 @@ const DropCard = ({
   pOptions = ["P_OPTIONS"],
   optionHeader = "OPTION HEADER",
   linkTo = "#",
+  clubName = undefined,
+  useOptionName = false,
+  toggleSwitch = false
 }) => {
   const [options, setOptions] = useState(pOptions);
   const [option, setOption] = useState("-1");
+  const [name, setName] = useState("");
+  const [globalState, globalActions] = useGlobal();
+  const [value, setValue] = useState(globalState.cycleScoreBoard !== undefined ? globalState.cycleScoreBoard : false);
+
+  const onChange = (e) => {
+    globalActions.setCycleScoreBoard(!value);
+    setValue(!value);
+  };
 
   useEffect(() => {
     setOptions(pOptions);
@@ -33,37 +48,40 @@ const DropCard = ({
       <div className={styles.__dashboard_card_top + " card-top"}>
         <p>{textHeader}</p>
       </div>
-      <div className='card-body'>
-        <p
-          className={styles.__dashboard_card_text + " card-text"}
-          style={{ whiteSpace: "pre-line" }}>
+      <div className="card-body">
+        <p className={styles.__dashboard_card_text + " card-text"} style={{ whiteSpace: "pre-line" }}>
           {textBody}
         </p>
+        <div style={{ textAlign: "center" }}>
+          {toggleSwitch && <span className={styles.__dashboard_card_text + " card-text"}>Cycle Scoreboards? </span>}
+          {toggleSwitch && (
+            <ToggleSwitch className="__dashboard_scoreboard_toggleswitch" value={value} onChange={onChange} />
+          )}
+        </div>
       </div>
-
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}>
+      <div className={styles.__dashboard_div_btn} style={{ marginBottom: toggleSwitch ? "-20%" : "0%" }}>
         <div className={styles.__dashboard_dropdown}>
-          <div className='btn-group' role='group' aria-label='Court selector'>
-            <div className='select-div'>
+          <div className="btn-group" role="group" aria-label="Court selector">
+            <div className="select-div">
               <select
-                className='form-select'
-                aria-label='Default select example'
-                value={option}
+                style={{ marginBottom: toggleSwitch ? "5%" : "0%" }}
+                className="form-select"
+                aria-label="Default select example"
+                value={option + "<->" + name}
+                disabled={toggleSwitch ? value : false}
                 onChange={(e) => {
-                  setOption(e.currentTarget.value);
-                }}>
-                <option value='-1' style={{ fontWeight: "bold" }}>
+                  const data = e.currentTarget.value.split("<->");
+                  setOption(data[0]);
+                  setName(data[1]);
+                }}
+              >
+                <option value="-1" style={{ fontWeight: "bold" }}>
                   {optionHeader}
                 </option>
-                <option disabled='disabled'>--------</option>
+                <option disabled="disabled">--------</option>
                 {options &&
                   options.map((o, i) => (
-                    <option value={o.id} key={o.id + "-" + String(i)}>
+                    <option value={o.id + "<->" + o.name} key={o.id + "-" + String(i)}>
                       {o.name}
                     </option>
                   ))}
@@ -75,11 +93,25 @@ const DropCard = ({
       <div className={styles.__dashboard_div_btn}>
         <Link
           className={
-            option === "-1"
+            toggleSwitch && value
+              ? styles.__dashboard_btn + " btn btn-rounded"
+              : toggleSwitch && !value && option === "-1"
+              ? styles.__dashboard_btn + " btn btn-rounded disabled"
+              : !toggleSwitch && option === "-1"
               ? styles.__dashboard_btn + " btn btn-rounded disabled"
               : styles.__dashboard_btn + " btn btn-rounded"
           }
-          to={`${linkTo.replace(":id", option)}`}>
+          to={{
+            pathname: `${linkTo
+              .replace(":clubId", option)
+              .replace(":clubName", useOptionName ? name : clubName)
+              .replace(linkTo.includes(":courtId") && ":courtId", option)}`,
+            state: {
+              clubId: option,
+              name: name
+            }
+          }}
+        >
           Enter
         </Link>
       </div>
@@ -93,6 +125,9 @@ DropCard.propTypes = {
   pOptions: PropTypes.array,
   optionHeader: PropTypes.string,
   linkTo: PropTypes.string,
+  clubName: PropTypes.string,
+  useOptionName: PropTypes.bool,
+  toggleSwitch: PropTypes.bool
 };
 
 export default DropCard;

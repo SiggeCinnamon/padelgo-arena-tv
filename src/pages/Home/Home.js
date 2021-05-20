@@ -13,10 +13,11 @@ const Home = () => {
       <NavBar />
       <div className={styles.__dashboard_container + " container"}>
         <DropCard
-          textHeader='Clubs'
-          textBody='Pick a club from the list below'
-          pOptions={clubs}
-          optionHeader='Clubs'
+          textHeader="Clubs"
+          textBody="Pick a club from the list below"
+          pOptions={clubs.sort((a, b) => a.name.localeCompare(b.name, "se", { numeric: true }))}
+          optionHeader="Clubs"
+          useOptionName={true}
           linkTo={Routes.DASHBOARD}
         />
       </div>
