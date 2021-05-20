@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import Player from "../../components/Player";
 import { withRouter, useParams } from "react-router-dom";
 import useRouteQuery from "../../hooks/useRouteQuery";
+import useGTMData from "../../hooks/useGTMData";
 
 const ArenaTv = ({ history }) => {
   const params = useParams();
   const query = useRouteQuery();
+  const [clubId, clubName] = useGTMData(params.clubId, params.clubName);
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
