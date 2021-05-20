@@ -8,6 +8,7 @@ import useGlobal from "../../vault";
 function Court({ match, history }) {
   const [games, setGames, numberOfGames, gamesIndex] = useLookForGames(match.params.clubId);
   const [globalState, globalAction] = useGlobal();
+
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
     return () => {
@@ -49,7 +50,6 @@ function Court({ match, history }) {
             poster={games[gamesIndex].thumbnailURL}
             stream={games}
             match={match}
-            
           />
         )}
       </>

@@ -33,6 +33,7 @@ const DropCard = ({
     globalActions.setCycleScoreBoard(!value);
     setValue(!value);
   };
+
   useEffect(() => {
     setOptions(pOptions);
   }, [pOptions]);
