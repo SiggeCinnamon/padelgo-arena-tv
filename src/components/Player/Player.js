@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { getMediaWithClubId } from "../../services/Media.js";
 import VideoPlayer from "../../components/VideoPlayer";
 import styles from "./Player.module.scss";
 import usePipeline from "../../hooks/usePipeline.js";
-import useGlobal from "../../vault";
 
 /**
  * A main component that uses the sub-component VideoPlayer for rendering a video player.
  * This component handles the conditionals and fetching of required data.
  * @author Christoffer Hansen
  *
- * @param  {Number} clubId A Number representing the club that the user picked from Home page
+ * @param  {String} clubId A String representing the clubs id that the user picked from Home page
+ * @param  {String} clubName A String representing the clubs name that the user picked from Home page
+ * @param  {String} include A String that informs Player whether to include livestreams or not
  * @return {JSX} React JSX Rendering
  */
-const Player = ({ clubId, clubName }) => {
+const Player = ({ clubId, clubName, include = true }) => {
   const [popular, setPopular] = useState([]);
   const [sources, setSources] = usePipeline(popular);
-  const [globalState] = useGlobal();
 
   useEffect(() => {
     fetchMedia();
@@ -27,7 +28,8 @@ const Player = ({ clubId, clubName }) => {
   };
 
   const fetchMedia = async () => {
-    const showcaseData = globalState.showLivestreams ? await getMediaWithClubId(clubId, clubName) : [];
+    // include === "true" ? await getMediaWithClubId(clubId, clubName) : []
+    const showcaseData = await getMediaWithClubId(clubId, clubName);
 
     if (showcaseData) {
       setPopular(showcaseData);
@@ -52,6 +54,12 @@ const Player = ({ clubId, clubName }) => {
       </div>
     </div>
   );
+};
+
+Player.propTypes = {
+  clubId: PropTypes.string,
+  clubName: PropTypes.string,
+  include: PropTypes.string
 };
 
 export default Player;
