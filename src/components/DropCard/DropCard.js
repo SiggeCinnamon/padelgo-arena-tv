@@ -97,8 +97,9 @@ const DropCard = ({
               : styles.__dashboard_btn + " btn btn-rounded"
           }
           to={{
-            pathname: `${linkTo.replace(":id", option)}`,
+            pathname: `${linkTo.replace(":clubId", option).replace(":clubName", name)}`,
             state: {
+              clubId: option,
               name: name
             }
           }}
