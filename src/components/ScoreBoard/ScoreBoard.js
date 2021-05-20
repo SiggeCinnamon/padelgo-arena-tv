@@ -16,7 +16,7 @@ import useFetchTeams from "../../hooks/useFetchTeams";
  * @param  {String} poster A String that represents the background image that should be displayed
  * @return {JSX} React JSX Rendering
  */
-export default function ScoreBoard({ clubName, liveStreamId, poster, stream, fTeams, match }) {
+export default function ScoreBoard({ clubName, liveStreamId, poster, stream, fTeams }) {
   const [teams, setTeams] = useFetchTeams(fTeams);
   const [score, setScore] = useFetchScore(liveStreamId);
 
