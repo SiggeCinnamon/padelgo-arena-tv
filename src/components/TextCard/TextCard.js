@@ -1,5 +1,5 @@
 // General imports
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./TextCard.module.scss";
@@ -15,15 +15,19 @@ import ToggleSwitch from "../../components/ToggleSwitch";
  * @param  {String} textHeader Text that appears as the header on the cards top area
  * @param  {String} textBody Text that appears as the body on the cards middle area
  * @param  {String} linkTo React-Router-DOM link URL
+ * @param  {Object} toggleSwitch An object consisting of keys used to check if it should render ToggleSwitch
+ * @param  {Function} onToggleChange A function to be called when ToggleSwitch state changes
  * @return {JSX} React JSX Rendering
  */
-const TextCard = ({ textHeader = "TEXT HEADER", textBody = "TEXT BODY", linkTo = "#", toggleSwitch = false }) => {
-  const [globalState, globalActions] = useGlobal();
-  const [value, setValue] = useState(globalState.showLivestreams !== undefined ? globalState.showLivestreams : true);
-
+const TextCard = ({
+  textHeader = "TEXT HEADER",
+  textBody = "TEXT BODY",
+  linkTo = "#",
+  toggleSwitch = { show: false, value: -1 },
+  onToggleChange = () => {}
+}) => {
   const onChange = (e) => {
-    globalActions.setShowLivestreams(!value);
-    setValue(!value);
+    onToggleChange();
   };
 
   return (
@@ -37,8 +41,12 @@ const TextCard = ({ textHeader = "TEXT HEADER", textBody = "TEXT BODY", linkTo =
             {textBody}
           </p>
           <div style={{ textAlign: "center" }}>
-            {toggleSwitch && <span className={styles.__dashboard_card_text + " card-text"}>Include livestreams? </span>}
-            {toggleSwitch && <ToggleSwitch name="__dashboard_card_toggleswitch" value={value} onChange={onChange} />}
+            {toggleSwitch.show && (
+              <span className={styles.__dashboard_card_text + " card-text"}>Include livestreams? </span>
+            )}
+            {toggleSwitch.show && (
+              <ToggleSwitch name="__dashboard_card_toggleswitch" value={toggleSwitch.value} onChange={onChange} />
+            )}
           </div>
         </div>
       </div>
@@ -55,7 +63,8 @@ TextCard.propTypes = {
   textHeader: PropTypes.string,
   textBody: PropTypes.string,
   linkTo: PropTypes.string,
-  toggleSwitch: PropTypes.bool
+  toggleSwitch: PropTypes.object,
+  onToggleChange: PropTypes.func
 };
 
 export default TextCard;
