@@ -7,6 +7,7 @@ import useFetchCourts from "../../hooks/useFetchCourts.js";
 import TextCard from "../../components/TextCard";
 import DropCard from "../../components/DropCard";
 import useGlobal from "../../vault";
+import { getClubDataWithClubId } from "../../services/Clubs.js";
 
 function Dashboard({ history }) {
   const params = useParams();
@@ -14,16 +15,16 @@ function Dashboard({ history }) {
   const [courts, setCourts] = useFetchCourts(params.clubId);
 
   useEffect(() => {
-    if (history.location.state.name && globalState.clubName !== history.location.state.name) {
-      globalAction.setClubName(history.location.state.name);
-    }
-  }, [history]);
-
-  useEffect(() => {
     if (params.clubId) {
       globalAction.setClubId(params.clubId);
     }
   }, [params.clubId]);
+
+  useEffect(() => {
+    if (params.clubName) {
+      globalAction.setClubName(params.clubName);
+    }
+  }, [params.clubName]);
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
@@ -46,7 +47,7 @@ function Dashboard({ history }) {
 
   return (
     <>
-      <NavBar clubName={history.location.state.name} />
+      <NavBar clubName={params.clubName} />
       <div className={styles.__dashboard_container + " container-fluid"}>
         <TextCard
           textHeader="Showcase"
