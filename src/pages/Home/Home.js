@@ -19,6 +19,8 @@ const Home = () => {
           optionHeader="Clubs"
           useOptionName={true}
           linkTo={Routes.DASHBOARD}
+          toggleSwitch = { false }
+
         />
       </div>
     </>
