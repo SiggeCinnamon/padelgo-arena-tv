@@ -8,11 +8,7 @@ import useGTMData from "../../hooks/useGTMData";
 
 function Court({ history, rotates = true }) {
   const params = useParams();
-  const [games, setGames, numberOfGames, gamesIndex] = useLookForGames(params.clubId,rotates);
-  
-  const [globalState, globalAction] = useGlobal();
-  const [clubId, clubName] = useGTMData(params.id, params.clubName);
-
+  const [games, setGames, numberOfGames, gamesIndex] = useLookForGames(params.clubId, rotates);
 
   useEffect(() => {
     const onKeyDownHandler = (event) => {
@@ -58,7 +54,7 @@ function Court({ history, rotates = true }) {
             liveStreamId={games[gamesIndex].liveEventExtId}
             fTeams={games[gamesIndex].id}
             poster={games[gamesIndex].thumbnailURL}
-            stream={games}
+            stream={games[gamesIndex]}
           />
         )}
       </>

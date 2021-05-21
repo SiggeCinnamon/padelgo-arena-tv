@@ -1,8 +1,9 @@
-import styles from './BottomChannelName.module.scss';
-import useFetchChannel from '../../../hooks/useFetchChannel';
+import styles from "./BottomChannelName.module.scss";
+import useFetchChannel from "../../../hooks/useFetchChannel";
 
-export default function BottomChannelName({ channels }) {
+export default function BottomChannelName({ channels, stream }) {
   const [channel] = useFetchChannel(channels);
+  console.log(stream);
   return (
     <>
       <div className={styles.__bottomchannelname_overlay_channel}>
@@ -19,7 +20,7 @@ export default function BottomChannelName({ channels }) {
             />
           )}
           <div className={styles.__bottomchannelname_overlay_channel_content_headers}>
-            {channel.result && <h6>{channel.result[0].description}</h6>}
+            {<h6>{stream.description}</h6>}
             {channel && channel.name && <h6 style={{ fontWeight: "400" }}>{channel.name}</h6>}
           </div>
         </div>

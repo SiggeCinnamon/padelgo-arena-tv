@@ -68,7 +68,7 @@ export default function ScoreBoard({ clubName, liveStreamId, poster, stream, fTe
             <BottomChannelName
               stream={stream}
               channels={
-                teams.result[0].players[teams.result && teams.result[0].players.length === 1 ? 0 : 1].channelName
+                teams.result[0].players[teams.result && teams.result[0].players.length > 1 ? 0 : 1].channelName
               }
             />
           )}
