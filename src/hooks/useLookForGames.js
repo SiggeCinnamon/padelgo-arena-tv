@@ -25,7 +25,7 @@ const useLookForGames = (clubId) => {
     forLoop();
     const interval = setInterval(() => {
       forLoop();
-    }, 5000);
+    }, 8000);
     return () => clearInterval(interval);
   }, [courts]);
 

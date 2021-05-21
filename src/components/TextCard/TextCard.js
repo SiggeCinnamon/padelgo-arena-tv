@@ -3,7 +3,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./TextCard.module.scss";
-import useGlobal from "../../vault";
 
 // Components
 import ToggleSwitch from "../../components/ToggleSwitch";

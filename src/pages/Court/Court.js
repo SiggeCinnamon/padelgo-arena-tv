@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, useParams } from "react-router-dom";
 import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
 import Player from "../../components/Player";
 import useLookForGames from "../../hooks/useLookForGames";
 import useGlobal from "../../vault";
+import useGTMData from "../../hooks/useGTMData";
 
-function Court({ match, history }) {
-  const [games, setGames, numberOfGames, gamesIndex] = useLookForGames(match.params.clubId);
+function Court({ history }) {
+  const params = useParams();
+  const [games, setGames, numberOfGames, gamesIndex] = useLookForGames(params.clubId);
   const [globalState, globalAction] = useGlobal();
+  const [clubId, clubName] = useGTMData(params.id, params.clubName);
 
   useEffect(() => {
     const matchPlaying = async () => {
@@ -49,17 +52,11 @@ function Court({ match, history }) {
         break;
     }
   };
-  useEffect(() => {
-    if (match.params.id) {
-      globalAction.setClubId(match.params.id);
-      globalAction.setClubName(match.params.clubName);
-    }
-  }, [match.params.id]);
 
   if (numberOfGames && numberOfGames === 0) {
     return (
       <>
-        <Player clubId={match.params.clubId} />
+        <Player clubId={params.clubId} />
       </>
     );
   } else
@@ -72,7 +69,6 @@ function Court({ match, history }) {
             fTeams={games[gamesIndex].id}
             poster={games[gamesIndex].thumbnailURL}
             stream={games}
-            match={match}
           />
         )}
       </>

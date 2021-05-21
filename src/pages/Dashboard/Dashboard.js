@@ -7,24 +7,14 @@ import useFetchCourts from "../../hooks/useFetchCourts.js";
 import TextCard from "../../components/TextCard";
 import DropCard from "../../components/DropCard";
 import useGlobal from "../../vault";
+import useGTMData from "../../hooks/useGTMData";
 
 function Dashboard({ history }) {
   const params = useParams();
   const [globalState, globalActions] = useGlobal();
   const [courts, setCourts] = useFetchCourts(params.clubId);
   const [value, setValue] = useState(globalState.showLivestreams !== undefined ? globalState.showLivestreams : true);
-
-  useEffect(() => {
-    if (params.clubId && globalState.clubId !== params.clubId) {
-      globalActions.setClubId(params.clubId);
-    }
-  }, [params.clubId]);
-
-  useEffect(() => {
-    if (params.clubName && globalState.clubName !== params.clubName) {
-      globalActions.setClubName(params.clubName);
-    }
-  }, [params.clubName]);
+  const [clubId, clubName] = useGTMData(params.clubId, params.clubName);
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
