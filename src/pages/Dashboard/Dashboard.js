@@ -25,7 +25,7 @@ function Dashboard({ history }) {
       document.removeEventListener("keydown", onKeyDownHandler);
     };
   }, []);
-
+  console.log('params',params);
   const onKeyDownHandler = (event) => {
     if (event.defaultPrevented) return;
 

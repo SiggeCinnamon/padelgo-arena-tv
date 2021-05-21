@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { withRouter, useParams } from "react-router-dom";
 import useFetchCourts from "./useFetchCourts";
 import { getStreamsWithCourtId } from "../services/Streams.js";
 import useGlobal from "../vault";
@@ -9,19 +10,26 @@ const useLookForGames = (clubId) => {
   const [numberOfGames, setNumberOfGames] = useState(null);
   const [gamesIndex, setGamesIndex] = useState(0);
   const [globalState, globalActions] = useGlobal();
-  // const [value, setValue] = useState(globalState.rotateScoreboard !== undefined ? globalState.rotateScoreboard : false);
-console.log("LFG",globalState);
+  const params = useParams();
+  console.log("öskdhugföuhsdföhsdf", params.courtId.substr(0, params.courtId.indexOf("?")));
   const forLoop = async (_) => {
-    let temp = [];
-    for (let index = 0; index < courts.length; index++) {
-      const ids = courts[index];
-      const stream = await getStreamsWithCourtId(ids.id);
-      if (stream.length > 0) {
-        temp.push(stream[0]);
+    if (globalState.rotateScoreboard === true) {
+      let temp = [];
+      for (let index = 0; index < courts.length; index++) {
+        const ids = courts[index];
+        const stream = await getStreamsWithCourtId(ids.id);
+        if (stream.length > 0) {
+          temp.push(stream[0]);
+        }
       }
+      setGames(temp);
+      setNumberOfGames(temp.length);
+    } else {
+      const stream = await getStreamsWithCourtId(params.courtId.substr(0, params.courtId.indexOf("?")));
+      setGames(stream);
+      console.log("stream", stream);
+      setNumberOfGames(1);
     }
-    setGames(temp);
-    setNumberOfGames(temp.length);
   };
 
   useEffect(() => {

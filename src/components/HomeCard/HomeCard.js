@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import styles from "./DropCard.module.scss";
-import ToggleSwitch from "../../components/ToggleSwitch";
+import styles from "./HomeCard.module.scss";
+import ToggleSwitch from "../ToggleSwitch";
 import useGlobal from "../../vault";
 /**
  * Bootstrap Component with a SELECT
@@ -77,7 +77,7 @@ const DropCard = ({
         </div>
       </div>
       <div className={styles.__dashboard_div_btn}>
-        <Link
+        <Link type="button"  className={styles.__dashboard_btn + " btn btn-rounded"}
           to={{
             pathname: `${linkTo
               .replace(":clubId", option)

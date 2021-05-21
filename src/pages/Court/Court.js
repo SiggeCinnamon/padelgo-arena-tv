@@ -6,26 +6,27 @@ import useLookForGames from "../../hooks/useLookForGames";
 import useGlobal from "../../vault";
 import useGTMData from "../../hooks/useGTMData";
 
-function Court({ history }) {
+function Court({ history, rotates = true }) {
   const params = useParams();
-  const [games, setGames, numberOfGames, gamesIndex] = useLookForGames(params.clubId);
+  const [games, setGames, numberOfGames, gamesIndex] = useLookForGames(params.clubId,rotates);
+  
   const [globalState, globalAction] = useGlobal();
   const [clubId, clubName] = useGTMData(params.id, params.clubName);
 
-
+  console.log("court:::",globalState);
   useEffect(() => {
     const onKeyDownHandler = (event) => {
       if (event.defaultPrevented) return;
       switch (event.key) {
-        case 'Escape':
+        case "Escape":
           history.goBack();
           break;
         default:
           break;
       }
     };
-  
-    document.addEventListener('keydown', onKeyDownHandler);
+
+    document.addEventListener("keydown", onKeyDownHandler);
     return () => {
       document.removeEventListener("keydown", onKeyDownHandler);
     };

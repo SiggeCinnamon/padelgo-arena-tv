@@ -15,7 +15,7 @@ import usePipeline from "../../hooks/usePipeline.js";
  * @param  {String} include A String that informs Player whether to include livestreams or not
  * @return {JSX} React JSX Rendering
  */
-const Player = ({ clubId, clubName, include = true }) => {
+const Player = ({ clubId, clubName}) => {
   const [popular, setPopular] = useState([]);
   const [sources, setSources] = usePipeline(popular);
 
