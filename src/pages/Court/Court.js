@@ -13,7 +13,7 @@ function Court({ history, rotates = true }) {
   const [globalState, globalAction] = useGlobal();
   const [clubId, clubName] = useGTMData(params.id, params.clubName);
 
-  console.log("court:::",globalState);
+
   useEffect(() => {
     const onKeyDownHandler = (event) => {
       if (event.defaultPrevented) return;

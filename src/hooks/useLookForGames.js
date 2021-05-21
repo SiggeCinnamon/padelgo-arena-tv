@@ -11,7 +11,7 @@ const useLookForGames = (clubId) => {
   const [gamesIndex, setGamesIndex] = useState(0);
   const [globalState, globalActions] = useGlobal();
   const params = useParams();
-  console.log("öskdhugföuhsdföhsdf", params.courtId.substr(0, params.courtId.indexOf("?")));
+
   const forLoop = async (_) => {
     if (globalState.rotateScoreboard === true) {
       let temp = [];
@@ -27,7 +27,6 @@ const useLookForGames = (clubId) => {
     } else {
       const stream = await getStreamsWithCourtId(params.courtId.substr(0, params.courtId.indexOf("?")));
       setGames(stream);
-      console.log("stream", stream);
       setNumberOfGames(1);
     }
   };

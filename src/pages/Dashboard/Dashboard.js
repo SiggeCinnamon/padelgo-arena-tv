@@ -18,14 +18,14 @@ function Dashboard({ history }) {
     globalState.rotateScoreboard !== undefined ? globalState.rotateScoreboard : false
   );
   const [clubId, clubName] = useGTMData(params.clubId, params.clubName);
-  console.log("DASH:::", globalState);
+
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
     return () => {
       document.removeEventListener("keydown", onKeyDownHandler);
     };
   }, []);
-  console.log('params',params);
+
   const onKeyDownHandler = (event) => {
     if (event.defaultPrevented) return;
 
