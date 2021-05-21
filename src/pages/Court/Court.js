@@ -12,17 +12,6 @@ function Court({ history }) {
   const [globalState, globalAction] = useGlobal();
   const [clubId, clubName] = useGTMData(params.id, params.clubName);
 
-  useEffect(() => {
-    const matchPlaying = async () => {
-      const liveStreamTempHash = await HashGen(liveStreamTemp);
-      const liveStreamHash = await HashGen(liveStream);
-      if (liveStreamTempHash !== liveStreamHash) {
-        setId(new Number(id));
-      }
-    };
-
-    matchPlaying();
-  }, [liveStreamTemp]);
 
   useEffect(() => {
     const onKeyDownHandler = (event) => {
@@ -53,7 +42,7 @@ function Court({ history }) {
     }
   };
 
-  if (numberOfGames && numberOfGames === 0) {
+  if (numberOfGames === 0) {
     return (
       <>
         <Player clubId={params.clubId} />

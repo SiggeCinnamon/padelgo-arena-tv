@@ -14,6 +14,9 @@ function Dashboard({ history }) {
   const [globalState, globalActions] = useGlobal();
   const [courts, setCourts] = useFetchCourts(params.clubId);
   const [value, setValue] = useState(globalState.showLivestreams !== undefined ? globalState.showLivestreams : true);
+  const [valueRotate, setValueRotate] = useState(
+    globalState.rotateScoreboard !== undefined ? globalState.rotateScoreboard : false
+  );
   const [clubId, clubName] = useGTMData(params.clubId, params.clubName);
 
   useEffect(() => {
@@ -40,6 +43,11 @@ function Dashboard({ history }) {
     setValue(!value);
   };
 
+  const onRotateToggleChange = (event) => {
+    globalActions.setRotateScoreboard(!valueRotate);
+    setValueRotate(!valueRotate);
+  };
+
   return (
     <>
       <NavBar clubName={params.clubName} />
@@ -53,6 +61,7 @@ function Dashboard({ history }) {
             Routes.ARENA_TV.replace(":clubId", params.clubId).replace(":clubName", params.clubName) +
             "?include=" +
             value
+            
           }
           toggleSwitch={{ show: true, value: value }}
           onToggleChange={onLivestreamToggleChange}
@@ -65,8 +74,13 @@ function Dashboard({ history }) {
           pOptions={courts.sort((a, b) => a.name.localeCompare(b.name, "se", { numeric: true }))}
           optionHeader="Courts"
           clubName={params.clubName}
-          linkTo={Routes.COURT.replace(":clubId", params.clubId)}
-          toggleSwitch={true}
+          linkTo={
+            Routes.COURT.replace(":clubId", params.clubId).replace(":clubName", params.clubName) +
+            "?rotate=" +
+            valueRotate
+          }
+          toggleSwitch={{ value: valueRotate }}
+          onToggleChange={onRotateToggleChange}
         />
       </div>
     </>

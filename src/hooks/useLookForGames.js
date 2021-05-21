@@ -21,6 +21,7 @@ const useLookForGames = (clubId) => {
     setNumberOfGames(temp.length);
   };
 
+
   useEffect(() => {
     forLoop();
     const interval = setInterval(() => {

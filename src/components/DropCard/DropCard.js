@@ -26,18 +26,23 @@ const DropCard = ({
   linkTo = "#",
   clubName = undefined,
   useOptionName = false,
-  toggleSwitch = false
+  toggleSwitch = { show: false, value: -1 },
+  onToggleChange = () => {}
 }) => {
+  const onChange = (e) => {
+    onToggleChange();
+  };
+
   const [options, setOptions] = useState(pOptions);
   const [option, setOption] = useState("-1");
   const [name, setName] = useState("");
   const [globalState, globalActions] = useGlobal();
-  const [value, setValue] = useState(globalState.cycleScoreBoard !== undefined ? globalState.cycleScoreBoard : false);
+  const [value, setValue] = useState(globalState.rotateScoreboard !== undefined ? globalState.rotateScoreboard : false);
 
-  const onChange = (e) => {
-    globalActions.setCycleScoreBoard(!value);
-    setValue(!value);
-  };
+  // const onChange = (e) => {
+  //   globalActions.setRotateScoreboard(!value);
+  //   setValue(!value);
+  // };
 
   useEffect(() => {
     setOptions(pOptions);
