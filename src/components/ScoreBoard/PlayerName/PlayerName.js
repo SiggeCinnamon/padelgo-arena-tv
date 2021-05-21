@@ -10,7 +10,7 @@ export default function PlayerName({ teamName, nameColor }) {
           color: nameColor === 0 ? "#FFF" : "#3D3D3D"
         }}
       >
-        <span>{teamName.length > 17 ? `${teamName.substring(0, 16)}...` : teamName}</span>
+        <span>{teamName.length > 16 ? `${teamName.substring(0, 15)}...` : teamName}</span>
 
       </div>
     </>
