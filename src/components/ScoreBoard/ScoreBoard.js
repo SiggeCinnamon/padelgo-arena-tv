@@ -19,7 +19,6 @@ import useFetchTeams from "../../hooks/useFetchTeams";
 export default function ScoreBoard({ clubName, liveStreamId, poster, stream, fTeams }) {
   const [teams, setTeams] = useFetchTeams(fTeams);
   const [score, setScore] = useFetchScore(liveStreamId);
-  console.log(teams);
   return (
     <>
       <div

@@ -3,9 +3,7 @@ import { withRouter, useParams } from "react-router-dom";
 import Scoreboard from "../../components/ScoreBoard/ScoreBoard.js";
 import Player from "../../components/Player";
 import useLookForGames from "../../hooks/useLookForGames";
-import useGlobal from "../../vault";
-import useGTMData from "../../hooks/useGTMData";
-
+//TODO DIRECTLINK TO GAME WONT ROTATE
 function Court({ history, rotates = true }) {
   const params = useParams();
   const [games, setGames, numberOfGames, gamesIndex] = useLookForGames(params.clubId, rotates);

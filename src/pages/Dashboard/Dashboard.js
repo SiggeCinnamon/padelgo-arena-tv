@@ -8,17 +8,18 @@ import TextCard from "../../components/TextCard";
 import DropCard from "../../components/DropCard";
 import useGlobal from "../../vault";
 import useGTMData from "../../hooks/useGTMData";
-
+//TODO SHOW ONLY LIVEGAMES IN DROP
 function Dashboard({ history }) {
   const params = useParams();
   const [globalState, globalActions] = useGlobal();
-  const [courts, setCourts] = useFetchCourts(params.clubId);
+  const [courts, setCourts, liveGames] = useFetchCourts(params.clubId);
   const [value, setValue] = useState(globalState.showLivestreams !== undefined ? globalState.showLivestreams : true);
   const [valueRotate, setValueRotate] = useState(
     globalState.rotateScoreboard !== undefined ? globalState.rotateScoreboard : false
   );
   const [clubId, clubName] = useGTMData(params.clubId, params.clubName);
-
+  console.log(liveGames);
+  console.log(courts);
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
     return () => {
@@ -80,7 +81,7 @@ function Dashboard({ history }) {
           }
           toggleSwitch={{ value: valueRotate }}
           onToggleChange={onRotateToggleChange}
-        />
+        />//TODO SHOW ONLY LIVEGAMES IN DROP
       </div>
     </>
   );

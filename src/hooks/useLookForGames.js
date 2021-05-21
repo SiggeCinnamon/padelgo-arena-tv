@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { withRouter, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useFetchCourts from "./useFetchCourts";
 import { getStreamsWithCourtId } from "../services/Streams.js";
 import useGlobal from "../vault";
+import useRouteQuery from "../hooks/useRouteQuery";
 
 const useLookForGames = (clubId) => {
   const [games, setGames] = useState([]);
@@ -11,7 +12,11 @@ const useLookForGames = (clubId) => {
   const [gamesIndex, setGamesIndex] = useState(0);
   const [globalState, globalActions] = useGlobal();
   const params = useParams();
-
+  const query = useRouteQuery();
+  console.log("globalState.rotateScoreboard", globalState.rotateScoreboard);
+  console.log("params", params);
+  let test = query.has("rotate=true");
+  console.log('test',test);
   const forLoop = async (_) => {
     if (globalState.rotateScoreboard === true) {
       let temp = [];
