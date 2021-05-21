@@ -26,13 +26,7 @@ const DropCard = ({
   linkTo = "#",
   clubName = undefined,
   useOptionName = false,
-  toggleSwitch = { show: false, value: -1 },
-  onToggleChange = () => {}
 }) => {
-  const onChange = (e) => {
-    onToggleChange();
-  };
-
   const [options, setOptions] = useState(pOptions);
   const [option, setOption] = useState("-1");
   const [name, setName] = useState("");
@@ -50,23 +44,17 @@ const DropCard = ({
         <p className={styles.__dashboard_card_text + " card-text"} style={{ whiteSpace: "pre-line" }}>
           {textBody}
         </p>
-        <div style={{ textAlign: "center" }}>
-          {toggleSwitch && <span className={styles.__dashboard_card_text + " card-text"}>Cycle Scoreboards? </span>}
-          {toggleSwitch && (
-            <ToggleSwitch className="__dashboard_scoreboard_toggleswitch" value={toggleSwitch.value} onChange={onChange} />
-          )}
-        </div>
       </div>
-      <div className={styles.__dashboard_div_btn} style={{ marginBottom: toggleSwitch ? "-20%" : "0%" }}>
+      <div className={styles.__dashboard_div_btn}>
         <div className={styles.__dashboard_dropdown}>
           <div className="btn-group" role="group" aria-label="Court selector">
             <div className="select-div">
               <select
-                style={{ marginBottom: toggleSwitch ? "5%" : "0%" }}
+                
                 className="form-select"
                 aria-label="Default select example"
                 value={option + "<->" + name}
-                disabled={toggleSwitch ? toggleSwitch.value : false}
+              
                 onChange={(e) => {
                   const data = e.currentTarget.value.split("<->");
                   setOption(data[0]);
@@ -90,15 +78,6 @@ const DropCard = ({
       </div>
       <div className={styles.__dashboard_div_btn}>
         <Link
-          className={
-            toggleSwitch && toggleSwitch.value
-              ? styles.__dashboard_btn + " btn btn-rounded"
-              : toggleSwitch && !toggleSwitch.value && option === "-1"
-              ? styles.__dashboard_btn + " btn btn-rounded disabled"
-              : !toggleSwitch && option === "-1"
-              ? styles.__dashboard_btn + " btn btn-rounded disabled"
-              : styles.__dashboard_btn + " btn btn-rounded"
-          }
           to={{
             pathname: `${linkTo
               .replace(":clubId", option)
@@ -125,6 +104,7 @@ DropCard.propTypes = {
   linkTo: PropTypes.string,
   clubName: PropTypes.string,
   useOptionName: PropTypes.bool,
+  toggleSwitch: PropTypes.bool
 };
 
 export default DropCard;

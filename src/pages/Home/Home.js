@@ -4,6 +4,7 @@ import styles from "../Dashboard/Dashboard.module.scss";
 import NavBar from "../../components/NavBar";
 import useFetchClubs from "../../hooks/useFetchClubs.js";
 import DropCard from "../../components/DropCard";
+import Test from "../../components/DropCard/Test";
 
 const Home = () => {
   const [clubs, setClubs] = useFetchClubs();
@@ -12,15 +13,13 @@ const Home = () => {
     <>
       <NavBar />
       <div className={styles.__dashboard_container + " container"}>
-        <DropCard
+        <Test
           textHeader="Clubs"
           textBody="Pick a club from the list below"
           pOptions={clubs.sort((a, b) => a.name.localeCompare(b.name, "se", { numeric: true }))}
           optionHeader="Clubs"
           useOptionName={true}
           linkTo={Routes.DASHBOARD}
-          toggleSwitch = { false }
-
         />
       </div>
     </>

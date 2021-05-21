@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import useFetchCourts from "./useFetchCourts";
 import { getStreamsWithCourtId } from "../services/Streams.js";
+import useGlobal from "../vault";
 
 const useLookForGames = (clubId) => {
   const [games, setGames] = useState([]);
   const [courts, setCourts] = useFetchCourts(clubId);
   const [numberOfGames, setNumberOfGames] = useState(null);
   const [gamesIndex, setGamesIndex] = useState(0);
-
+  const [globalState, globalActions] = useGlobal();
+  // const [value, setValue] = useState(globalState.rotateScoreboard !== undefined ? globalState.rotateScoreboard : false);
+console.log("LFG",globalState);
   const forLoop = async (_) => {
     let temp = [];
     for (let index = 0; index < courts.length; index++) {
@@ -20,7 +23,6 @@ const useLookForGames = (clubId) => {
     setGames(temp);
     setNumberOfGames(temp.length);
   };
-
 
   useEffect(() => {
     forLoop();

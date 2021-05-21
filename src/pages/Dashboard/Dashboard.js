@@ -18,7 +18,7 @@ function Dashboard({ history }) {
     globalState.rotateScoreboard !== undefined ? globalState.rotateScoreboard : false
   );
   const [clubId, clubName] = useGTMData(params.clubId, params.clubName);
-
+  console.log("DASH:::", globalState);
   useEffect(() => {
     document.addEventListener("keydown", onKeyDownHandler);
     return () => {
@@ -61,7 +61,6 @@ function Dashboard({ history }) {
             Routes.ARENA_TV.replace(":clubId", params.clubId).replace(":clubName", params.clubName) +
             "?include=" +
             value
-            
           }
           toggleSwitch={{ show: true, value: value }}
           onToggleChange={onLivestreamToggleChange}
